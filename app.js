@@ -1,27 +1,24 @@
-const config = require('./config/config');
-const createError = require('http-errors')
+const config = require('./config/config')
 const express = require('express')
 const cookieParser = require('cookie-parser')
 const logger = require('morgan')
 
-const indexRouter = require('./routes/index')
-const usersRouter = require('./routes/users')
-
+// new express app and port setup
 const app = express()
 app.set('port', config.port);
-
-// view engine setup
-app.use(express.static(config.root + '/public'))
-app.set('views', config.root + '/app/views')
-app.set('view engine', 'ejs')
 
 app.use(logger('dev'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 
-app.use('/', indexRouter)
-app.use('/users', usersRouter)
+// view engine setup
+app.use(express.static(config.root + '/public'))
+app.set('views', config.root + '/app/views')
+app.set('view engine', 'ejs')
+
+// load routes and pass in our app
+require('./config/routes.js')(app)
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
