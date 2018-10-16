@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "dev": "nodemon ./bin/www"
+    "dev": "nodemon ./bin/www",
+    "sequelize": "sequelize --options-path=./config/sequelize_cli.js"
   },
   "dependencies": {
     "cookie-parser": "~1.4.3",
