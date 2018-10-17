@@ -1,4 +1,5 @@
 "use strict"
+const db = require('../models')
 
 /* User Info. */
 exports.user = (req, res) => {
@@ -7,5 +8,10 @@ exports.user = (req, res) => {
 
 /* Users List. */
 exports.list = (req, res) => {
-  res.send('Users List')
+  db.User.findAll().then((users) => {
+    res.render('user/list.ejs', {
+      title: 'Users List',
+      users: users
+    });
+  });
 }

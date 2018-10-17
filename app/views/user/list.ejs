@@ -1,0 +1,12 @@
+<% include ../header %>
+
+<h1>User List</h1>
+<ul>
+	<% users.forEach(function({firstName, lastName}){ %>
+	<li>
+		<%= firstName %>, <%= lastName %>
+	</li>
+	<% }); %>
+</ul>
+
+<% include ../footer %>

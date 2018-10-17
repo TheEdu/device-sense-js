@@ -1,6 +1,6 @@
 "use strict"
-const home = require('../app/controllers/HomeController');
-const user = require('../app/controllers/UserController');
+const home = require('../app/controllers/HomeController')
+const user = require('../app/controllers/UserController')
 
 module.exports = (app) => {
 

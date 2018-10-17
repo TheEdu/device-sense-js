@@ -1,37 +1,38 @@
 const path = require('path')
-const rootPath = path.normalize(__dirname + '/..');
-const env = process.env.NODE_ENV || 'development';
+const rootPath = path.normalize(__dirname + '/..')
+const currentEnv = process.env.NODE_ENV || 'development'
+const database = require('./database.json')[currentEnv]
 
 const config = {
   development: {
-    env: env,
+    env: 'development',
+    port: process.env.PORT || 3000,
+    db: database,
     root: rootPath,
     app: {
       name: 'device-sense-dev'
-    },
-    port: process.env.PORT || 3000,
-    db: 'mysql://localhost/device-sense-dev'
+    }
   },
 
   test: {
-    env: env,
+    env: 'test',
+    port: 80,
+    db: database,
     root: rootPath,
     app: {
       name: 'device-sense-test'
-    },
-    port: process.env.PORT || 3000,
-    db: 'mysql://localhost/device-sense-test'
+    }
   },
 
   production: {
-    env: env,
+    env: 'production',
+    port: 80,
+    db: database,
     root: rootPath,
     app: {
       name: 'device-sense-prod'
-    },
-    port: process.env.PORT || 3000,
-    db: 'mysql://localhost/device-sense-prod'
+    }
   }
 };
 
-module.exports = config[env];
+module.exports = config[currentEnv]
