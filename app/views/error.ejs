@@ -1,8 +1,8 @@
-<% include header %>
+<% include partials/header %>
 
 	<h1><%- title %></h1>
-	<p class="blue"><%- message %></p>
+	<p class="blue"><%- error.message %></p>
 	<p class="green"><%- error.status %></p>
 	<p class="red"><%- error.stack %></p>
 	
-<% include footer %>
+<% include partials/footer %>

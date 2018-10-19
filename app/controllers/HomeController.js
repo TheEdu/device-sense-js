@@ -2,5 +2,5 @@
 
 /* Visit Home. */
 exports.home = (req, res) => {
-  res.render('home.ejs', { title: 'Express' })
+  res.render('home.ejs', { title: 'Device Sense' })
 }
