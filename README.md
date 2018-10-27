@@ -1,5 +1,5 @@
 # device-sense-js
-## subscription app
+## app to configure subscriptions to opc-ua servers
 
 ### Para instalar el proyecto se deberan correr los siguientes comandos:
     git clone https://github.com/TheEdu/device-sense-js.git
