@@ -11,5 +11,9 @@ module.exports = (sequelize, DataTypes) => {
     User.hasMany(models.Device, {foreignKey: 'fk_userId', sourceKey: 'id'})
   }
 
+  User.prototype.validPassword = function (password) {
+    return true
+  }
+
   return User;
 }

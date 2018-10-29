@@ -2,6 +2,9 @@ const config = require('./config/config')
 const express = require('express')
 const cookieParser = require('cookie-parser')
 const logger = require('morgan')
+const session = require('express-session')
+const flash = require('connect-flash')
+const passport = require('passport')
 
 // new express app and port setup
 const app = express()
@@ -17,8 +20,27 @@ app.use(express.static(config.root + '/public'))
 app.set('view engine', 'ejs')
 app.set('views', config.root + '/app/views/')
 
+// load session and passport
+app.use(session({
+    secret: 'I Love League Of Legent',
+    resave: true,
+    saveUninitialized: true
+}))
+
+require('./config/passport.js')(passport)
+app.use(passport.initialize())
+app.use(passport.session()) // persistent login sessions
+app.use(flash()) // use connect-flash for flash messages stored in session
+
+// send user (from passport session) object to templates
+app.use(function(req, res, next) {
+  res.locals.user = req.session.passport ? req.session.passport.user : null
+  next()
+})
+
+
 // load routes and pass in our app
-require('./config/routes.js')(app)
+require('./config/routes.js')(app, passport)
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

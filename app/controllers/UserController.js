@@ -10,7 +10,6 @@ exports.user = (req, res) => {
 exports.list = (req, res) => {
   db.User.findAll().then((users) => {
     res.render('user/list.ejs', {
-      title: 'Users List',
       users: users
     });
   });

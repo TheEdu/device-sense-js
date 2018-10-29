@@ -2,5 +2,32 @@
 
 /* Visit Home. */
 exports.home = (req, res) => {
-  res.render('home.ejs', { title: 'Device Sense' })
+  res.render('home.ejs', {
+    error :  req.flash("error"),
+    success: req.flash("success")
+  })
+}
+
+/* Login. */
+exports.login = (req, res) => {
+  res.render('auth/login.ejs', {
+    error :  req.flash("error"),
+    success: req.flash("success")
+  })
+}
+
+/* Logout */
+exports.logout = (req, res) => {
+  req.logout()
+  req.session.destroy()
+  res.redirect('/')
+}
+
+/*Is logged?*/
+exports.loggedIn = (req, res, next) => {
+  if (req.isAuthenticated()) {
+    next()
+  } else {
+    res.redirect('/login')
+  }
 }
