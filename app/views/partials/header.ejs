@@ -93,12 +93,11 @@
 
         <div class="container-fluid">
 
-          
-          <% if (error.length > 0) { %>
+          <% if ((typeof error != 'undefined') && error.length > 0) { %>
             <div class="alert alert-danger"><%- error %></div>
           <% } %>
 
-           <% if (success.length > 0) { %>
+          <% if ((typeof success != 'undefined') && success.length > 0) { %>
             <div class="alert alert-success"><%- success %></div>
           <% } %>
 

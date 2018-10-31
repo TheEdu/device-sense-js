@@ -1,4 +1,6 @@
 'use strict'
+var bCrypt = require('bcrypt-nodejs')
+
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
     firstName: DataTypes.STRING,
@@ -11,9 +13,10 @@ module.exports = (sequelize, DataTypes) => {
     User.hasMany(models.Device, {foreignKey: 'fk_userId', sourceKey: 'id'})
   }
 
-  User.prototype.validPassword = function (password) {
-    return true
-  }
+  User.hook('beforeCreate', (user, options) => {
+    user.password = bCrypt.hashSync(user.password, bCrypt.genSaltSync(10))
+  });
+
 
   return User;
 }
