@@ -11,12 +11,11 @@ module.exports = (passport) => {
       usernameField: "email"
     }, function(email, password, done) {
         db.User.findOne({ where: {email: email} }).then( user => {
-          if (!user) return done(null, false, { message: 'Incorrect username.' })
-
-          // bCrypt.hashSync(user.password, bCrypt.genSaltSync(10))
-          if (!bCrypt.compareSync(password, user.password))
+          if (!user) 
+            return done(null, false, { message: 'Incorrect username.' })
+          if (!bCrypt.compareSync(password, user.password)) 
             return done(null, false, { message: 'Incorrect password.' })
-          return done(null, user, { message: 'Welcome'})
+          return done(null, user, { message: `Welcome ${user.firstName}`})
         }).catch( err => {
           return done(err)
         })

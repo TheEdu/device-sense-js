@@ -1,8 +1,19 @@
-<% include partials/header %>
-
-	<h1>Upss :(</h1>
-	<p class="blue"><%- error.message %></p>
-	<p class="green"><%- error.status %></p>
-	<p class="red"><%- error.stack %></p>
-	
-<% include partials/footer %>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Devise Sense</title>
+	<!-- Bootstrap core CSS-->
+	<link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Custom fonts for this template-->
+	<link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+</head>
+<body id="page-top">
+	<div id="content-wrapper">
+		<div class="container-fluid pt-5">
+			<h1 class="text-center"><a href="/"><i class="text-info fas fa-home fa-1x"></i></a> Upss :(</h1>
+			<p class="text-center text-danger"><b><%- error.status %> - <%- error.message %></b></p>
+			<p class="text-center text-info"><b><%- error.stack %></b></p>
+		</div>
+	</div>
+</body>
+</html>

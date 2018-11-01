@@ -35,6 +35,7 @@ app.use(flash()) // use connect-flash for flash messages stored in session
 
 // send user (from passport session) object to templates
 app.use(function(req, res, next) {
+  console.log(req.session);
   res.locals.session = req.session;
   // res.locals.user = req.session.passport ? req.session.passport.user : null
   next()
@@ -45,16 +46,17 @@ require('./config/routes.js')(app, passport)
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
-  var error = new Error('Not Found')
-  error.status = 404
-  next(error)
+  var err = new Error('Not Found')
+  err.status = 404
+  next(err)
 })
 
 // error handler
-app.use((error, req, res, next) => {
+app.use((err, req, res, next) => {
   // set locals, only providing error in development
-  res.locals.error = config.env === 'development' ? error : {}
-  res.status(error.status || 500)
+  res.locals.error = config.env === 'development' ? err : {}
+  res.status(err.status || 500)
+
   // render the error page
   res.render('error')
 })
