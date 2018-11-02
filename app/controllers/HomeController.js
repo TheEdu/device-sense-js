@@ -10,10 +10,14 @@ exports.home = (req, res) => {
 
 /* Login. */
 exports.login = (req, res) => {
-  res.render('auth/login.ejs', {
-    error :  req.flash("error"),
-    success: req.flash("success")
-  })
+  if (!req.isAuthenticated()) {
+    res.render('auth/login.ejs', {
+      error :  req.flash("error"),
+      success: req.flash("success")
+    })
+  } else {
+    res.redirect('/home')
+  }
 }
 
 /* Logout */

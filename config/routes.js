@@ -9,7 +9,6 @@ module.exports = (app, passport) => {
   app.get('/home', home.loggedIn, home.home)
 
   /* User Routes */
-  app.get('/user', home.loggedIn, user.user)
   app.get('/users', home.loggedIn, user.list)
 
   /*Log In*/
