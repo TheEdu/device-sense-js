@@ -24,11 +24,12 @@ exports.login = (req, res) => {
 exports.logout = (req, res) => {
   req.logout()
   req.session.destroy()
-  res.redirect('/')
+  res.redirect('/login')
 }
 
-/*Is logged?*/
+/* Check is user is Logged In */
 exports.loggedIn = (req, res, next) => {
+  return next() // loggedIn defuse(?)
   if (req.isAuthenticated()) {
     next()
   } else {
