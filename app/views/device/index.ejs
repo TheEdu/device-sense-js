@@ -16,17 +16,18 @@
   		<span>Mis Dispositivo</span>
   	</div>
   	<div class="col-6 text-right">
-  		<a href="#">
+  		<a href="/device/create">
   			<i class="fas fa-plus fa-lg"></i>
   		</a>
   	</div>
-</div>
+  </div>
   <div class="card-body">
     <div class="table-responsive">
       <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
         <thead>
           <tr>
             <th class="">Name</th>
+            <th class="">IP</th>
             <th class="">Description</th>
             <th class="">Fecha Alta</th>
             <th class="">Administrador</th>
@@ -36,6 +37,7 @@
         <tfoot>
           <tr>
             <th class="">Name</th>
+            <th class="">IP</th>
             <th class="">Description</th>
             <th class="">Fecha Alta</th>
             <th class="">Administrador</th>
@@ -44,10 +46,12 @@
         </tfoot>
         <tbody>
         <% if (typeof devices != 'undefined') { %>
-        	<% devices.forEach(function({name, description, User:{firstName, lastName}}){ %>
+        	<% devices.forEach(function({name, ip_address, description, createdAt, User:{firstName, lastName}}){ %>
 				<tr>
 					<td class=""><%= name %></td>
+          <td class=""><%= ip_address %></td>
 					<td class=""><%= description %></td>
+          <td class=""><%=  `${createdAt.getDate()}/${createdAt.getMonth()+1}/${createdAt.getFullYear()}` %></td>
 					<td class=""><%= firstName %> <%= lastName %></td>
 					<td class="">
 						<div class="text-center">

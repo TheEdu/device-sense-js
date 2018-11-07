@@ -7,43 +7,50 @@ module.exports = {
         description: 'Testing Device 1',
         createdAt: new Date(),
         updatedAt: new Date(),
-        fk_userId: 2
+        fk_userId: 2,
+        ip_address: '192.168.100.1'
       }, {
         name: 'Device 2',
         description: 'Testing Device 2',
         createdAt: new Date(),
         updatedAt: new Date(),
-        fk_userId: 3
+        fk_userId: 3,
+        ip_address: '192.168.100.1'
       }, {
         name: 'Device 3',
         description: 'Testing Device 3',
         createdAt: new Date(),
         updatedAt: new Date(),
-        fk_userId: 4
+        fk_userId: 4,
+        ip_address: '192.168.100.1'
       }, {
         name: 'Device 4',
         description: 'Testing Device 4',
         createdAt: new Date(),
         updatedAt: new Date(),
-        fk_userId: 2
+        fk_userId: 2,
+        ip_address: '192.168.100.1'
       }, {
         name: 'Device 5',
         description: 'Testing Device 5',
         createdAt: new Date(),
         updatedAt: new Date(),
-        fk_userId: 2
+        fk_userId: 2,
+        ip_address: '192.168.100.1'
       }, {
         name: 'Device 6',
         description: 'Testing Device 6',
         createdAt: new Date(),
         updatedAt: new Date(),
-        fk_userId: 3
+        fk_userId: 3,
+        ip_address: '192.168.100.1'
       }, {
         name: 'Device 7',
         description: 'Testing Device 7',
         createdAt: new Date(),
         updatedAt: new Date(),
-        fk_userId: 2
+        fk_userId: 2,
+        ip_address: '192.168.100.1'
       }], {}
     )
   },

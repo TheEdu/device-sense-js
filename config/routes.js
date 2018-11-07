@@ -25,7 +25,8 @@ module.exports = (app, passport) => {
   /* Devie Routes */
   app.get('/device/list',     home.loggedIn, device.list)
   // app.get('/device/:id',      home.loggedIn, device.show)
-  // app.post('/device/create',  home.loggedIn, device.create)
+  app.get('/device/create',  home.loggedIn, device.createIndex)
+  app.post('/device/create',  home.loggedIn, device.create)
   // app.put('/device/:id',      home.loggedIn, device.update)
   // app.delete('/device/:id',   home.loggedIn, device.delete)
   

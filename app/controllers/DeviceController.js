@@ -20,9 +20,13 @@ exports.list = async (req, res) => {
   }
 }
 
-// exports.create = (req, res) => {
-//   res.render('device/index.ejs', {})
-// }
+exports.createIndex = (req, res) => {
+   res.render('device/create.ejs', {})
+}
+
+exports.create = (req, res) => {
+}
+
 
 // exports.show = (req, res) => {
 //   res.render('device/index.ejs', {})
