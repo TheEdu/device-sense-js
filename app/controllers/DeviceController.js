@@ -12,7 +12,8 @@ exports.list = async (req, res) => {
                         })
     console.log(devices)
     res.render('device/index.ejs', {
-      devices: devices
+      devices: devices,
+      success: req.flash("success")
     })
   } catch (error) {
     console.log(error)
@@ -21,10 +22,16 @@ exports.list = async (req, res) => {
 }
 
 exports.createIndex = (req, res) => {
-   res.render('device/create.ejs', {})
+  res.render('device/create.ejs', {})
 }
 
 exports.create = (req, res) => {
+  const deviceName = req.body.name != 'undefined' ? req.body.name : 'Edu';
+  console.log(deviceName)
+  console.log(req.body.ipAdrress)
+  console.log(req.body.descripcion)
+  // req.flash('success', 'Dispositivo creado con Exito!')
+  // res.redirect('/device/list')
 }
 
 
