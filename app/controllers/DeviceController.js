@@ -2,8 +2,6 @@
 const db = require('../models')
 
 exports.list = async (req, res) => {
-  // res.send('List')
-  // res.render('device/index.ejs', {})
   try {
     let devices = await db.Device.findAll({
                           include: [
@@ -26,14 +24,25 @@ exports.createIndex = (req, res) => {
 }
 
 exports.create = (req, res) => {
-  const deviceName = req.body.name != 'undefined' ? req.body.name : 'Edu';
-  console.log(deviceName)
-  console.log(req.body.ipAdrress)
-  console.log(req.body.descripcion)
-  // req.flash('success', 'Dispositivo creado con Exito!')
-  // res.redirect('/device/list')
-}
+  // Get the form inputs from the request body
+  const name = req.body.name
+  const description = req.body.description
+  const endpointUrl = req.body.endpointUrl
 
+  const params = {
+    name: name,
+    description: description,
+    endpointUrl: endpointUrl
+  }
+
+  // Check for restrictions
+  if (!name || !description || !endpointUrl) {
+    return res.render('device/create.ejs', {
+      params,
+      error: 'Los Campos Nombre, Descripción y EndpointUrl deben tener contenido'
+    })
+  }
+}
 
 // exports.show = (req, res) => {
 //   res.render('device/index.ejs', {})

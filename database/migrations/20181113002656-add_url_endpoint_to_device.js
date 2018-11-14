@@ -5,7 +5,7 @@ module.exports = {
     // logic for transforming into the new state
     queryInterface.addColumn(
       'Devices',
-      'ip_address',
+      'endpointUrl',
      Sequelize.STRING
     );
 
@@ -15,7 +15,7 @@ module.exports = {
     // logic for reverting the changes
     queryInterface.removeColumn(
       'Devices',
-      'ip_address'
+      'endpointUrl'
     );
   }
 }

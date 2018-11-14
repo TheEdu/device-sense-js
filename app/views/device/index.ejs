@@ -27,7 +27,7 @@
         <thead>
           <tr>
             <th class="">Name</th>
-            <th class="">IP</th>
+            <th class="">URL</th>
             <th class="">Description</th>
             <th class="">Fecha Alta</th>
             <th class="">Administrador</th>
@@ -37,7 +37,7 @@
         <tfoot>
           <tr>
             <th class="">Name</th>
-            <th class="">IP</th>
+            <th class="">URL</th>
             <th class="">Description</th>
             <th class="">Fecha Alta</th>
             <th class="">Administrador</th>
@@ -46,10 +46,10 @@
         </tfoot>
         <tbody>
         <% if (typeof devices != 'undefined') { %>
-        	<% devices.forEach(function({name, ip_address, description, createdAt, User:{firstName, lastName}}){ %>
+        	<% devices.forEach(function({name, endpointUrl, description, createdAt, User:{firstName, lastName}}){ %>
 				<tr>
 					<td class=""><%= name %></td>
-          <td class=""><%= ip_address %></td>
+          <td class=""><%= endpointUrl %></td>
 					<td class=""><%= description %></td>
           <td class=""><%=  `${createdAt.getDate()}/${createdAt.getMonth()+1}/${createdAt.getFullYear()}` %></td>
 					<td class=""><%= firstName %> <%= lastName %></td>
