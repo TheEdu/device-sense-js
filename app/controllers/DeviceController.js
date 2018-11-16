@@ -1,12 +1,11 @@
 "use strict"
 const db = require('../models')
+const ds_opcua = require('../../lib/ds-opcua')
 
 exports.list = async (req, res) => {
   try {
     let devices = await db.Device.findAll({
-                          include: [
-                                  { model: db.User }
-                              ]
+                          include: [{ model: db.User }]
                         })
     console.log(devices)
     res.render('device/index.ejs', {
@@ -42,6 +41,11 @@ exports.create = (req, res) => {
       error: 'Los Campos Nombre, Descripción y EndpointUrl deben tener contenido'
     })
   }
+
+  ds_opcua.status(endpointUrl, function (err) {
+    console.log(`STATUS: ${err}`)
+  })
+
 }
 
 // exports.show = (req, res) => {
