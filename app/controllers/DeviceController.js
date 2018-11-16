@@ -42,15 +42,12 @@ exports.create = async (req, res) => {
     })
   }
 
-  // ds_opcua.status(endpointUrl, function (err) {
-  //   console.log(`STATUS: ${err}`)
-  // })
-
+  // Test Device Connection
   try {
-    let test = await ds_opcua.statusPromises(endpointUrl)
+    let test = await ds_opcua.status(endpointUrl)
     console.log(`test: ${test}`)
   } catch (err) {
-    console.log(`error: ${err}`)
+    console.log(`${err}`)
   }
 
 }
