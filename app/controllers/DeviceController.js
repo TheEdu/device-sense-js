@@ -22,7 +22,7 @@ exports.createIndex = (req, res) => {
   res.render('device/create.ejs', {})
 }
 
-exports.create = (req, res) => {
+exports.create = async (req, res) => {
   // Get the form inputs from the request body
   const name = req.body.name
   const description = req.body.description
@@ -42,9 +42,16 @@ exports.create = (req, res) => {
     })
   }
 
-  ds_opcua.status(endpointUrl, function (err) {
-    console.log(`STATUS: ${err}`)
-  })
+  // ds_opcua.status(endpointUrl, function (err) {
+  //   console.log(`STATUS: ${err}`)
+  // })
+
+  try {
+    let test = await ds_opcua.statusPromises(endpointUrl)
+    console.log(`test: ${test}`)
+  } catch (err) {
+    console.log(`error: ${err}`)
+  }
 
 }
 
