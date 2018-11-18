@@ -4,14 +4,16 @@ const ds_opcua = require('../../lib/ds-opcua')
 
 exports.list = async (req, res) => {
   try {
+    // Get all Devices
     let devices = await db.Device.findAll({
                           include: [{ model: db.User }]
                         })
-    console.log(devices)
+
     res.render('device/index.ejs', {
       devices: devices,
       success: req.flash("success")
     })
+
   } catch (error) {
     console.log(error)
     res.render('home.ejs', {error :  error})
@@ -23,31 +25,52 @@ exports.createIndex = (req, res) => {
 }
 
 exports.create = async (req, res) => {
+  // Get User
+  const user = req.user
+
   // Get the form inputs from the request body
   const name = req.body.name
   const description = req.body.description
   const endpointUrl = req.body.endpointUrl
+  const uuid = req.body.uuid
 
   const params = {
     name: name,
     description: description,
-    endpointUrl: endpointUrl
+    endpointUrl: endpointUrl,
+    uuid: uuid
   }
 
   // Check for restrictions
-  if (!name || !description || !endpointUrl) {
+  if (!name || !endpointUrl || !uuid) {
     return res.render('device/create.ejs', {
       params,
-      error: 'Los Campos Nombre, Descripción y EndpointUrl deben tener contenido'
+      error: 'Los Campos Nombre, UUID y EndpointUrl deben tener contenido'
     })
   }
 
-  // Test Device Connection
+  // Test Device Connection Status
   try {
-    let test = await ds_opcua.status(endpointUrl)
-    console.log(`test: ${test}`)
+    const status = await ds_opcua.status(endpointUrl)
+    if (status) {
+      // Insert new Device to the Database
+      await db.Device.create({
+        name: name,
+        description: description,
+        endpointUrl: endpointUrl,
+        fk_userId: user.id,
+        uuid: uuid
+      })
+      
+      return res.render('device/create.ejs', {
+        success: `Dispositivo creado Exitosamente!`
+      })
+    }
   } catch (err) {
-    console.log(`${err}`)
+    return res.render('device/create.ejs', {
+      params,
+      error: `${err}`
+    })
   }
 
 }

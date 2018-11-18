@@ -26,9 +26,9 @@
       <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
         <thead>
           <tr>
+            <th class="">UUID</th>
             <th class="">Name</th>
             <th class="">URL</th>
-            <th class="">Description</th>
             <th class="">Fecha Alta</th>
             <th class="">Administrador</th>
             <th class=" text-center">Acciones</th>
@@ -36,9 +36,9 @@
         </thead>
         <tfoot>
           <tr>
+            <th class="">UUID</th>
             <th class="">Name</th>
             <th class="">URL</th>
-            <th class="">Description</th>
             <th class="">Fecha Alta</th>
             <th class="">Administrador</th>
             <th class=" text-center">Acciones</th>
@@ -46,11 +46,11 @@
         </tfoot>
         <tbody>
         <% if (typeof devices != 'undefined') { %>
-        	<% devices.forEach(function({name, endpointUrl, description, createdAt, User:{firstName, lastName}}){ %>
+        	<% devices.forEach(function({uuid, name, endpointUrl, createdAt, User:{firstName, lastName}}){ %>
 				<tr>
+          <td class=""><%= uuid %></td>
 					<td class=""><%= name %></td>
           <td class=""><%= endpointUrl %></td>
-					<td class=""><%= description %></td>
           <td class=""><%=  `${createdAt.getDate()}/${createdAt.getMonth()+1}/${createdAt.getFullYear()}` %></td>
 					<td class=""><%= firstName %> <%= lastName %></td>
 					<td class="">

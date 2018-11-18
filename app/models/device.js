@@ -3,7 +3,8 @@ module.exports = (sequelize, DataTypes) => {
   const Device = sequelize.define('Device', {
     name: DataTypes.STRING,
     description: DataTypes.STRING,
-    endpointUrl: DataTypes.STRING
+    endpointUrl: DataTypes.STRING,
+    uuid: DataTypes.STRING
   }, {} );
 
   Device.associate = function(models) {

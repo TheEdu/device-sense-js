@@ -19,15 +19,24 @@
           value=<%if(typeof params != 'undefined'){%> "<%=params['name']%>" <%}%>>
         </div>
         <div class="form-group col-md-6">
+          <label for="uuid">UUID</label>
+          <input type="text" class="form-control" id="endpointUrl" name="uuid" placeholder="UUID"
+          value=<%if(typeof params != 'undefined'){%> "<%=params['uuid']%>" <%}%>>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-12">
           <label for="ipAdrress">Endpoint URL</label>
           <input type="text" class="form-control" id="endpointUrl" name="endpointUrl" placeholder="Endpoint URL"
           value=<%if(typeof params != 'undefined'){%> "<%=params['endpointUrl']%>" <%}%>>
         </div>
       </div>
-      <div class="form-group">
+      <div class="form-row">
+        <div class="form-group col-md-12">
         <label for="description">Descripción</label>
-        <input type="text" class="form-control"  id="description" name="description" placeholder="Drescripción"
-        value=<%if(typeof params != 'undefined'){%> "<%=params['description']%>" <%}%>>
+          <input type="text" class="form-control"  id="description" name="description" placeholder="Drescripción"
+          value=<%if(typeof params != 'undefined'){%> "<%=params['description']%>" <%}%>>
+        </div>
       </div>
       <button type="submit" class="btn btn-primary">Crear</button>
     </form>
