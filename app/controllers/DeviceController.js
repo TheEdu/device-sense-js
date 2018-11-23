@@ -11,7 +11,8 @@ exports.list = async (req, res) => {
 
     res.render('device/index.ejs', {
       devices: devices,
-      success: req.flash("success")
+      success: req.flash("success"),
+      error: req.flash("error")
     })
 
   } catch (error) {
@@ -33,19 +34,21 @@ exports.create = async (req, res) => {
   const description = req.body.description
   const endpointUrl = req.body.endpointUrl
   const uuid = req.body.uuid
+  const rootNode = req.body.rootNode
 
   const params = {
     name: name,
     description: description,
     endpointUrl: endpointUrl,
-    uuid: uuid
+    uuid: uuid,
+    rootNode: rootNode
   }
 
   // Check for restrictions
-  if (!name || !endpointUrl || !uuid) {
+  if (!name || !endpointUrl || !uuid || !rootNode) {
     return res.render('device/create.ejs', {
       params,
-      error: 'Los Campos Nombre, UUID y EndpointUrl deben tener contenido'
+      error: 'Los Campos Nombre, UUID, Root Node y Endpoint Url deben tener contenido'
     })
   }
 
@@ -59,7 +62,8 @@ exports.create = async (req, res) => {
         description: description,
         endpointUrl: endpointUrl,
         fk_userId: user.id,
-        uuid: uuid
+        uuid: uuid,
+        rootNode: rootNode
       })
       
       return res.render('device/create.ejs', {
@@ -75,10 +79,35 @@ exports.create = async (req, res) => {
 }
 
 exports.json = async (req, res) => {
-  const endpointUrl = "opc.tcp://DESKTOP-9FGRFUJ:48020"
-  const nodeId = "ns=4;s=Demo.Static.Arrays"
-  const tree = await ds_opcua.tree(endpointUrl, nodeId)
-  res.send(tree)
+  const device_uuid = req.params.uuid;
+  try {
+    const device = await db.Device.findOne({ where: {uuid: device_uuid} })
+    const endpointUrl = device.endpointUrl
+    const nodeId = device.rootNode
+    const tree = await ds_opcua.tree(endpointUrl, nodeId)
+    return res.send(tree)
+  } catch (err) {
+    // req.flash('error', err.message)
+    // return res.redirect('/device/list')
+    return res.send(err)
+  }
+}
+
+exports.getAddressSpace = async (req, res) => {
+  const device_uuid = req.params.uuid;
+  try {
+    const device = await db.Device.findOne({ where: {uuid: device_uuid} })
+    const endpointUrl = device.endpointUrl
+    const nodeId = device.rootNode
+    const tree = await ds_opcua.tree(endpointUrl, nodeId)
+    console.log(tree)
+    return res.render('device/addressSpace.ejs', {
+      addressSpace: tree
+    })
+  } catch (err) {
+    req.flash('error', err.message)
+    return res.redirect('/device/list')
+  }
 }
 
 // exports.show = (req, res) => {

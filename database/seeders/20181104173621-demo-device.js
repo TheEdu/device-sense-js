@@ -9,7 +9,8 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
         fk_userId: 2,
-        endpointUrl: 'opc.tcp://DEVICE1:48020'
+        endpointUrl: 'opc.tcp://DEVICE1:48020',
+        rootNode: 'RootFolder'
       }, {
         name: 'Device 2',
         uuid: '0002',
@@ -17,7 +18,8 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
         fk_userId: 3,
-        endpointUrl: 'opc.tcp://DEVICE2:48020'
+        endpointUrl: 'opc.tcp://DEVICE2:48020',
+        rootNode: 'RootFolder'
       }, {
         name: 'Device 3',
         uuid: '0003',
@@ -25,7 +27,8 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
         fk_userId: 4,
-        endpointUrl: 'opc.tcp://DEVICE3:48020'
+        endpointUrl: 'opc.tcp://DEVICE3:48020',
+        rootNode: 'RootFolder'
       }, {
         name: 'Device 4',
         uuid: '0004',
@@ -33,7 +36,8 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
         fk_userId: 2,
-        endpointUrl: 'opc.tcp://DEVICE4:48020'
+        endpointUrl: 'opc.tcp://DEVICE4:48020',
+        rootNode: 'RootFolder'
       }, {
         name: 'Device 5',
         uuid: '0005',
@@ -41,7 +45,8 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
         fk_userId: 2,
-        endpointUrl: 'opc.tcp://DEVICE5:48020'
+        endpointUrl: 'opc.tcp://DEVICE5:48020',
+        rootNode: 'RootFolder'
       }, {
         name: 'Device 6',
         uuid: '0006',
@@ -49,7 +54,8 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
         fk_userId: 3,
-        endpointUrl: 'opc.tcp://DEVICE6:48020'
+        endpointUrl: 'opc.tcp://DEVICE6:48020',
+        rootNode: 'RootFolder'
       }, {
         name: 'Device 7',
         uuid: '0007',
@@ -57,7 +63,8 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
         fk_userId: 2,
-        endpointUrl: 'opc.tcp://DEVICE7:48020'
+        endpointUrl: 'opc.tcp://DEVICE7:48020',
+        rootNode: 'RootFolder'
       }], {}
     )
   },

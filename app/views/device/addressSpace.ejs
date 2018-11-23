@@ -1,0 +1,18 @@
+<% include ../partials/header %>
+
+	<h1>Address Space</h1>
+	<div id="data" class="demo">
+
+<% include ../partials/footer %>
+	
+
+<% if ((typeof addressSpace != 'undefined')) { %>
+	<script >
+		// inline data demo
+		$('#data').jstree({
+			'core' : {
+				'data' : [<%- JSON.stringify(addressSpace) %>]
+			}
+		});
+	</script>
+<% } %>

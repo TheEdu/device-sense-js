@@ -22,7 +22,7 @@ app.set('views', config.root + '/app/views/')
 
 // create session
 app.use(session({
-    secret: 'I Love League Of Legent',
+    secret: 'I Love League Of Legends',
     resave: true,
     saveUninitialized: true
 }))
