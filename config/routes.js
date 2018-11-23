@@ -29,5 +29,9 @@ module.exports = (app, passport) => {
   app.post('/device/create',  home.loggedIn, device.create)
   // app.put('/device/:id',      home.loggedIn, device.update)
   // app.delete('/device/:id',   home.loggedIn, device.delete)
+  app.get('/json', device.json)
+  app.get('/tree', (req, res) => {
+    res.render('tree')
+  })
   
 }

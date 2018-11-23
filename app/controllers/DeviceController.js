@@ -72,7 +72,13 @@ exports.create = async (req, res) => {
       error: `${err}`
     })
   }
+}
 
+exports.json = async (req, res) => {
+  const endpointUrl = "opc.tcp://DESKTOP-9FGRFUJ:48020"
+  const nodeId = "ns=4;s=Demo.Static.Arrays"
+  const tree = await ds_opcua.tree(endpointUrl, nodeId)
+  res.send(tree)
 }
 
 // exports.show = (req, res) => {
