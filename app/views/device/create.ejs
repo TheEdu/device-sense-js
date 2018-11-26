@@ -30,10 +30,15 @@
           <input type="text" class="form-control" id="endpointUrl" name="endpointUrl" placeholder="Endpoint URL"
           value=<%if(typeof params != 'undefined'){%> "<%=params['endpointUrl']%>" <%}%>>
         </div>
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-3">
           <label for="rootNode">Root Node</label>
           <input type="text" class="form-control" id="rootNode" name="rootNode" placeholder="Root Node"
           value=<%if(typeof params != 'undefined'){%> "<%=params['rootNode']%>" <%}%>>
+        </div>
+        <div class="form-group col-md-3">
+          <label for="timeOut">Timeout</label>
+          <input type="text" class="form-control" id="timeOut" name="timeOut" placeholder="timeOut"
+          value=<%if(typeof params != 'undefined'){%> "<%=params['timeOut']%>" <%}%>>
         </div>
       </div>
       <div class="form-row">

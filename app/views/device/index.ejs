@@ -49,29 +49,32 @@
         	<% devices.forEach(function({uuid, name, endpointUrl, createdAt, User:{firstName, lastName}}){ %>
 				<tr>
           <td class=""><%= uuid %></td>
-					<td class=""><%= name %></td>
+          <td class=""><%= name %></td>
           <td class=""><%= endpointUrl %></td>
           <td class=""><%=  `${createdAt.getDate()}/${createdAt.getMonth()+1}/${createdAt.getFullYear()}` %></td>
-					<td class=""><%= firstName %> <%= lastName %></td>
-					<td class="">
-						<div class="text-center">
+          <td class=""><%= firstName %> <%= lastName %></td>
+          <td class="">
+            <div class="text-center">
               <a class="col-3" href="<%= `/tree/${uuid}` %>">
                 <i class="fas fa-cannabis"></i>
               </a>
               <a class="col-3" href="<%= `/json/${uuid}` %>">
                 <i class="fab fa-js"></i>
               </a>
-							<!-- <a class="col-3" href="">
+              <a class="col-3" href="">
 								<i class="far fa-eye"></i>
 							</a>
+              <!--
 							<a class="col-3" href="">
 								<i class="fas fa-plug"></i>
 							</a>
-							<a class="col-3" href=""><i class="far fa-edit"></i>
+							<a class="col-3" href="">
+                <i class="far fa-edit"></i>
 							</a>
 							<a class="col-3" href="">
 								<i class="far fa-trash-alt"></i>
-							</a> -->
+							</a>
+              -->
 						</div>
 					</td>
 				</tr>

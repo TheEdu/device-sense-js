@@ -5,7 +5,8 @@ module.exports = (sequelize, DataTypes) => {
     description: DataTypes.STRING,
     endpointUrl: DataTypes.STRING,
     uuid: DataTypes.STRING,
-    rootNode: DataTypes.STRING
+    rootNode: DataTypes.STRING,
+    timeOut: DataTypes.STRING
   }, {} );
 
   Device.associate = function(models) {
