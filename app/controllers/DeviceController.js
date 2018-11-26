@@ -84,11 +84,9 @@ exports.json = async (req, res) => {
     const device = await db.Device.findOne({ where: {uuid: device_uuid} })
     const endpointUrl = device.endpointUrl
     const nodeId = device.rootNode
-    const tree = await ds_opcua.tree(endpointUrl, nodeId)
+    const tree = await ds_opcua.addressSpace(endpointUrl, nodeId)
     return res.send(tree)
   } catch (err) {
-    // req.flash('error', err.message)
-    // return res.redirect('/device/list')
     return res.send(err)
   }
 }
@@ -99,13 +97,12 @@ exports.getAddressSpace = async (req, res) => {
     const device = await db.Device.findOne({ where: {uuid: device_uuid} })
     const endpointUrl = device.endpointUrl
     const nodeId = device.rootNode
-    const tree = await ds_opcua.tree(endpointUrl, nodeId)
-    console.log(tree)
+    const tree = await ds_opcua.addressSpace(endpointUrl, nodeId)
     return res.render('device/addressSpace.ejs', {
       addressSpace: tree
     })
   } catch (err) {
-    req.flash('error', err.message)
+    req.flash('error', err.code || 'Error')
     return res.redirect('/device/list')
   }
 }

@@ -29,7 +29,7 @@ module.exports = (app, passport) => {
   app.post('/device/create',  home.loggedIn, device.create)
   // app.put('/device/:id',      home.loggedIn, device.update)
   // app.delete('/device/:id',   home.loggedIn, device.delete)
-  app.get('/json/:uuid',  home.loggedIn, device.json)
-  app.get('/tree/:uuid',  home.loggedIn, device.getAddressSpace)
+  app.get('/json/:uuid',  device.json)
+  app.get('/tree/:uuid',  device.getAddressSpace)
   
 }

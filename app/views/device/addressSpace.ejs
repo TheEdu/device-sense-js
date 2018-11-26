@@ -12,7 +12,13 @@
 		$('#data').jstree({
 			'core' : {
 				'data' : [<%- JSON.stringify(addressSpace) %>]
-			}
+			},
+			'checkbox' : {
+			    'keep_selected_style' : false,
+			    'cascade_to_hidden': false,
+			    'cascade_to_disabled': false,
+			},
+			'plugins' : [ "wholerow", "checkbox" ]
 		});
 	</script>
 <% } %>
