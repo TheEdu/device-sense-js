@@ -9,7 +9,9 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       name: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false,
+        unique: true
       },
       description: {
         type: Sequelize.STRING
@@ -21,6 +23,25 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
+      },
+      endpointUrl: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        unique: true
+      },
+      uuid: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        unique: true
+      },
+      rootNode: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      timeOut: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 10000
       },
       fk_userId: {
         type: Sequelize.INTEGER,
