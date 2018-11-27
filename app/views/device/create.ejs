@@ -14,36 +14,36 @@
       <div class="form-row">
         <div class="form-group col-md-6">
           <label for="uuid"><b>UUID</b></label>
-          <input type="text" class="form-control" id="endpointUrl" name="uuid" placeholder="UUID"
+          <input type="text" class="form-control" id="endpointUrl" name="uuid" placeholder="XXXX"
           value=<%if(typeof params != 'undefined'){%> "<%=params['uuid']%>" <%}%>>
         </div>
         <div class="form-group col-md-6">
           <label for="name"><b>Nombre</b></label>
-          <input type="text" class="form-control" id="name" name="name" placeholder="Nombre" 
+          <input type="text" class="form-control" id="name" name="name" placeholder="Nombre del Dispositivo" 
           value=<%if(typeof params != 'undefined'){%> "<%=params['name']%>" <%}%>>
         </div>
       </div>
       <div class="form-row">
         <div class="form-group col-md-6">
           <label for="ipAdrress"><b>URL de Conexión</b></label>
-          <input type="text" class="form-control" id="endpointUrl" name="endpointUrl" placeholder="Endpoint URL"
+          <input type="text" class="form-control" id="endpointUrl" name="endpointUrl" placeholder="opc.tcp://host-name:port"
           value=<%if(typeof params != 'undefined'){%> "<%=params['endpointUrl']%>" <%}%>>
         </div>
         <div class="form-group col-md-3">
           <label for="rootNode"><b>Nodo Raíz</b></label>
-          <input type="text" class="form-control" id="rootNode" name="rootNode" placeholder="Root Node"
+          <input type="text" class="form-control" id="rootNode" name="rootNode" placeholder="RootFolder"
           value=<%if(typeof params != 'undefined'){%> "<%=params['rootNode']%>" <%}%>>
         </div>
         <div class="form-group col-md-3">
           <label for="timeOut"><b>Tiempo Límite</b></label>
-          <input type="text" class="form-control" id="timeOut" name="timeOut" placeholder="timeOut"
+          <input type="number" class="form-control" id="timeOut" name="timeOut" placeholder="Timeout (ms)"
           value=<%if(typeof params != 'undefined'){%> "<%=params['timeOut']%>" <%}%>>
         </div>
       </div>
       <div class="form-row">
         <div class="form-group col-md-12">
         <label for="description"><b>Descripción</b></label>
-          <input type="text" class="form-control"  id="description" name="description" placeholder="Drescripción"
+          <input type="text" class="form-control"  id="description" name="description" placeholder="Drescripción del Dispositivo"
           value=<%if(typeof params != 'undefined'){%> "<%=params['description']%>" <%}%>>
         </div>
       </div>
