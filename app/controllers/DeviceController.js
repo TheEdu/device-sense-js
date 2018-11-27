@@ -81,40 +81,12 @@ exports.create = async (req, res) => {
   }
 }
 
-exports.json = async (req, res) => {
-  const device_uuid = req.params.uuid
-  try {
-    const device = await db.Device.findOne({ where: {uuid: device_uuid} })
-    const endpointUrl = device.endpointUrl
-    const nodeId = device.rootNode
-    const timeout_ms = device.timeOut
-    const tree = await ds_opcua.addressSpace(endpointUrl, nodeId, timeout_ms)
-    return res.send(tree)
-  } catch (err) {
-    return res.send(err)
-  }
-}
-
-exports.getAddressSpace = async (req, res) => {
-  const device_uuid = req.params.uuid
-  try {
-    const device = await db.Device.findOne({ where: {uuid: device_uuid} })
-    const endpointUrl = device.endpointUrl
-    const nodeId = device.rootNode
-    const timeout_ms = device.timeOut
-    const tree = await ds_opcua.addressSpace(endpointUrl, nodeId, timeout_ms)
-    return res.render('device/addressSpace.ejs', {
-      addressSpace: tree
-    })
-  } catch (err) {
-    req.flash('error', err.toString())
-    return res.redirect('/device/list')
-  }
-}
-
 exports.show = async (req, res) => {
+  // Get URL params
+  const device_uuid = req.params.uuid
+
   try {
-    const device_uuid = req.params.uuid
+    // Get Device to Show
     let device = await db.Device.findOne({
                           where: {uuid: device_uuid},
                           include: [{ model: db.User }]
@@ -167,7 +139,7 @@ exports.update = async (req, res) => {
     return res.redirect('/device/list')
   }
 
-  // If the Device couldnt be found, then redirect to Device List
+  // If the Device could not be found, then redirect to Device List
   if (device == null) {
     req.flash('error', 'No se pudo Actualizar el Dispositivo. Por favor inténtelo de nuevo en unos minutos.')
     return res.redirect('/device/list')
@@ -218,6 +190,33 @@ exports.delete = async (req, res) => {
   }
 }
 
-// exports.test = (req, res) => {
-//   res.render('device/index.ejs', {})
-// }
+exports.json = async (req, res) => {
+  const device_uuid = req.params.uuid
+  try {
+    const device = await db.Device.findOne({ where: {uuid: device_uuid} })
+    const endpointUrl = device.endpointUrl
+    const nodeId = device.rootNode
+    const timeout_ms = device.timeOut
+    const tree = await ds_opcua.addressSpace(endpointUrl, nodeId, timeout_ms)
+    return res.send(tree)
+  } catch (err) {
+    return res.send(err)
+  }
+}
+
+exports.getAddressSpace = async (req, res) => {
+  const device_uuid = req.params.uuid
+  try {
+    const device = await db.Device.findOne({ where: {uuid: device_uuid} })
+    const endpointUrl = device.endpointUrl
+    const nodeId = device.rootNode
+    const timeout_ms = device.timeOut
+    const tree = await ds_opcua.addressSpace(endpointUrl, nodeId, timeout_ms)
+    return res.render('device/addressSpace.ejs', {
+      addressSpace: tree
+    })
+  } catch (err) {
+    req.flash('error', err.toString())
+    return res.redirect('/device/list')
+  }
+}
