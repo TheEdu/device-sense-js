@@ -114,13 +114,18 @@ exports.getAddressSpace = async (req, res) => {
 }
 
 exports.show = async (req, res) => {
-  const device_uuid = req.params.uuid
-  let device = await db.Device.findOne({
-                        where: {uuid: device_uuid},
-                        include: [{ model: db.User }]
-                      })
-  console.log(device)
-  return res.render('device/show.ejs', {device})
+  try {
+    const device_uuid = req.params.uuid
+    let device = await db.Device.findOne({
+                          where: {uuid: device_uuid},
+                          include: [{ model: db.User }]
+                        })
+    console.log(device)
+    return res.render('device/show.ejs', {device})
+  } catch (err) {
+    req.flash('error', err.toString())
+    return res.redirect('/device/list')
+  }
 }
 
 // exports.update = (req, res) => {
