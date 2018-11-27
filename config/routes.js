@@ -24,12 +24,19 @@ module.exports = (app, passport) => {
 
   /* Devie Routes */
   app.get('/device/list',     home.loggedIn, device.list)
+
   app.get('/device/create',   home.loggedIn, device.createIndex)
   app.post('/device/create',  home.loggedIn, device.create)
-  // app.put('/device/:id',      home.loggedIn, device.update)
-  // app.delete('/device/:id',   home.loggedIn, device.delete)
+
   app.get('/json/:uuid', device.json)
   app.get('/device/addressSpace/:uuid', device.getAddressSpace)
+
   app.get('/device/show/:uuid', home.loggedIn, device.show)
+
+  app.get('/device/update/:uuid', home.loggedIn, device.updateIndex)
+  app.post('/device/update', home.loggedIn, device.update)
+
+  
+  app.post('/device/delete',   home.loggedIn, device.delete)
   
 }

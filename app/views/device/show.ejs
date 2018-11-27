@@ -8,68 +8,68 @@
     <li class="breadcrumb-item active">Ver</li>
   </ol>
 
-  <div class="card mb-3">
-    <div class="container p-2">
-      <form>
-        <div class="form-row">
-          <div class="form-group col-md-6">
-            <label for="uuid"><b>UUID</b></label>
-            <input type="text" class="form-control" id="endpointUrl" readonly
-            value=<%if(typeof device != 'undefined'){%> "<%=device.uuid%>" <%}%>>
+  <%if(typeof device != 'undefined'){%>
+    <div class="card mb-3">
+      <div class="container p-2">
+        <form>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="uuid"><b>UUID</b></label>
+              <input type="text" class="form-control" id="endpointUrl" disabled
+              value="<%=device.uuid%>">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="name"><b>Nombre</b></label>
+              <input type="text" class="form-control" id="name" disabled
+              value="<%=device.name%>">
+            </div>
           </div>
-          <div class="form-group col-md-6">
-            <label for="name"><b>Nombre</b></label>
-            <input type="text" class="form-control" id="name" readonly
-            value=<%if(typeof device != 'undefined'){%> "<%=device.name%>" <%}%>>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="ipAdrress"><b>Administrador</b></label>
+              <input type="text" class="form-control" id="endpointUrl" disabled
+              value=<%if(typeof device.User != 'undefined'){%> 
+                      "<%= device.User.firstName %> <%= device.User.lastName %>" 
+                    <%}%>>
+            </div>
+            <div class="form-group col-md-3">
+              <label for="rootNode"><b>Creado En</b></label>
+              <input type="text" class="form-control" id="rootNode" disabled
+              value="<%=`${device.createdAt.getDate()}/${device.createdAt.getMonth()+1}/${device.createdAt.getFullYear()}`%>">
+            </div>
+            <div class="form-group col-md-3">
+              <label for="timeOut"><b>Actualizado En</b></label>
+              <input type="text" class="form-control" id="timeOut" disabled
+              value="<%=`${device.updatedAt.getDate()}/${device.updatedAt.getMonth()+1}/${device.updatedAt.getFullYear()}`%>">
+            </div>
           </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group col-md-6">
-            <label for="ipAdrress"><b>Administrador</b></label>
-            <input type="text" class="form-control" id="endpointUrl" readonly
-            value=<%if(typeof device != 'undefined' && typeof device.User != 'undefined'){%> "<%= device.User.firstName %> <%= device.User.lastName %>" <%}%>>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="ipAdrress"><b>URL de Conexión</b></label>
+              <input type="text" class="form-control" id="endpointUrl" disabled
+              value="<%=device.endpointUrl%>">
+            </div>
+            <div class="form-group col-md-3">
+              <label for="rootNode"><b>Nodo Raíz</b></label>
+              <input type="text" class="form-control" id="rootNode" disabled
+              value="<%=device.rootNode%>">
+            </div>
+            <div class="form-group col-md-3">
+              <label for="timeOut"><b>Tiempo Límite</b></label>
+              <input type="text" class="form-control" id="timeOut" disabled
+              value="<%=device.timeOut%>">
+            </div>
           </div>
-          <div class="form-group col-md-3">
-            <label for="rootNode"><b>Creado En</b></label>
-            <input type="text" class="form-control" id="rootNode" readonly
-            value=<%if(typeof device != 'undefined'){%> 
-              "<%=`${device.createdAt.getDate()}/${device.createdAt.getMonth()+1}/${device.createdAt.getFullYear()}`%>" 
-            <%}%>>
+          <div class="form-row">
+            <div class="form-group col-md-12">
+            <label for="description"><b>Descripción</b></label>
+              <input type="text" class="form-control"  id="description" disabled
+              value="<%=device.description%>">
+            </div>
           </div>
-          <div class="form-group col-md-3">
-            <label for="timeOut"><b>Actualizado En</b></label>
-            <input type="text" class="form-control" id="timeOut" readonly
-            value=<%if(typeof device != 'undefined'){%>
-              "<%=`${device.updatedAt.getDate()}/${device.updatedAt.getMonth()+1}/${device.updatedAt.getFullYear()}`%>"
-            <%}%>>
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group col-md-6">
-            <label for="ipAdrress"><b>URL de Conexión</b></label>
-            <input type="text" class="form-control" id="endpointUrl" readonly
-            value=<%if(typeof device != 'undefined'){%> "<%=device.endpointUrl%>" <%}%>>
-          </div>
-          <div class="form-group col-md-3">
-            <label for="rootNode"><b>Nodo Raíz</b></label>
-            <input type="text" class="form-control" id="rootNode" readonly
-            value=<%if(typeof device != 'undefined'){%> "<%=device.rootNode%>" <%}%>>
-          </div>
-          <div class="form-group col-md-3">
-            <label for="timeOut"><b>Tiempo Límite</b></label>
-            <input type="text" class="form-control" id="timeOut" readonly
-            value=<%if(typeof device != 'undefined'){%> "<%=device.timeOut%>" <%}%>>
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group col-md-12">
-          <label for="description"><b>Descripción</b></label>
-            <input type="text" class="form-control"  id="description" readonly
-            value=<%if(typeof device != 'undefined'){%> "<%=device.description%>" <%}%>>
-          </div>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
-  </div>
+   <%}%>
 
 <% include ../partials/footer %>

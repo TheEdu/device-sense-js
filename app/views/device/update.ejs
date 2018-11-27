@@ -1,0 +1,64 @@
+<% include ../partials/header %>
+
+  <!-- Breadcrumbs-->
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <a href="/device/list">Dispositivos</a>
+    </li>
+    <li class="breadcrumb-item active">Ver</li>
+  </ol>
+
+  <%if(typeof device != 'undefined'){%>
+    <div class="card mb-3">
+      <div class="card-header">
+        <div class="d-inline">
+           <span class="text-primary"> UUID: </span> <span> <%=device.uuid%> </span>
+        </div>
+        <div class="d-inline ml-3">
+           <span class="text-primary"> Nombre: </span>  <span> <%=device.name%> </span>
+        </div>
+        <div class="d-inline ml-3">
+           <span class="text-primary"> URL de Conexión: </span>  <span> <%=device.endpointUrl%> </span>
+        </div>
+      </div>
+      <div class="container py-2">
+        <form action="/device/update" method="POST">
+          <input type="number" name="id" value="<%=device.id%>" hidden>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="rootNode"><b>Nodo Raíz</b></label>
+              <input type="text" class="form-control" id="rootNode" name="rootNode"
+              value=  <%if(typeof params != 'undefined'){%> 
+                        "<%=params['rootNode']%>"
+                      <%} else {%>
+                        "<%=device.rootNode%>"
+                      <%}%> >
+            </div>
+            <div class="form-group col-md-6">
+              <label for="timeOut"><b>Tiempo Límite (ms)</b></label>
+              <input type="text" class="form-control" id="timeOut" name="timeOut" placeholder="1000ms (Default)"
+              value=  <%if(typeof params != 'undefined'){%> 
+                        "<%=params['timeOut']%>"
+                      <%} else {%>
+                        "<%=device.timeOut%>"
+                      <%}%> >
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-12">
+            <label for="description"><b>Descripción</b></label>
+              <input type="text" class="form-control"  id="description" name="description"
+              value=  <%if(typeof params != 'undefined'){%> 
+                        "<%=params['description']%>"
+                      <%} else {%>
+                        "<%=device.description%>"
+                      <%}%> >
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">Guardar</button>
+        </form>
+      </div>
+    </div>
+   <%}%>
+
+<% include ../partials/footer %>

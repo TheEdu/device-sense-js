@@ -46,7 +46,7 @@
         </tfoot>
         <tbody>
         <% if (typeof devices != 'undefined') { %>
-        	<% devices.forEach(function({uuid, name, endpointUrl, createdAt, User:{firstName, lastName}}){ %>
+        	<% devices.forEach(function({id, uuid, name, endpointUrl, createdAt, User:{firstName, lastName}}){ %>
 				<tr>
           <td class=""><%= uuid %></td>
           <td class=""><%= name %></td>
@@ -55,20 +55,35 @@
           <td class=""><%= firstName %> <%= lastName %></td>
           <td class="">
             <div class="text-center">
-              <a class="col-3"href="<%= `/device/show/${uuid}` %>">
-                <i class="far fa-eye"></i>
-              </a>
-              <a class="col-3" href="<%= `/device/addressSpace/${uuid}` %>">
-                <i class="fas fa-tree"></i>
-              </a>
+
+              <div class="d-inline">
+                <a href="<%= `/device/show/${uuid}` %>">
+                  <i class="far fa-eye"></i>
+                </a>
+              </div>
+
+              <div class="d-inline">
+                <a href="<%= `/device/addressSpace/${uuid}` %>">
+                  <i class="fas fa-tree"></i>
+                </a>
+              </div>
+
+              <div class="d-inline">
+                <a href="<%= `/device/update/${uuid}` %>">
+                  <i class="far fa-edit"></i>
+                </a>
+              </div>
+              
+              <div class="d-inline">
+                <a class="delete-device" data-id="<%= id %>" data-name="<%= name %>" data-toggle="modal" data-target="#deleteDevice" href="#">
+                  <i class="far fa-trash-alt"></i>
+                </a>
+              </div>
               <!--
 							<a class="col-3" href="">
 								<i class="fas fa-plug"></i>
 							</a>
-							<a class="col-3" href="">
-                <i class="far fa-edit"></i>
-							</a>
-							<a class="col-3" href="">
+							<a class="col-3" data-toggle="modal" data-target="#logoutModal">
 								<i class="far fa-trash-alt"></i>
 							</a>
               <a class="col-3" href="<%= `/json/${uuid}` %>">
@@ -86,4 +101,43 @@
   </div>
 </div>
 
+<!-- Delete Device Modal-->
+<div class="modal fade" id="deleteDevice" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <form id="deleteForm" action="/device/delete" method="POST">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Desea Eliminar el dispositivo seleccionado?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>
+            Seleccione "Eliminar" para proceder con la eliminación de <b><span id="dispostivoBorrarNombre"></span></b>
+          </p>
+          <input type="text" name="deleteId" id="deleteId" value="" hidden/>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+          <a class="btn btn-danger" onclick="deleteDevice()">Eliminar</a>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
 <% include ../partials/footer %>
+
+<script type='text/javascript'>
+  $(document).on('click', '.delete-device', function () {
+    const name = $(this).data('name')
+    const id = $(this).data('id')
+    $('.modal-body #dispostivoBorrarNombre').html(name)
+    $('.modal-body #deleteId').val(id)
+  })
+
+  function deleteDevice() {
+    $('#deleteForm').submit()
+  }
+</script>

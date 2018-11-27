@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
     timeOut: DataTypes.STRING,
     createdAt: DataTypes.DATE,
     updatedAt: DataTypes.DATE
-  }, {} );
+  }, {});
 
   Device.associate = function(models) {
     Device.belongsTo(models.User, {foreignKey: 'fk_userId', targetKey: 'id'});

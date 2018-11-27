@@ -69,10 +69,9 @@ exports.create = async (req, res) => {
         rootNode: rootNode,
         timeOut: timeOut || default_timeOut
       })
-      
-      return res.render('device/create.ejs', {
-        success: `Dispositivo creado Exitosamente!`
-      })
+
+      req.flash('success', 'Dispositivo Creado Exitosamente.')
+      return res.redirect('/device/list')
     }
   } catch (err) {
     return res.render('device/create.ejs', {
@@ -120,7 +119,6 @@ exports.show = async (req, res) => {
                           where: {uuid: device_uuid},
                           include: [{ model: db.User }]
                         })
-    console.log(device)
     return res.render('device/show.ejs', {device})
   } catch (err) {
     req.flash('error', err.toString())
@@ -128,13 +126,97 @@ exports.show = async (req, res) => {
   }
 }
 
-// exports.update = (req, res) => {
-//   res.render('device/index.ejs', {})
-// }
+exports.updateIndex = async (req, res) => {
+  // Get URL params
+  const device_uuid = req.params.uuid
+  
+  try {
+    // Get Device to Update
+    let device = await db.Device.findOne({
+                          where: {uuid: device_uuid}
+                        })
+    return res.render('device/update.ejs', {device})
+  } catch (err) {
+    // Redirect to Device List with the Error
+    req.flash('error', err.toString())
+    return res.redirect('/device/list')
+  }
+}
 
-// exports.delete = (req, res) => {
-//   res.render('device/index.ejs', {})
-// }
+
+exports.update = async (req, res) => {
+  // Get the form inputs from the request body
+  let device = null
+  const id = req.body.id
+  const description = req.body.description
+  const rootNode = req.body.rootNode
+  const timeOut = req.body.timeOut
+  const default_timeOut = 10000
+
+  const params = {
+    description: description,
+    rootNode: rootNode,
+    timeOut: timeOut
+  }
+
+  // Get the Device by the hidden form Id
+  try {
+    device = await db.Device.findById(id)
+  } catch (err) {
+    req.flash('error', err.toString())
+    return res.redirect('/device/list')
+  }
+
+  // If the Device couldnt be found, then redirect to Device List
+  if (device == null) {
+    req.flash('error', 'No se pudo Actualizar el Dispositivo. Por favor inténtelo de nuevo en unos minutos.')
+    return res.redirect('/device/list')
+  }
+
+  // Check for restrictions
+  if (!rootNode) {
+    return res.render('device/update.ejs', {
+      device: device,
+      params: params,
+      error: 'El Campo Nodo Raíz debe tener contenido'
+    })
+  }
+
+  // Update Device
+  try {
+    await device.update({
+      rootNode: rootNode,
+      timeOut: timeOut || default_timeOut,
+      description: description,
+    })
+
+    req.flash('success', 'Dispositivo Actualizado Correctamente.')
+    return res.redirect('/device/list')
+
+  } catch (err) {
+    return res.render('device/update.ejs', {
+      device: device,
+      params: params,
+      error: err.toString()
+    })
+  }
+  
+}
+
+exports.delete = async (req, res) => {
+  const deleteId = req.body.deleteId
+
+  try {
+    let device = await db.Device.findById(deleteId)
+    await device.destroy()
+    req.flash('success', 'Dispositivo Eliminado Correctamente.')
+    return res.redirect('/device/list')
+
+  } catch (err) {
+    req.flash('error', err.toString())
+    return res.redirect('/device/list')
+  }
+}
 
 // exports.test = (req, res) => {
 //   res.render('device/index.ejs', {})
