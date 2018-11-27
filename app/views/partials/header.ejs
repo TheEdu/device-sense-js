@@ -26,6 +26,9 @@
     <!-- jsTree styles-->
     <link href="/css/jstree/style.min.css" rel="stylesheet">
 
+    <!-- Custom CSS-->
+    <link href="/css/style.css" rel="stylesheet">
+
   </head>
 
   <body id="page-top">
@@ -82,7 +85,7 @@
           <div class="dropdown-menu" aria-labelledby="pagesDropdown">
             <h6 class="dropdown-header">Acciones:</h6>
             <a class="dropdown-item" href="/device/list">Mis Dispositivos</a>
-            <a class="dropdown-item" href="/device/create">Nuevo Dispositivo</a>
+            <a class="dropdown-item" href="/device/create">Nuevo</a>
           </div>
         </li>
       </ul>
@@ -98,14 +101,3 @@
           <% if ((typeof success != 'undefined') && success.length > 0) { %>
             <div class="alert alert-success"><%- success %></div>
           <% } %>
-
-          <!-- <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-              <a href="index.html">Dashboard</a>
-            </li>
-            <li class="breadcrumb-item active">Blank Page</li>
-          </ol>
-
-          <h1>Blank Page</h1>
-          <hr>
-          <p>This is a great starting point for new custom pages.</p> -->

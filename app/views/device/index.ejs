@@ -3,7 +3,7 @@
 <!-- Breadcrumbs-->
 <ol class="breadcrumb">
   <li class="breadcrumb-item">
-    <a href="#">Dispositivo</a>
+    <a  href="/device/list">Dispositivos</a>
   </li>
   <li class="breadcrumb-item active">Mis Dispositivo</li>
 </ol>
@@ -55,15 +55,12 @@
           <td class=""><%= firstName %> <%= lastName %></td>
           <td class="">
             <div class="text-center">
-              <a class="col-3" href="<%= `/tree/${uuid}` %>">
-                <i class="fas fa-cannabis"></i>
+              <a class="col-3"href="<%= `/device/show/${uuid}` %>">
+                <i class="far fa-eye"></i>
               </a>
-              <a class="col-3" href="<%= `/json/${uuid}` %>">
-                <i class="fab fa-js"></i>
+              <a class="col-3" href="<%= `/device/addressSpace/${uuid}` %>">
+                <i class="fas fa-tree"></i>
               </a>
-              <a class="col-3" href="">
-								<i class="far fa-eye"></i>
-							</a>
               <!--
 							<a class="col-3" href="">
 								<i class="fas fa-plug"></i>
@@ -74,6 +71,9 @@
 							<a class="col-3" href="">
 								<i class="far fa-trash-alt"></i>
 							</a>
+              <a class="col-3" href="<%= `/json/${uuid}` %>">
+                <i class="fab fa-js"></i>
+              </a>
               -->
 						</div>
 					</td>

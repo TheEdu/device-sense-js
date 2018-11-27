@@ -1,21 +1,4 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+.address-space-container {
+	overflow: auto; 
+	height: 350px;
 }
-
-a {
-  color: #00B7FF;
-}
-
-.red {
-	color:red;
-}
-
-.blue {
-	color:blue;
-}
-
-.green {
-	color:green;
-}
-

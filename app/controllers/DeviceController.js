@@ -89,7 +89,7 @@ exports.json = async (req, res) => {
     const endpointUrl = device.endpointUrl
     const nodeId = device.rootNode
     const timeout_ms = device.timeOut
-    const tree = await ds_opcua.addressSpace(endpointUrl, nodeId, timeout_ms*10)
+    const tree = await ds_opcua.addressSpace(endpointUrl, nodeId, timeout_ms)
     return res.send(tree)
   } catch (err) {
     return res.send(err)
@@ -103,7 +103,7 @@ exports.getAddressSpace = async (req, res) => {
     const endpointUrl = device.endpointUrl
     const nodeId = device.rootNode
     const timeout_ms = device.timeOut
-    const tree = await ds_opcua.addressSpace(endpointUrl, nodeId, timeout_ms*10)
+    const tree = await ds_opcua.addressSpace(endpointUrl, nodeId, timeout_ms)
     return res.render('device/addressSpace.ejs', {
       addressSpace: tree
     })
@@ -113,8 +113,14 @@ exports.getAddressSpace = async (req, res) => {
   }
 }
 
-exports.show = (req, res) => {
-  res.render('device/show.ejs', {})
+exports.show = async (req, res) => {
+  const device_uuid = req.params.uuid
+  let device = await db.Device.findOne({
+                        where: {uuid: device_uuid},
+                        include: [{ model: db.User }]
+                      })
+  console.log(device)
+  return res.render('device/show.ejs', {device})
 }
 
 // exports.update = (req, res) => {

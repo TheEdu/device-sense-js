@@ -3,47 +3,46 @@
 <!-- Breadcrumbs-->
 <ol class="breadcrumb">
   <li class="breadcrumb-item">
-    <a href="#">Dispositivo</a>
+    <a  href="/device/list">Dispositivos</a>
   </li>
   <li class="breadcrumb-item active">Nuevo</li>
 </ol>
 
-<!-- DataTables Example -->
 <div class="card mb-3">
   <div class="container p-2">
     <form action="/device/create" method="POST">
       <div class="form-row">
         <div class="form-group col-md-6">
-          <label for="name">Nombre</label>
-          <input type="text" class="form-control" id="name" name="name" placeholder="Nombre" 
-          value=<%if(typeof params != 'undefined'){%> "<%=params['name']%>" <%}%>>
-        </div>
-        <div class="form-group col-md-6">
-          <label for="uuid">UUID</label>
+          <label for="uuid"><b>UUID</b></label>
           <input type="text" class="form-control" id="endpointUrl" name="uuid" placeholder="UUID"
           value=<%if(typeof params != 'undefined'){%> "<%=params['uuid']%>" <%}%>>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="name"><b>Nombre</b></label>
+          <input type="text" class="form-control" id="name" name="name" placeholder="Nombre" 
+          value=<%if(typeof params != 'undefined'){%> "<%=params['name']%>" <%}%>>
         </div>
       </div>
       <div class="form-row">
         <div class="form-group col-md-6">
-          <label for="ipAdrress">Endpoint URL</label>
+          <label for="ipAdrress"><b>URL de Conexión</b></label>
           <input type="text" class="form-control" id="endpointUrl" name="endpointUrl" placeholder="Endpoint URL"
           value=<%if(typeof params != 'undefined'){%> "<%=params['endpointUrl']%>" <%}%>>
         </div>
         <div class="form-group col-md-3">
-          <label for="rootNode">Root Node</label>
+          <label for="rootNode"><b>Nodo Raíz</b></label>
           <input type="text" class="form-control" id="rootNode" name="rootNode" placeholder="Root Node"
           value=<%if(typeof params != 'undefined'){%> "<%=params['rootNode']%>" <%}%>>
         </div>
         <div class="form-group col-md-3">
-          <label for="timeOut">Timeout</label>
+          <label for="timeOut"><b>Tiempo Límite</b></label>
           <input type="text" class="form-control" id="timeOut" name="timeOut" placeholder="timeOut"
           value=<%if(typeof params != 'undefined'){%> "<%=params['timeOut']%>" <%}%>>
         </div>
       </div>
       <div class="form-row">
         <div class="form-group col-md-12">
-        <label for="description">Descripción</label>
+        <label for="description"><b>Descripción</b></label>
           <input type="text" class="form-control"  id="description" name="description" placeholder="Drescripción"
           value=<%if(typeof params != 'undefined'){%> "<%=params['description']%>" <%}%>>
         </div>
