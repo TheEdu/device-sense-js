@@ -23,20 +23,14 @@ module.exports = (app, passport) => {
   }))
 
   /* Devie Routes */
-  app.get('/device/list',     home.loggedIn, device.list)
-
-  app.get('/device/create',   home.loggedIn, device.createIndex)
-  app.post('/device/create',  home.loggedIn, device.create)
-
-  app.get('/json/:uuid', device.json)
-  app.get('/device/addressSpace/:uuid', device.getAddressSpace)
-
+  app.get('/device/list', home.loggedIn, device.list)
+  app.get('/device/create', home.loggedIn, device.createIndex)
+  app.post('/device/create', home.loggedIn, device.create)
   app.get('/device/show/:uuid', home.loggedIn, device.show)
-
   app.get('/device/update/:uuid', home.loggedIn, device.updateIndex)
   app.post('/device/update', home.loggedIn, device.update)
-
-  
-  app.post('/device/delete',   home.loggedIn, device.delete)
+  app.post('/device/delete', home.loggedIn, device.delete)
+  app.get('/json/:uuid', home.loggedIn, device.json)
+  app.get('/device/addressSpace/:uuid', home.loggedIn, device.getAddressSpace)
   
 }
