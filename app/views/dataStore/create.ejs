@@ -1,0 +1,99 @@
+<% include ../partials/header %>
+
+<!-- Breadcrumbs-->
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">
+    <a  href="/datastore/list">Bases de Datos</a>
+  </li>
+  <li class="breadcrumb-item active">Nueva</li>
+</ol>
+
+<div class="card mb-3">
+  <div class="container p-2">
+    <form action="/datastore/create" method="POST">
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="uuid"><b>UUID</b></label>
+          <input type="text" class="form-control" id="endpointUrl" name="uuid" placeholder="XXXX"
+          value=<%if(typeof params != 'undefined'){%> "<%=params['uuid']%>" <%}%>>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="name"><b>Nombre</b></label>
+          <input type="text" class="form-control" id="name" name="name" placeholder="Nombre del Dispositivo" 
+          value=<%if(typeof params != 'undefined'){%> "<%=params['name']%>" <%}%>>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-3">
+          <label for="type"><b>type</b></label>
+          <input type="text" class="form-control" id="type" name="type" placeholder="type"
+          value=<%if(typeof params != 'undefined'){%> "<%=params['type']%>" <%}%>>
+        </div>
+        <div class="form-group col-md-3">
+          <label for="host"><b>host</b></label>
+          <input type="text" class="form-control" id="host" name="host" placeholder="host"
+          value=<%if(typeof params != 'undefined'){%> "<%=params['host']%>" <%}%>>
+        </div>
+        <div class="form-group col-md-3">
+          <label for="port"><b>port</b></label>
+          <input type="number" class="form-control" id="port" name="port" placeholder="port"
+          value=<%if(typeof params != 'undefined'){%> "<%=params['port']%>" <%}%>>
+        </div>
+        <div class="form-group col-md-3">
+          <label for="protocol"><b>protocol</b></label>
+          <input type="text" class="form-control" id="protocol" name="protocol" placeholder="protocol"
+          value=<%if(typeof params != 'undefined'){%> "<%=params['protocol']%>" <%}%>>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="database"><b>database</b></label>
+          <input type="text" class="form-control" id="database" name="database" placeholder="database"
+          value=<%if(typeof params != 'undefined'){%> "<%=params['database']%>" <%}%>>
+        </div>
+        <div class="form-group col-md-3">
+          <label for="username"><b>username</b></label>
+          <input type="text" class="form-control" id="username" name="username" placeholder="username"
+          value=<%if(typeof params != 'undefined'){%> "<%=params['username']%>" <%}%>>
+        </div>
+        <div class="form-group col-md-3">
+          <label for="password"><b>password</b></label>
+          <input type="text" class="form-control" id="password" name="password" placeholder="password"
+          value=<%if(typeof params != 'undefined'){%> "<%=params['password']%>" <%}%>>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-3">
+          <label for="failoverTimeout"><b>failoverTimeout</b></label>
+          <input type="number" class="form-control" id="failoverTimeout" name="failoverTimeout" placeholder="failoverTimeout"
+          value=<%if(typeof params != 'undefined'){%> "<%=params['failoverTimeout']%>" <%}%>>
+        </div>
+        <div class="form-group col-md-3">
+          <label for="bufferMaxSize"><b>bufferMaxSize</b></label>
+          <input type="number" class="form-control" id="bufferMaxSize" name="bufferMaxSize" placeholder="bufferMaxSize"
+          value=<%if(typeof params != 'undefined'){%> "<%=params['bufferMaxSize']%>" <%}%>>
+        </div>
+        <div class="form-group col-md-3">
+          <label for="writeInterval"><b>writeInterval</b></label>
+          <input type="number" class="form-control" id="writeInterval" name="writeInterval" placeholder="writeInterval"
+          value=<%if(typeof params != 'undefined'){%> "<%=params['writeInterval']%>" <%}%>>
+        </div>
+        <div class="form-group col-md-3">
+          <label for="writeMaxPoints"><b>writeMaxPoints</b></label>
+          <input type="number" class="form-control" id="writeMaxPoints" name="writeMaxPoints" placeholder="writeMaxPoints"
+          value=<%if(typeof params != 'undefined'){%> "<%=params['writeMaxPoints']%>" <%}%>>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-12">
+        <label for="description"><b>Descripción</b></label>
+          <input type="text" class="form-control"  id="description" name="description" placeholder="Drescripción del Dispositivo"
+          value=<%if(typeof params != 'undefined'){%> "<%=params['description']%>" <%}%>>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Crear</button>
+    </form>
+  </div>
+</div>
+
+<% include ../partials/footer %>

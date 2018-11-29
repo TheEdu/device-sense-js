@@ -2,6 +2,7 @@
 const home = require('../app/controllers/HomeController')
 const user = require('../app/controllers/UserController')
 const device = require('../app/controllers/DeviceController')
+const dataStore = require('../app/controllers/DataStoreController')
 
 module.exports = (app, passport) => {
 
@@ -32,5 +33,14 @@ module.exports = (app, passport) => {
   app.post('/device/delete', home.loggedIn, device.delete)
   app.get('/json/:uuid', home.loggedIn, device.json)
   app.get('/device/addressSpace/:uuid', home.loggedIn, device.getAddressSpace)
+
+  /* DataStore Routes */
+  app.get('/datastore/list', home.loggedIn, dataStore.list)
+  app.get('/datastore/create', home.loggedIn, dataStore.createIndex)
+  app.post('/datastore/create', home.loggedIn, dataStore.create)
+  app.get('/datastore/show/:uuid', home.loggedIn, dataStore.show)
+  app.get('/datastore/update/:uuid', home.loggedIn, dataStore.updateIndex)
+  app.post('/datastore/update', home.loggedIn, dataStore.update)
+  app.post('/datastore/delete', home.loggedIn, dataStore.delete)
   
 }

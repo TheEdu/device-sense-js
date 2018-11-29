@@ -1,0 +1,119 @@
+<% include ../partials/header %>
+
+  <!-- Breadcrumbs-->
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <a  href="/datastore/list">Bases de Datos</a>
+    </li>
+    <li class="breadcrumb-item active">Ver</li>
+  </ol>
+
+  <%if(typeof dataStore != 'undefined'){%>
+    <div class="card mb-3">
+      <div class="container p-2">
+        <form>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="uuid"><b>UUID</b></label>
+              <input type="text" class="form-control" id="endpointUrl" disabled
+              value="<%=dataStore.uuid%>">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="name"><b>Nombre</b></label>
+              <input type="text" class="form-control" id="name" disabled
+              value="<%=dataStore.name%>">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="ipAdrress"><b>Administrador</b></label>
+              <input type="text" class="form-control" id="endpointUrl" disabled
+              value=<%if(typeof dataStore.User != 'undefined'){%> 
+                      "<%= dataStore.User.firstName %> <%= dataStore.User.lastName %>" 
+                    <%}%>>
+            </div>
+            <div class="form-group col-md-3">
+              <label for="rootNode"><b>Creado En</b></label>
+              <input type="text" class="form-control" id="rootNode" disabled
+              value="<%=`${dataStore.createdAt.getDate()}/${dataStore.createdAt.getMonth()+1}/${dataStore.createdAt.getFullYear()}`%>">
+            </div>
+            <div class="form-group col-md-3">
+              <label for="timeOut"><b>Actualizado En</b></label>
+              <input type="text" class="form-control" id="timeOut" disabled
+              value="<%=`${dataStore.updatedAt.getDate()}/${dataStore.updatedAt.getMonth()+1}/${dataStore.updatedAt.getFullYear()}`%>">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-3">
+              <label for="type"><b>Tipo</b></label>
+              <input type="text" class="form-control" id="type" disabled
+              value="<%=dataStore.type%>">
+            </div>
+            <div class="form-group col-md-3">
+              <label for="host"><b>Host</b></label>
+              <input type="text" class="form-control" id="host" disabled
+              value="<%=dataStore.host%>">
+            </div>
+            <div class="form-group col-md-3">
+              <label for="port"><b>Puerto</b></label>
+              <input type="text" class="form-control" id="port" disabled
+              value="<%=dataStore.port%>">
+            </div>
+            <div class="form-group col-md-3">
+              <label for="protocol"><b>Protocolo</b></label>
+              <input type="text" class="form-control" id="protocol" disabled
+              value="<%=dataStore.protocol%>">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="database"><b>Base de Datos</b></label>
+              <input type="text" class="form-control" id="database" disabled
+              value="<%=dataStore.database%>">
+            </div>
+            <div class="form-group col-md-3">
+              <label for="username"><b>Nombre de Usuario</b></label>
+              <input type="text" class="form-control" id="username" disabled
+              value="<%=dataStore.username%>">
+            </div>
+            <div class="form-group col-md-3">
+              <label for="password"><b>Password</b></label>
+              <input type="text" class="form-control" id="password" disabled
+              value="<%=dataStore.password%>">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-3">
+              <label for="failoverTimeout"><b>failoverTimeout</b></label>
+              <input type="text" class="form-control" id="failoverTimeout" disabled
+              value="<%=dataStore.failoverTimeout%>">
+            </div>
+            <div class="form-group col-md-3">
+              <label for="bufferMaxSize"><b>bufferMaxSize</b></label>
+              <input type="text" class="form-control" id="bufferMaxSize" disabled
+              value="<%=dataStore.bufferMaxSize%>">
+            </div>
+            <div class="form-group col-md-3">
+              <label for="writeInterval"><b>writeInterval</b></label>
+              <input type="text" class="form-control" id="writeInterval" disabled
+              value="<%=dataStore.writeInterval%>">
+            </div>
+            <div class="form-group col-md-3">
+              <label for="writeMaxPoints"><b>writeMaxPoints</b></label>
+              <input type="text" class="form-control" id="writeMaxPoints" disabled
+              value="<%=dataStore.writeMaxPoints%>">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-12">
+            <label for="description"><b>Descripción</b></label>
+              <input type="text" class="form-control"  id="description" disabled
+              value="<%=dataStore.description%>">
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+   <%}%>
+
+<% include ../partials/footer %>

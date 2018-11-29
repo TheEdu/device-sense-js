@@ -56,27 +56,33 @@
           <td class="">
             <div class="text-center">
 
-              <div class="d-inline ml-1">
+              <div class="d-inline">
                 <a href="<%= `/device/show/${uuid}` %>">
                   <i class="far fa-eye"></i>
                 </a>
               </div>
 
-              <div class="d-inline ml-1">
-                <a href="<%= `/device/addressSpace/${uuid}` %>">
-                  <i class="fas fa-tree"></i>
-                </a>
-              </div>
-
-              <div class="d-inline ml-1">
+              <div class="d-inline">
                 <a href="<%= `/device/update/${uuid}` %>">
                   <i class="far fa-edit"></i>
                 </a>
               </div>
               
-              <div class="d-inline ml-1">
+              <div class="d-inline">
                 <a class="delete-device" data-id="<%= id %>" data-name="<%= name %>" data-toggle="modal" data-target="#deleteDevice" href="#">
                   <i class="far fa-trash-alt"></i>
+                </a>
+              </div>
+
+              <div class="d-inline">
+                <a href="<%= `/device/addressSpace/${uuid}` %>">
+                  <i class="fas fa-tree"></i>
+                </a>
+              </div>
+
+              <div class="d-inline">
+                <a href="<%= `/json/${uuid}` %>">
+                  <i class="fab fa-js"></i>
                 </a>
               </div>
               <!--
@@ -86,9 +92,6 @@
 							<a class="col-3" data-toggle="modal" data-target="#logoutModal">
 								<i class="far fa-trash-alt"></i>
 							</a>
-              <a class="col-3" href="<%= `/json/${uuid}` %>">
-                <i class="fab fa-js"></i>
-              </a>
               -->
 						</div>
 					</td>

@@ -1,0 +1,120 @@
+<% include ../partials/header %>
+
+  <!-- Breadcrumbs-->
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <a href="/datastore/list">Base de Datos</a>
+    </li>
+    <li class="breadcrumb-item active">Actualizar</li>
+  </ol>
+
+  <%if(typeof dataStore != 'undefined'){%>
+    <div class="card mb-3">
+      <div class="card-header">
+        <div class="d-inline">
+           <span class="text-primary"> UUID: </span> <span> <%=dataStore.uuid%> </span>
+        </div>
+        <div class="d-inline ml-2">
+           <span class="text-primary"> Nombre: </span>  <span> <%=dataStore.name%> </span>
+        </div>
+        <div class="d-inline ml-2">
+           <span class="text-primary"> Type: </span>  <span> <%=dataStore.type%> </span>
+        </div>
+
+        <div class="d-inline ml-2">
+           <span class="text-primary"> Protocol: </span>  <span> <%=dataStore.protocol%> </span>
+        </div>
+        <div class="d-inline ml-2">
+           <span class="text-primary"> Host: </span>  <span> <%=dataStore.host%> </span>
+        </div>
+        <div class="d-inline ml-2">
+           <span class="text-primary"> Port: </span>  <span> <%=dataStore.port%> </span>
+        </div>
+        <div class="d-inline ml-2">
+           <span class="text-primary"> Database: </span>  <span> <%=dataStore.database%> </span>
+        </div>
+      </div>
+      <div class="container py-2">
+        <form action="/datastore/update" method="POST">
+          <input type="number" name="id" value="<%=dataStore.id%>" hidden>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="username"><b>username</b></label>
+              <input type="text" class="form-control" id="username" name="username"
+              value=  <%if(typeof params != 'undefined'){%> 
+                        "<%=params['username']%>"
+                      <%} else {%>
+                        "<%=dataStore.username%>"
+                      <%}%> >
+            </div>
+            <div class="form-group col-md-6">
+              <label for="password"><b>password</b></label>
+              <input type="text" class="form-control" id="password" name="password"
+              value=  <%if(typeof params != 'undefined'){%> 
+                        "<%=params['password']%>"
+                      <%} else {%>
+                        "<%=dataStore.password%>"
+                      <%}%> >
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-3">
+              <label for="failoverTimeout"><b>failoverTimeout</b></label>
+              <input type="text" class="form-control" id="failoverTimeout" name="failoverTimeout"
+              value=  <%if(typeof params != 'undefined'){%> 
+                        "<%=params['failoverTimeout']%>"
+                      <%} else {%>
+                        "<%=dataStore.failoverTimeout%>"
+                      <%}%> >
+
+            </div>
+
+            <div class="form-group col-md-3">
+              <label for="bufferMaxSize"><b>bufferMaxSize</b></label>
+              <input type="text" class="form-control" id="bufferMaxSize" name="bufferMaxSize"
+              value=  <%if(typeof params != 'undefined'){%> 
+                        "<%=params['bufferMaxSize']%>"
+                      <%} else {%>
+                        "<%=dataStore.bufferMaxSize%>"
+                      <%}%> >
+            </div>
+
+            <div class="form-group col-md-3">
+              <label for="writeInterval"><b>writeInterval</b></label>
+              <input type="text" class="form-control" id="writeInterval" name="writeInterval"
+              value=  <%if(typeof params != 'undefined'){%> 
+                        "<%=params['writeInterval']%>"
+                      <%} else {%>
+                        "<%=dataStore.writeInterval%>"
+                      <%}%> >
+
+            </div>
+
+            <div class="form-group col-md-3">
+              <label for="timeOut"><b>writeMaxPoints</b></label>
+              <input type="text" class="form-control" id="writeMaxPoints" name="writeMaxPoints"
+              value=  <%if(typeof params != 'undefined'){%> 
+                        "<%=params['writeMaxPoints']%>"
+                      <%} else {%>
+                        "<%=dataStore.writeMaxPoints%>"
+                      <%}%> >
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-12">
+            <label for="description"><b>Descripción</b></label>
+              <input type="text" class="form-control"  id="description" name="description"
+              value=  <%if(typeof params != 'undefined'){%> 
+                        "<%=params['description']%>"
+                      <%} else {%>
+                        "<%=dataStore.description%>"
+                      <%}%> >
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">Guardar</button>
+        </form>
+      </div>
+    </div>
+   <%}%>
+
+<% include ../partials/footer %>

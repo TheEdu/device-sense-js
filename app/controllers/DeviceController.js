@@ -9,7 +9,7 @@ exports.list = async (req, res) => {
                           include: [{ model: db.User }]
                         })
 
-    res.render('device/index.ejs', {
+    res.render('device/list.ejs', {
       devices: devices,
       success: req.flash("success"),
       error: req.flash("error")

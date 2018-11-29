@@ -1,0 +1,129 @@
+<% include ../partials/header %>
+
+<!-- Breadcrumbs-->
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">
+    <a  href="/datastore/list">Bases de Datos</a>
+  </li>
+  <li class="breadcrumb-item active">Mis Bases de Datos</li>
+</ol>
+
+<!-- DataTables Example -->
+<div class="card mb-3">
+  <div class="card-header row">
+  	<div class="col-6">
+  		<i class="fas fa-table"></i>
+  		<span>Mis Bases de Datos</span>
+  	</div>
+  	<div class="col-6 text-right">
+  		<a href="/datastore/create">
+  			<i class="fas fa-plus fa-lg"></i>
+  		</a>
+  	</div>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <thead>
+          <tr>
+            <th class="">UUID</th>
+            <th class="">Name</th>
+            <th class="">Host</th>
+            <th class="">Database</th>
+            <th class="">Fecha Alta</th>
+            <th class="">Administrador</th>
+            <th class=" text-center">Acciones</th>
+          </tr>
+        </thead>
+        <tfoot>
+          <tr>
+            <th class="">UUID</th>
+            <th class="">Name</th>
+            <th class="">Host</th>
+            <th class="">Database</th>
+            <th class="">Fecha Alta</th>
+            <th class="">Administrador</th>
+            <th class=" text-center">Acciones</th>
+          </tr>
+        </tfoot>
+        <tbody>
+        <% if (typeof dataStores != 'undefined') { %>
+        	<% dataStores.forEach(function({id, uuid, protocol, host, port, database, name, createdAt, User:{firstName, lastName}}){ %>
+				<tr>
+          <td class=""><%= uuid %></td>
+          <td class=""><%= name %></td>
+          <td class=""><%= host %></td>
+          <td class=""><%= database %></td>
+          <td class=""><%=  `${createdAt.getDate()}/${createdAt.getMonth()+1}/${createdAt.getFullYear()}` %></td>
+          <td class=""><%= firstName %> <%= lastName %></td>
+          <td class="">
+            <div class="text-center">
+
+              <div class="d-inline ml-1">
+                <a href="<%= `/datastore/show/${uuid}` %>">
+                  <i class="far fa-eye"></i>
+                </a>
+              </div>
+
+              <div class="d-inline ml-1">
+                <a href="<%= `/datastore/update/${uuid}` %>">
+                  <i class="far fa-edit"></i>
+                </a>
+              </div>
+              
+              <div class="d-inline ml-1">
+                <a class="delete-device" data-id="<%= id %>" data-name="<%= name %>" data-toggle="modal" data-target="#deleteDevice" href="#">
+                  <i class="far fa-trash-alt"></i>
+                </a>
+              </div>
+						</div>
+					</td>
+				</tr>
+        	<% }) %>
+        <% } %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Device Modal-->
+<div class="modal fade" id="deleteDevice" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <form id="deleteForm" action="/datastore/delete" method="POST">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Desea Eliminar ela Base de Datos seleccionada?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>
+            Si continua eliminara "<b><span id="dispostivoBorrarNombre"></span></b>" de su lista de Bases de Datos
+          </p>
+          <input type="text" name="deleteId" id="deleteId" value="" hidden/>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+          <a class="btn btn-danger text-white" onclick="deleteDataBase()">Eliminar</a>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<% include ../partials/footer %>
+
+<script type='text/javascript'>
+  $(document).on('click', '.delete-device', function () {
+    const name = $(this).data('name')
+    const id = $(this).data('id')
+    $('.modal-body #dispostivoBorrarNombre').html(name)
+    $('.modal-body #deleteId').val(id)
+  })
+
+  function deleteDataBase() {
+    $('#deleteForm').submit()
+  }
+</script>
