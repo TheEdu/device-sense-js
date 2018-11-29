@@ -1,0 +1,58 @@
+<% include ../partials/header %>
+
+  <!-- Breadcrumbs-->
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <a  href="/subscription/list">Suscripciones</a>
+    </li>
+    <li class="breadcrumb-item active">Ver</li>
+  </ol>
+
+  <%if(typeof subscription != 'undefined'){%>
+    <div class="card mb-3">
+      <div class="container p-2">
+        <form>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="uuid"><b>UUID</b></label>
+              <input type="text" class="form-control" id="endpointUrl" disabled
+              value="<%=subscription.uuid%>">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="name"><b>Nombre</b></label>
+              <input type="text" class="form-control" id="name" disabled
+              value="<%=subscription.name%>">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="ipAdrress"><b>Administrador</b></label>
+              <input type="text" class="form-control" id="endpointUrl" disabled
+              value=<%if(typeof subscription.User != 'undefined'){%> 
+                      "<%= subscription.User.firstName %> <%= subscription.User.lastName %>" 
+                    <%}%>>
+            </div>
+            <div class="form-group col-md-3">
+              <label for="rootNode"><b>Creado En</b></label>
+              <input type="text" class="form-control" id="rootNode" disabled
+              value="<%=`${subscription.createdAt.getDate()}/${subscription.createdAt.getMonth()+1}/${subscription.createdAt.getFullYear()}`%>">
+            </div>
+            <div class="form-group col-md-3">
+              <label for="timeOut"><b>Actualizado En</b></label>
+              <input type="text" class="form-control" id="timeOut" disabled
+              value="<%=`${subscription.updatedAt.getDate()}/${subscription.updatedAt.getMonth()+1}/${subscription.updatedAt.getFullYear()}`%>">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-12">
+            <label for="description"><b>Descripción</b></label>
+              <input type="text" class="form-control"  id="description" disabled
+              value="<%=subscription.description%>">
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+   <%}%>
+
+<% include ../partials/footer %>

@@ -3,6 +3,7 @@ const home = require('../app/controllers/HomeController')
 const user = require('../app/controllers/UserController')
 const device = require('../app/controllers/DeviceController')
 const dataStore = require('../app/controllers/DataStoreController')
+const subscription = require('../app/controllers/SubscriptionController')
 
 module.exports = (app, passport) => {
 
@@ -42,5 +43,14 @@ module.exports = (app, passport) => {
   app.get('/datastore/update/:uuid', home.loggedIn, dataStore.updateIndex)
   app.post('/datastore/update', home.loggedIn, dataStore.update)
   app.post('/datastore/delete', home.loggedIn, dataStore.delete)
+
+  /* Subscription Routes */
+  app.get('/subscription/list', home.loggedIn, subscription.list)
+  app.get('/subscription/create', home.loggedIn, subscription.createIndex)
+  app.post('/subscription/create', home.loggedIn, subscription.create)
+  app.get('/subscription/show/:uuid', home.loggedIn, subscription.show)
+  app.get('/subscription/update/:uuid', home.loggedIn, subscription.updateIndex)
+  app.post('/subscription/update', home.loggedIn, subscription.update)
+  app.post('/subscription/delete', home.loggedIn, subscription.delete)
   
 }

@@ -1,0 +1,41 @@
+<% include ../partials/header %>
+
+  <!-- Breadcrumbs-->
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <a href="/subscription/list">Suscripciones</a>
+    </li>
+    <li class="breadcrumb-item active">Actualizar</li>
+  </ol>
+
+  <%if(typeof subscription != 'undefined'){%>
+    <div class="card mb-3">
+      <div class="card-header">
+        <div class="d-inline">
+           <span class="text-primary"> UUID: </span> <span> <%=subscription.uuid%> </span>
+        </div>
+        <div class="d-inline ml-2">
+           <span class="text-primary"> Nombre: </span>  <span> <%=subscription.name%> </span>
+        </div>
+      </div>
+      <div class="container py-2">
+        <form action="/subscription/update" method="POST">
+          <input type="number" name="id" value="<%=subscription.id%>" hidden>
+          <div class="form-row">
+            <div class="form-group col-md-12">
+            <label for="description"><b>Descripción</b></label>
+              <input type="text" class="form-control"  id="description" name="description"
+              value=  <%if(typeof params != 'undefined'){%> 
+                        "<%=params['description']%>"
+                      <%} else {%>
+                        "<%=subscription.description%>"
+                      <%}%> >
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">Guardar</button>
+        </form>
+      </div>
+    </div>
+   <%}%>
+
+<% include ../partials/footer %>

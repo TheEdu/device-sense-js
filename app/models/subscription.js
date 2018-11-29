@@ -9,11 +9,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
 
   Subscription.associate = function(models) {
-    Subscription.belongsTo(models.User, {foreignKey: 'fk_userId', targetKey: 'id'});
-  };
-
-  Subscription.associate = function(models) {
     Subscription.belongsTo(models.Device, {foreignKey: 'fk_deviceId', targetKey: 'id'});
+    Subscription.belongsTo(models.User, {foreignKey: 'fk_userId', targetKey: 'id'});
   };
 
   return Subscription;
