@@ -17,6 +17,10 @@ module.exports = (sequelize, DataTypes) => {
     User.hasMany(models.DataStore, {foreignKey: 'fk_userId', sourceKey: 'id'})
   }
 
+  User.associate = function(models) {
+    User.hasMany(models.Subscription, {foreignKey: 'fk_userId', sourceKey: 'id'})
+  }
+
   User.hook('beforeCreate', (user, options) => {
     user.password = bCrypt.hashSync(user.password, bCrypt.genSaltSync(10))
   });

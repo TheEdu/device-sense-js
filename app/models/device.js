@@ -15,5 +15,9 @@ module.exports = (sequelize, DataTypes) => {
     Device.belongsTo(models.User, {foreignKey: 'fk_userId', targetKey: 'id'});
   };
 
+  Device.associate = function(models) {
+    Device.hasMany(models.Subscription, {foreignKey: 'fk_deviceId', sourceKey: 'id'})
+  }
+
   return Device;
 };
