@@ -34,16 +34,6 @@
             <th class=" text-center">Acciones</th>
           </tr>
         </thead>
-        <tfoot>
-          <tr>
-            <th class="">UUID</th>
-            <th class="">Name</th>
-            <th class="">URL</th>
-            <th class="">Fecha Alta</th>
-            <th class="">Administrador</th>
-            <th class=" text-center">Acciones</th>
-          </tr>
-        </tfoot>
         <tbody>
         <% if (typeof devices != 'undefined') { %>
         	<% devices.forEach(function({id, uuid, name, endpointUrl, createdAt, User:{firstName, lastName}}){ %>

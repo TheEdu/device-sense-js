@@ -35,50 +35,39 @@
             <th class=" text-center">Acciones</th>
           </tr>
         </thead>
-        <tfoot>
-          <tr>
-            <th class="">UUID</th>
-            <th class="">Name</th>
-            <th class="">Host</th>
-            <th class="">Database</th>
-            <th class="">Fecha Alta</th>
-            <th class="">Administrador</th>
-            <th class=" text-center">Acciones</th>
-          </tr>
-        </tfoot>
         <tbody>
         <% if (typeof dataStores != 'undefined') { %>
         	<% dataStores.forEach(function({id, uuid, protocol, host, port, database, name, createdAt, User:{firstName, lastName}}){ %>
-				<tr>
-          <td class=""><%= uuid %></td>
-          <td class=""><%= name %></td>
-          <td class=""><%= host %></td>
-          <td class=""><%= database %></td>
-          <td class=""><%=  `${createdAt.getDate()}/${createdAt.getMonth()+1}/${createdAt.getFullYear()}` %></td>
-          <td class=""><%= firstName %> <%= lastName %></td>
-          <td class="">
-            <div class="text-center">
+  				<tr>
+            <td class=""><%= uuid %></td>
+            <td class=""><%= name %></td>
+            <td class=""><%= host %></td>
+            <td class=""><%= database %></td>
+            <td class=""><%=  `${createdAt.getDate()}/${createdAt.getMonth()+1}/${createdAt.getFullYear()}` %></td>
+            <td class=""><%= firstName %> <%= lastName %></td>
+            <td class="">
+              <div class="text-center">
 
-              <div class="d-inline ml-1">
-                <a href="<%= `/datastore/show/${uuid}` %>">
-                  <i class="far fa-eye"></i>
-                </a>
-              </div>
+                <div class="d-inline ml-1">
+                  <a href="<%= `/datastore/show/${uuid}` %>">
+                    <i class="far fa-eye"></i>
+                  </a>
+                </div>
 
-              <div class="d-inline ml-1">
-                <a href="<%= `/datastore/update/${uuid}` %>">
-                  <i class="far fa-edit"></i>
-                </a>
-              </div>
-              
-              <div class="d-inline ml-1">
-                <a class="delete-device" data-id="<%= id %>" data-name="<%= name %>" data-toggle="modal" data-target="#deleteDevice" href="#">
-                  <i class="far fa-trash-alt"></i>
-                </a>
-              </div>
-						</div>
-					</td>
-				</tr>
+                <div class="d-inline ml-1">
+                  <a href="<%= `/datastore/update/${uuid}` %>">
+                    <i class="far fa-edit"></i>
+                  </a>
+                </div>
+                
+                <div class="d-inline ml-1">
+                  <a class="delete-device" data-id="<%= id %>" data-name="<%= name %>" data-toggle="modal" data-target="#deleteDevice" href="#">
+                    <i class="far fa-trash-alt"></i>
+                  </a>
+                </div>
+  						</div>
+  					</td>
+  				</tr>
         	<% }) %>
         <% } %>
         </tbody>
