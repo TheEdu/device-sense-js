@@ -6,9 +6,9 @@ exports.list = async (req, res) => {
     // Get all subscription
     let subscriptions = await db.Subscription.findAll({
                           include: [{ model: db.Device },
+                                    { model: db.DataStore },
                                     { model: db.User }]
                         })
-    console.log(subscriptions)
 
     res.render('subscription/list.ejs', {
       subscriptions: subscriptions,
@@ -17,13 +17,29 @@ exports.list = async (req, res) => {
     })
 
   } catch (error) {
-    console.log(error)
     res.render('home.ejs', {error :  error.toString()})
   }
 }
 
-exports.createIndex = (req, res) => {
-  res.render('subscription/create.ejs', {})
+exports.createIndex = async (req, res) => {
+  try {
+    const devices = await db.Device.findAll()
+    const dataStores = await db.DataStore.findAll()
+
+    if (devices == '' || dataStores == '') {
+      req.flash('error', 'Para realizar el Alta de una Suscripción debe Existir al menos un Dispositivo y una Base de Datos')
+      return res.redirect('/subscription/list')
+    }
+
+    return res.render('subscription/create.ejs', {
+      devices: devices,
+      dataStores: dataStores,
+      error: req.flash('error')
+    })
+  } catch (err) {
+    req.flash('error', err.toString())
+    return res.redirect('/subscription/list')
+  }
 }
 
 exports.create = async (req, res) => {
@@ -34,18 +50,39 @@ exports.create = async (req, res) => {
   const uuid = req.body.uuid
   const name = req.body.name
   const description = req.body.description
+  const device = req.body.device
+  const dataStore = req.body.dataStore
+
+  // Get Devices and DataStore for the Select (if create fails)
+  let devices = null
+  let dataStores = null
+  try {
+    devices = await db.Device.findAll()
+    dataStores = await db.DataStore.findAll()
+    if (devices == '' || dataStores == '') {
+      req.flash('error', 'Para realizar el Alta de una Suscripción debe Existir al menos un Dispositivo y una Base de Datos')
+      return res.redirect('/subscription/list')
+    }
+  } catch (err) {
+    req.flash('error', err.toString())
+    return res.redirect('/subscription/list')
+  }
 
   const params = {
     uuid: uuid,
     name: name,
-    description: description
+    description: description,
+    device: device,
+    dataStore: dataStore
   }
 
   // Check for restrictions
-  if (!uuid || !name) {
+  if (!uuid || !name || !device || !dataStore) {
     return res.render('subscription/create.ejs', {
       params,
-      error: 'Los Campos uuid y name deben tener contenido'
+      error: 'Los Campos UUID, Nombre, Dispositivo y Base de Datos deben tener contenido',
+      devices,
+      dataStores
     })
   }
 
@@ -56,7 +93,8 @@ exports.create = async (req, res) => {
       name: name,
       description: description,
       fk_userId: user.id,
-      fk_deviceId: 1
+      fk_deviceId: device,
+      fk_dataStoreId: dataStore,
     })
 
     req.flash('success', 'Suscripción Creada Exitosamente.')
@@ -64,7 +102,9 @@ exports.create = async (req, res) => {
   } catch (err) {
     return res.render('subscription/create.ejs', {
       params,
-      error: `${err}`
+      error: `${err}`,
+      devices,
+      dataStores
     })
   }
 }
@@ -77,8 +117,9 @@ exports.show = async (req, res) => {
     // Get subscription to Show
     let subscription = await db.Subscription.findOne({
                           where: {uuid: subscription_uuid},
-                          include: [{ model: db.User },
-                                    { model: db.Device}]
+                          include: [{ model: db.Device },
+                                    { model: db.DataStore },
+                                    { model: db.User }]
                         })
     return res.render('subscription/show.ejs', {subscription})
   } catch (err) {

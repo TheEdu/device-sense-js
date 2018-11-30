@@ -16,8 +16,7 @@ exports.list = async (req, res) => {
     })
 
   } catch (error) {
-    console.log(error)
-    res.render('home.ejs', {error :  error})
+    res.render('home.ejs', {error : error.toString()})
   }
 }
 

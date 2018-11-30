@@ -14,13 +14,39 @@
       <div class="form-row">
         <div class="form-group col-md-6">
           <label for="uuid"><b>UUID</b></label>
-          <input type="text" class="form-control" id="endpointUrl" name="uuid" placeholder="XXXX"
+          <input type="text" class="form-control" id="uuid" name="uuid" placeholder="XXXX"
           value=<%if(typeof params != 'undefined'){%> "<%=params['uuid']%>" <%}%>>
         </div>
         <div class="form-group col-md-6">
           <label for="name"><b>Nombre</b></label>
           <input type="text" class="form-control" id="name" name="name" placeholder="Nombre del Dispositivo" 
           value=<%if(typeof params != 'undefined'){%> "<%=params['name']%>" <%}%>>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="device"><b>Dispositivo</b></label>
+          <select class="form-control" id="device" name="device">
+            <option value="">Seleccione un Dispositivo</option>
+            <% devices.forEach(({id, name}) => { %>
+            <option value="<%=id%>"
+              <%if(typeof params != 'undefined' && params['device'] == id){%> selected <%}%>>
+              <%=name%>
+            </option>
+            <% }) %>
+          </select>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="dataStore"><b>Base de Datos</b></label>
+          <select class="form-control" id="dataStore" name="dataStore">
+            <option value="">Seleccione una Base de Datos</option>
+            <% dataStores.forEach(({id, name}) => { %>
+            <option value="<%=id%>"
+              <%if(typeof params != 'undefined' && params['dataStore'] == id){%> selected <%}%>>
+              <%=name%>
+            </option>
+            <% }) %>
+          </select>
         </div>
       </div>
       <div class="form-row">

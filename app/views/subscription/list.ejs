@@ -27,21 +27,21 @@
         <thead>
           <tr>
             <th class="">UUID</th>
-            <th class="">Name</th>
+            <th class="">Nombre</th>
             <th class="">Dispositivo</th>
-            <th class="">Fecha Alta</th>
+            <th class="">Base de Datos</th>
             <th class="">Administrador</th>
             <th class=" text-center">Acciones</th>
           </tr>
         </thead>
         <tbody>
         <% if (typeof subscriptions != 'undefined') { %>
-        	<% subscriptions.forEach(function({id, uuid, name, createdAt, Device, User:{firstName, lastName}}){ %>
+        	<% subscriptions.forEach(function({id, uuid, name, createdAt, Device, DataStore, User:{firstName, lastName}}){ %>
   				<tr>
             <td class=""><%= uuid %></td>
             <td class=""><%= name %></td>
             <td class=""><%= Device.name %></td>
-            <td class=""><%=  `${createdAt.getDate()}/${createdAt.getMonth()+1}/${createdAt.getFullYear()}` %></td>
+            <td class=""><%= DataStore.name %></td>
             <td class=""><%= firstName %> <%= lastName %></td>
             <td class="">
               <div class="text-center">

@@ -44,6 +44,14 @@ module.exports = {
           model: 'Devices',
           key: 'id'
         }
+      },
+      fk_dataStoreId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'DataStores',
+          key: 'id'
+        }
       }
     });
   },

@@ -21,6 +21,7 @@ module.exports = (sequelize, DataTypes) => {
 
   DataStore.associate = function(models) {
     DataStore.belongsTo(models.User, {foreignKey: 'fk_userId', targetKey: 'id'});
+    DataStore.hasMany(models.Subscription, {foreignKey: 'fk_dataStoreId', sourceKey: 'id'})
   };
 
   return DataStore;

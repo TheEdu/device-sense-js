@@ -12,10 +12,10 @@ module.exports = (passport) => {
     }, function(email, password, done) {
         db.User.findOne({ where: {email: email} }).then( user => {
           if (!user) 
-            return done(null, false, { message: 'Incorrect username.' })
+            return done(null, false, { message: 'Usuario Incorrecto.' })
           if (!bCrypt.compareSync(password, user.password)) 
-            return done(null, false, { message: 'Incorrect password.' })
-          return done(null, user, { message: `Welcome ${user.firstName}`})
+            return done(null, false, { message: 'Contraseña Incorrecta.' })
+          return done(null, user, { message: `Bienvenid@ ${user.firstName}.`})
         }).catch( err => {
           return done(err)
         })

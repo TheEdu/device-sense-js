@@ -26,6 +26,22 @@
           </div>
           <div class="form-row">
             <div class="form-group col-md-6">
+              <label for="device"><b>Dispositivo</b></label>
+              <input type="text" class="form-control" id="device" disabled
+              value=<%if(typeof subscription.Device != 'undefined'){%> 
+                      "<%= subscription.Device.name %>"
+                    <%}%>>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="dataStore"><b>Base de Datos</b></label>
+              <input type="text" class="form-control" id="dataStore" disabled
+              value=<%if(typeof subscription.DataStore != 'undefined'){%> 
+                      "<%= subscription.DataStore.name %>" 
+                    <%}%>>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
               <label for="ipAdrress"><b>Administrador</b></label>
               <input type="text" class="form-control" id="endpointUrl" disabled
               value=<%if(typeof subscription.User != 'undefined'){%> 
