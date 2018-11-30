@@ -18,20 +18,20 @@
            <span class="text-primary"> Nombre: </span>  <span> <%=dataStore.name%> </span>
         </div>
         <div class="d-inline ml-2">
-           <span class="text-primary"> Type: </span>  <span> <%=dataStore.type%> </span>
+           <span class="text-primary"> Tipo: </span>  <span> <%=dataStore.type%> </span>
         </div>
 
         <div class="d-inline ml-2">
-           <span class="text-primary"> Protocol: </span>  <span> <%=dataStore.protocol%> </span>
+           <span class="text-primary"> Protocolo: </span>  <span> <%=dataStore.protocol%> </span>
         </div>
         <div class="d-inline ml-2">
            <span class="text-primary"> Host: </span>  <span> <%=dataStore.host%> </span>
         </div>
         <div class="d-inline ml-2">
-           <span class="text-primary"> Port: </span>  <span> <%=dataStore.port%> </span>
+           <span class="text-primary"> Puerto: </span>  <span> <%=dataStore.port%> </span>
         </div>
         <div class="d-inline ml-2">
-           <span class="text-primary"> Database: </span>  <span> <%=dataStore.database%> </span>
+           <span class="text-primary"> Base de Datos: </span>  <span> <%=dataStore.database%> </span>
         </div>
       </div>
       <div class="container py-2">
@@ -39,7 +39,7 @@
           <input type="number" name="id" value="<%=dataStore.id%>" hidden>
           <div class="form-row">
             <div class="form-group col-md-6">
-              <label for="username"><b>username</b></label>
+              <label for="username"><b>Usuario</b></label>
               <input type="text" class="form-control" id="username" name="username"
               value=  <%if(typeof params != 'undefined'){%> 
                         "<%=params['username']%>"
@@ -48,7 +48,7 @@
                       <%}%> >
             </div>
             <div class="form-group col-md-6">
-              <label for="password"><b>password</b></label>
+              <label for="password"><b>Contraseña</b></label>
               <input type="text" class="form-control" id="password" name="password"
               value=  <%if(typeof params != 'undefined'){%> 
                         "<%=params['password']%>"
@@ -60,7 +60,7 @@
           <div class="form-row">
             <div class="form-group col-md-3">
               <label for="failoverTimeout"><b>failoverTimeout</b></label>
-              <input type="text" class="form-control" id="failoverTimeout" name="failoverTimeout"
+              <input type="text" class="form-control" id="failoverTimeout" name="failoverTimeout" placeholder="10000ms (Default)"
               value=  <%if(typeof params != 'undefined'){%> 
                         "<%=params['failoverTimeout']%>"
                       <%} else {%>
@@ -71,7 +71,7 @@
 
             <div class="form-group col-md-3">
               <label for="bufferMaxSize"><b>bufferMaxSize</b></label>
-              <input type="text" class="form-control" id="bufferMaxSize" name="bufferMaxSize"
+              <input type="text" class="form-control" id="bufferMaxSize" name="bufferMaxSize" placeholder="64MB (Default)"
               value=  <%if(typeof params != 'undefined'){%> 
                         "<%=params['bufferMaxSize']%>"
                       <%} else {%>
@@ -81,7 +81,7 @@
 
             <div class="form-group col-md-3">
               <label for="writeInterval"><b>writeInterval</b></label>
-              <input type="text" class="form-control" id="writeInterval" name="writeInterval"
+              <input type="text" class="form-control" id="writeInterval" name="writeInterval" placeholder="3000ms (Default)"
               value=  <%if(typeof params != 'undefined'){%> 
                         "<%=params['writeInterval']%>"
                       <%} else {%>
@@ -92,7 +92,7 @@
 
             <div class="form-group col-md-3">
               <label for="timeOut"><b>writeMaxPoints</b></label>
-              <input type="text" class="form-control" id="writeMaxPoints" name="writeMaxPoints"
+              <input type="text" class="form-control" id="writeMaxPoints" name="writeMaxPoints" placeholder="1000 (Default)"
               value=  <%if(typeof params != 'undefined'){%> 
                         "<%=params['writeMaxPoints']%>"
                       <%} else {%>

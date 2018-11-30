@@ -25,39 +25,39 @@
       </div>
       <div class="form-row">
         <div class="form-group col-md-3">
-          <label for="type"><b>type</b></label>
+          <label for="type"><b>Tipo</b></label>
           <input type="text" class="form-control" id="type" name="type" placeholder="type"
           value=<%if(typeof params != 'undefined'){%> "<%=params['type']%>" <%}%>>
         </div>
         <div class="form-group col-md-3">
-          <label for="host"><b>host</b></label>
+          <label for="host"><b>Host</b></label>
           <input type="text" class="form-control" id="host" name="host" placeholder="host"
           value=<%if(typeof params != 'undefined'){%> "<%=params['host']%>" <%}%>>
         </div>
         <div class="form-group col-md-3">
-          <label for="port"><b>port</b></label>
+          <label for="port"><b>Puerto</b></label>
           <input type="number" class="form-control" id="port" name="port" placeholder="port"
           value=<%if(typeof params != 'undefined'){%> "<%=params['port']%>" <%}%>>
         </div>
         <div class="form-group col-md-3">
-          <label for="protocol"><b>protocol</b></label>
+          <label for="protocol"><b>Protocolo</b></label>
           <input type="text" class="form-control" id="protocol" name="protocol" placeholder="protocol"
           value=<%if(typeof params != 'undefined'){%> "<%=params['protocol']%>" <%}%>>
         </div>
       </div>
       <div class="form-row">
         <div class="form-group col-md-6">
-          <label for="database"><b>database</b></label>
+          <label for="database"><b>Base de Datos</b></label>
           <input type="text" class="form-control" id="database" name="database" placeholder="database"
           value=<%if(typeof params != 'undefined'){%> "<%=params['database']%>" <%}%>>
         </div>
         <div class="form-group col-md-3">
-          <label for="username"><b>username</b></label>
+          <label for="username"><b>Usuario</b></label>
           <input type="text" class="form-control" id="username" name="username" placeholder="username"
           value=<%if(typeof params != 'undefined'){%> "<%=params['username']%>" <%}%>>
         </div>
         <div class="form-group col-md-3">
-          <label for="password"><b>password</b></label>
+          <label for="password"><b>Contraseña</b></label>
           <input type="text" class="form-control" id="password" name="password" placeholder="password"
           value=<%if(typeof params != 'undefined'){%> "<%=params['password']%>" <%}%>>
         </div>
@@ -65,22 +65,22 @@
       <div class="form-row">
         <div class="form-group col-md-3">
           <label for="failoverTimeout"><b>failoverTimeout</b></label>
-          <input type="number" class="form-control" id="failoverTimeout" name="failoverTimeout" placeholder="failoverTimeout"
+          <input type="number" class="form-control" id="failoverTimeout" name="failoverTimeout" placeholder="10000ms (Default)"
           value=<%if(typeof params != 'undefined'){%> "<%=params['failoverTimeout']%>" <%}%>>
         </div>
         <div class="form-group col-md-3">
           <label for="bufferMaxSize"><b>bufferMaxSize</b></label>
-          <input type="number" class="form-control" id="bufferMaxSize" name="bufferMaxSize" placeholder="bufferMaxSize"
+          <input type="number" class="form-control" id="bufferMaxSize" name="bufferMaxSize" placeholder="64MB (Default)"
           value=<%if(typeof params != 'undefined'){%> "<%=params['bufferMaxSize']%>" <%}%>>
         </div>
         <div class="form-group col-md-3">
           <label for="writeInterval"><b>writeInterval</b></label>
-          <input type="number" class="form-control" id="writeInterval" name="writeInterval" placeholder="writeInterval"
+          <input type="number" class="form-control" id="writeInterval" name="writeInterval" placeholder="3000ms (Default)"
           value=<%if(typeof params != 'undefined'){%> "<%=params['writeInterval']%>" <%}%>>
         </div>
         <div class="form-group col-md-3">
           <label for="writeMaxPoints"><b>writeMaxPoints</b></label>
-          <input type="number" class="form-control" id="writeMaxPoints" name="writeMaxPoints" placeholder="writeMaxPoints"
+          <input type="number" class="form-control" id="writeMaxPoints" name="writeMaxPoints" placeholder="1000 (Default)"
           value=<%if(typeof params != 'undefined'){%> "<%=params['writeMaxPoints']%>" <%}%>>
         </div>
       </div>

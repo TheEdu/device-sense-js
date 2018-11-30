@@ -27,9 +27,9 @@
         <thead>
           <tr>
             <th class="">UUID</th>
-            <th class="">Name</th>
+            <th class="">Nombre</th>
             <th class="">Host</th>
-            <th class="">Database</th>
+            <th class="">Base de Datos</th>
             <th class="">Fecha Alta</th>
             <th class="">Administrador</th>
             <th class=" text-center">Acciones</th>
@@ -82,14 +82,14 @@
     <form id="deleteForm" action="/datastore/delete" method="POST">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Desea Eliminar ela Base de Datos seleccionada?</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Desea Eliminar la Base de Datos seleccionada?</h5>
           <button class="close" type="button" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
           </button>
         </div>
         <div class="modal-body">
           <p>
-            Si continua eliminara "<b><span id="dispostivoBorrarNombre"></span></b>" de su lista de Bases de Datos
+            Si continua eliminara "<b><span id="baseDatosBorrarNombre"></span></b>" de su lista de Bases de Datos
           </p>
           <input type="text" name="deleteId" id="deleteId" value="" hidden/>
         </div>
@@ -108,7 +108,7 @@
   $(document).on('click', '.delete-device', function () {
     const name = $(this).data('name')
     const id = $(this).data('id')
-    $('.modal-body #dispostivoBorrarNombre').html(name)
+    $('.modal-body #baseDatosBorrarNombre').html(name)
     $('.modal-body #deleteId').val(id)
   })
 

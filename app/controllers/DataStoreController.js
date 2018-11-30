@@ -7,7 +7,6 @@ exports.list = async (req, res) => {
     let dataStores = await db.DataStore.findAll({
                           include: [{ model: db.User }]
                         })
-    console.log(dataStores)
 
     res.render('dataStore/list.ejs', {
       dataStores: dataStores,
@@ -44,6 +43,10 @@ exports.create = async (req, res) => {
   const bufferMaxSize = req.body.bufferMaxSize
   const writeInterval = req.body.writeInterval
   const writeMaxPoints = req.body.writeMaxPoints
+  const default_failoverTimeout = 10000
+  const default_bufferMaxSize = 64
+  const default_writeInterval = 3000
+  const default_writeMaxPoints = 1000
 
   const params = {
     uuid: uuid,
@@ -66,7 +69,7 @@ exports.create = async (req, res) => {
   if (!uuid || !name || !type || !host || !protocol || !database) {
     return res.render('dataStore/create.ejs', {
       params,
-      error: 'Los Campos uuid, name, type, host, protocol, y database deben tener contenido'
+      error: 'Los Campos UUID, Nombre, Tipo, Host, Protocolo, y Base de Datos deben tener contenido'
     })
   }
 
@@ -83,10 +86,10 @@ exports.create = async (req, res) => {
       username: username,
       password: password,
       database: database,
-      failoverTimeout: failoverTimeout,
-      bufferMaxSize: bufferMaxSize,
-      writeInterval: writeInterval,
-      writeMaxPoints: writeMaxPoints,
+      failoverTimeout: failoverTimeout || default_failoverTimeout,
+      bufferMaxSize: bufferMaxSize || default_bufferMaxSize,
+      writeInterval: writeInterval || default_writeInterval,
+      writeMaxPoints: writeMaxPoints || default_writeMaxPoints,
       fk_userId: user.id,
     })
 
@@ -146,6 +149,10 @@ exports.update = async (req, res) => {
   const bufferMaxSize = req.body.bufferMaxSize
   const writeInterval = req.body.writeInterval
   const writeMaxPoints = req.body.writeMaxPoints
+  const default_failoverTimeout = 10000
+  const default_bufferMaxSize = 64
+  const default_writeInterval = 3000
+  const default_writeMaxPoints = 1000
 
   const params = {
     description: description,
@@ -172,11 +179,11 @@ exports.update = async (req, res) => {
   }
 
   // Check for restrictions
-  if (!username || !password || !failoverTimeout || !bufferMaxSize || !writeInterval || !writeMaxPoints) {
+  if (!username || !password) {
     return res.render('dataStore/update.ejs', {
       dataStore: dataStore,
       params: params,
-      error: 'Los Campos username, password, failoverTimeout, bufferMaxSize, writeInterval y writeMaxPoints debe tener contenido'
+      error: 'Los Campos Usuario y Contraseña deben tener contenido'
     })
   }
 
@@ -186,10 +193,10 @@ exports.update = async (req, res) => {
       description: description,
       username: username,
       password: password,
-      failoverTimeout: failoverTimeout,
-      bufferMaxSize: bufferMaxSize,
-      writeInterval: writeInterval,
-      writeMaxPoints: writeMaxPoints
+      failoverTimeout: failoverTimeout || default_failoverTimeout,
+      bufferMaxSize: bufferMaxSize || default_bufferMaxSize,
+      writeInterval: writeInterval || default_writeInterval,
+      writeMaxPoints: writeMaxPoints || default_writeMaxPoints
     })
 
     req.flash('success', 'Base de Datos Actualizada Correctamente.')
