@@ -1,0 +1,47 @@
+<% include ../partials/header %>
+
+<!-- Breadcrumbs-->
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">
+    <a  href="/subscription/list">Suscripciones</a>
+  </li>
+  <li class="breadcrumb-item active">Nueva Suscripción</li>
+  <li class="breadcrumb-item active">Paso 3 de 3</li>
+</ol>
+
+<div class="card mb-3">
+  <div class="card-header text-primary">
+    <b>Configuración de los Items</b>
+  </div>
+  <div class="card-body">
+    <form id="create" action="/subscription/create3" method="POST">
+      <div class="table-responsive">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+          <thead>
+            <tr>
+              <th class="">Item ID</th>
+              <th class="">Tipo de Monitoreo</th>
+              <th class="">Tiempo</th>
+              <th class="">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+          <% if (typeof itemsSelected != 'undefined') { %>
+            <% for (i = 0; i < itemsSelected.length; i++) {  %>
+            <tr>
+              <td class=""><%= itemsSelected[i] %></td>
+              <th class="">Monitoreo</th>
+              <th class="">1000ms</th>
+              <th class="">Accion</th>
+            </tr>
+            <% } %>
+          <% } %>
+          </tbody>
+        </table>
+      </div>
+      <button type="submit" class="btn btn-primary mt-2">Finalizar</button>
+    </form>
+  </div>
+</div>
+
+<% include ../partials/footer %>

@@ -52,5 +52,9 @@ module.exports = (app, passport) => {
   app.get('/subscription/update/:uuid', home.loggedIn, subscription.updateIndex)
   app.post('/subscription/update', home.loggedIn, subscription.update)
   app.post('/subscription/delete', home.loggedIn, subscription.delete)
+
+  app.post('/subscription/create1', home.loggedIn, subscription.create1)
+  app.post('/subscription/create2', home.loggedIn, subscription.create2)
+  app.post('/subscription/create3', home.loggedIn, subscription.create3)
   
 }

@@ -1,5 +1,6 @@
 "use strict"
 const db = require('../models')
+const ds_opcua = require('../../lib/ds-opcua')
 
 exports.list = async (req, res) => {
   try {
@@ -211,4 +212,97 @@ exports.delete = async (req, res) => {
     req.flash('error', err.toString())
     return res.redirect('/subscription/list')
   }
+}
+
+exports.create1 = async (req, res) => {
+  // Get User
+  const user = req.user
+
+  // Get the form inputs from the request body
+  const uuid = req.body.uuid
+  const name = req.body.name
+  const description = req.body.description
+  const device = req.body.device
+  const dataStore = req.body.dataStore
+
+  // Get Devices and DataStore for the Select (if create fails)
+  let devices = null
+  let dataStores = null
+  try {
+    devices = await db.Device.findAll()
+    dataStores = await db.DataStore.findAll()
+    if (devices == '' || dataStores == '') {
+      req.flash('error', 'Para realizar el Alta de una Suscripción debe Existir al menos un Dispositivo y una Base de Datos')
+      return res.redirect('/subscription/list')
+    }
+  } catch (err) {
+    req.flash('error', err.toString())
+    return res.redirect('/subscription/list')
+  }
+
+  const params = {
+    uuid: uuid,
+    name: name,
+    description: description,
+    device: device,
+    dataStore: dataStore
+  }
+
+  // Check for restrictions
+  if (!uuid || !name || !device || !dataStore) {
+    return res.render('subscription/create.ejs', {
+      params,
+      error: 'Los Campos UUID, Nombre, Dispositivo y Base de Datos deben tener contenido',
+      devices,
+      dataStores
+    })
+  }
+
+  try {
+    // Check for unique restrictions
+    const subscriptions = await db.Subscription.findAll({
+      where: {
+        $or: [
+          { uuid: {$eq: uuid} }, 
+          { name: {$eq: name}}
+        ]
+      }
+    })
+
+    if (subscriptions == null || (subscriptions != null && subscriptions.length == 0)) {
+      // No existe ningun registro con el uuid y el nombre de la nueva suscripcion.
+      // Entonces puedo proceder con el Alta de la Misma
+      const dev = await db.Device.findById(device)
+      const tree = await ds_opcua.addressSpace(dev.endpointUrl, dev.rootNode, dev.timeOut)
+      return res.render('subscription/create2.ejs', {
+        addressSpace: tree
+      })
+    } else {
+      return res.render('subscription/create.ejs', {
+        error: 'Los Campos UUID y/o Nombre, deben ser unicos en la Base de Datos',
+        params,
+        devices,
+        dataStores
+      })
+    }
+    
+  } catch (err) {
+    return res.render('subscription/create.ejs', {
+      params,
+      error: `${err}`,
+      devices,
+      dataStores
+    })
+  }
+}
+
+exports.create2 = async (req, res) => {
+  const itemsSelected = req.body.itemsSelected.split(';')
+  return res.render('subscription/create3.ejs', {
+    itemsSelected: itemsSelected
+  })
+}
+
+exports.create3 = async (req, res) => {
+  res.send('create3')
 }

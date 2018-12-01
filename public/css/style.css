@@ -1,4 +1,5 @@
 .address-space-container {
-	overflow: auto; 
-	height: 350px;
+	overflow: auto !important;
+	height: 350px !important;
+  border: 0px !important;
 }

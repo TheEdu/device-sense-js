@@ -5,60 +5,89 @@
   <li class="breadcrumb-item">
     <a  href="/subscription/list">Suscripciones</a>
   </li>
-  <li class="breadcrumb-item active">Nueva</li>
+  <li class="breadcrumb-item active">Nueva Suscripción</li>
+  <li class="breadcrumb-item active">Paso 1 de 3</li>
 </ol>
 
 <div class="card mb-3">
-  <div class="container p-2">
-    <form action="/subscription/create" method="POST">
-      <div class="form-row">
-        <div class="form-group col-md-6">
-          <label for="uuid"><b>UUID</b></label>
-          <input type="text" class="form-control" id="uuid" name="uuid" placeholder="XXXX"
-          value=<%if(typeof params != 'undefined'){%> "<%=params['uuid']%>" <%}%>>
+    <div class="card-header text-primary">
+      <b>Información de la Suscripción</b>
+    </div>
+    <div class="card-body">
+      <!-- <form id="create" action="/subscription/create" method="POST"> -->
+      <form id="create" action="/subscription/create1" method="POST">
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="uuid"><b>UUID</b></label>
+            <input type="text" class="form-control" id="uuid" name="uuid" placeholder="XXXX" required
+            value=<%if(typeof params != 'undefined'){%> "<%=params['uuid']%>" <%}%>>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="name"><b>Nombre</b></label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="Nombre del Dispositivo" required
+            value=<%if(typeof params != 'undefined'){%> "<%=params['name']%>" <%}%>>
+          </div>
         </div>
-        <div class="form-group col-md-6">
-          <label for="name"><b>Nombre</b></label>
-          <input type="text" class="form-control" id="name" name="name" placeholder="Nombre del Dispositivo" 
-          value=<%if(typeof params != 'undefined'){%> "<%=params['name']%>" <%}%>>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="device"><b>Dispositivo</b></label>
+            <select class="form-control" id="device" name="device" required>
+              <option value="">Seleccione un Dispositivo</option>
+              <% devices.forEach(({id, name}) => { %>
+              <option value="<%=id%>"
+                <%if(typeof params != 'undefined' && params['device'] == id){%> selected <%}%>>
+                <%=name%>
+              </option>
+              <% }) %>
+            </select>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="dataStore"><b>Base de Datos</b></label>
+            <select class="form-control" id="dataStore" name="dataStore" required>
+              <option value="">Seleccione una Base de Datos</option>
+              <% dataStores.forEach(({id, name}) => { %>
+              <option value="<%=id%>"
+                <%if(typeof params != 'undefined' && params['dataStore'] == id){%> selected <%}%>>
+                <%=name%>
+              </option>
+              <% }) %>
+            </select>
+          </div>
         </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group col-md-6">
-          <label for="device"><b>Dispositivo</b></label>
-          <select class="form-control" id="device" name="device">
-            <option value="">Seleccione un Dispositivo</option>
-            <% devices.forEach(({id, name}) => { %>
-            <option value="<%=id%>"
-              <%if(typeof params != 'undefined' && params['device'] == id){%> selected <%}%>>
-              <%=name%>
-            </option>
-            <% }) %>
-          </select>
+        <div class="form-row">
+          <div class="form-group col-md-12">
+          <label for="description"><b>Descripción</b></label>
+            <input type="text" class="form-control"  id="description" name="description" placeholder="Drescripción del Dispositivo"
+            value=<%if(typeof params != 'undefined'){%> "<%=params['description']%>" <%}%>>
+          </div>
         </div>
-        <div class="form-group col-md-6">
-          <label for="dataStore"><b>Base de Datos</b></label>
-          <select class="form-control" id="dataStore" name="dataStore">
-            <option value="">Seleccione una Base de Datos</option>
-            <% dataStores.forEach(({id, name}) => { %>
-            <option value="<%=id%>"
-              <%if(typeof params != 'undefined' && params['dataStore'] == id){%> selected <%}%>>
-              <%=name%>
-            </option>
-            <% }) %>
-          </select>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group col-md-12">
-        <label for="description"><b>Descripción</b></label>
-          <input type="text" class="form-control"  id="description" name="description" placeholder="Drescripción del Dispositivo"
-          value=<%if(typeof params != 'undefined'){%> "<%=params['description']%>" <%}%>>
-        </div>
-      </div>
-      <button type="submit" class="btn btn-primary">Crear</button>
-    </form>
-  </div>
+        <!-- <button type="submit" class="btn btn-primary">Guardar</button> -->
+        <button type="submit" class="btn btn-primary">Siguiente</button>
+      </form>
+    </div>
 </div>
 
 <% include ../partials/footer %>
+
+<script type="text/javascript">
+
+  class SubscriptionInfo {
+    constructor(uuid, name, device, dataStore, description) {
+      this.uuid = uuid
+      this.name = name
+      this.device = device
+      this.dataStore = dataStore
+      this.description = description
+    }
+  }
+
+  $("#create").on('submit', function () {
+    const myStorage = window.localStorage
+    const subInfo = new SubscriptionInfo(this.uuid.value, this.name.value, this.device.value, this.dataStore.value, this.description.value)
+    // Clear All localStorage items and setting Step 1 Subscription Info
+    myStorage.clear()
+    myStorage.setItem('subcription_info_step1', JSON.stringify(subInfo))
+    console.log(JSON.parse(myStorage.getItem('subcription_info_step1')))
+  })
+
+</script>

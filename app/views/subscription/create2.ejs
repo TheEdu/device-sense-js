@@ -1,0 +1,56 @@
+<% include ../partials/header %>
+
+<!-- Breadcrumbs-->
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">
+    <a  href="/subscription/list">Suscripciones</a>
+  </li>
+  <li class="breadcrumb-item active">Nueva Suscripción</li>
+  <li class="breadcrumb-item active">Paso 2 de 3</li>
+</ol>
+
+<div class="card mb-3">
+  <div class="card-header text-primary">
+    <b>Items de la Suscripción</b>
+  </div>
+  <div class="card-body">
+    <form id="create2" action="/subscription/create2" method="POST">
+      <input id="itemsSelected" type="text" name="itemsSelected" hidden>
+      <div class="form-row address-space-container">
+        <div id="data" class="mt-1 demo"></div>
+      </div>
+      <button type="submit" class="btn btn-primary mt-2">Siguiente</button>
+    </form>
+  </div>
+</div>
+
+<% include ../partials/footer %>
+  
+
+<% if ((typeof addressSpace != 'undefined')) { %>
+  <script>
+    // inline data demo
+    $('#data').jstree({
+      'core' : {
+        'data' : [<%- JSON.stringify(addressSpace) %>]
+      },
+      'checkbox' : {
+          'keep_selected_style' : false,
+          'cascade_to_hidden': false,
+          'cascade_to_disabled': false,
+      },
+      'plugins' : [ "wholerow", "checkbox" ]
+    })
+
+
+    $("#create2").on('submit', function () {
+      const myStorage = window.localStorage
+      const itemsSelected = $('#data').jstree(true).get_selected()
+      $('#itemsSelected').val(itemsSelected)
+      myStorage.setItem('items_selected_step2', itemsSelected)
+      console.log(myStorage.getItem('subcription_info_step1'))
+      console.log(myStorage.getItem('items_selected_step2'))
+    })
+
+  </script>
+<% } %>
