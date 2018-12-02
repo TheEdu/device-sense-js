@@ -45,9 +45,13 @@
 
     $("#create2").on('submit', function () {
       const myStorage = window.localStorage
-      const itemsSelected = $('#data').jstree(true).get_selected()
-      $('#itemsSelected').val(itemsSelected)
-      myStorage.setItem('items_selected_step2', itemsSelected)
+      //const itemsSelected = JSON.stringify($('#data').jstree(true).get_selected())
+      const itemsSelected = $('#data').jstree().get_selected(true)
+      const originalItems = itemsSelected.map(function(itemSelected) {
+         return itemSelected.original;
+      });
+      $('#itemsSelected').val(JSON.stringify(originalItems))
+      myStorage.setItem('items_selected_step2', JSON.stringify(originalItems))
       console.log(myStorage.getItem('subcription_info_step1'))
       console.log(myStorage.getItem('items_selected_step2'))
     })

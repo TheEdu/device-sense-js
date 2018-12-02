@@ -297,9 +297,10 @@ exports.create1 = async (req, res) => {
 }
 
 exports.create2 = async (req, res) => {
-  const itemsSelected = req.body.itemsSelected.split(';')
+  const itemsSelected = req.body.itemsSelected
+  console.log(JSON.parse(itemsSelected))
   return res.render('subscription/create3.ejs', {
-    itemsSelected: itemsSelected
+    itemsSelected: JSON.parse(itemsSelected)
   })
 }
 

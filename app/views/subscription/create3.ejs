@@ -19,20 +19,18 @@
         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
           <thead>
             <tr>
-              <th class="">Item ID</th>
-              <th class="">Tipo de Monitoreo</th>
-              <th class="">Tiempo</th>
-              <th class="">Acciones</th>
+              <th class="">Node Name</th>
+              <th class="">Node Id</th>
+              <th class="">Node Class</th>
             </tr>
           </thead>
           <tbody>
           <% if (typeof itemsSelected != 'undefined') { %>
             <% for (i = 0; i < itemsSelected.length; i++) {  %>
             <tr>
-              <td class=""><%= itemsSelected[i] %></td>
-              <th class="">Monitoreo</th>
-              <th class="">1000ms</th>
-              <th class="">Accion</th>
+              <td class=""><%= itemsSelected[i].text %></td>
+              <td class=""><%= itemsSelected[i].id %></td>
+              <td class=""><%= itemsSelected[i].nodeClass %></td>
             </tr>
             <% } %>
           <% } %>
