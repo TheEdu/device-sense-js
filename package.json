@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node ./bin/www",
     "dev": "nodemon ./bin/www",
-    "sequelize": "sequelize --options-path=./config/sequelize_cli.js"
+    "sequelize": "sequelize --options-path=./config/sequelize_cli.js",
+    "database": "sequelize --options-path=./config/sequelize_cli.js db:migrate:undo:all && sequelize --options-path=./config/sequelize_cli.js db:migrate && sequelize --options-path=./config/sequelize_cli.js db:seed:all"
   },
   "dependencies": {
     "async": "^2.6.1",

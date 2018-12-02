@@ -1,39 +1,20 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Devices', {
+    return queryInterface.createTable('SubscriptionItems', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      uuid: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        unique: true
-      },
-      name: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        unique: true
-      },
-      description: {
-        type: Sequelize.STRING
-      },
-      endpointUrl: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        unique: true
-      },
-      rootNode: {
+      nodeId: {
         type: Sequelize.STRING,
         allowNull: false
       },
-      timeOut: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        defaultValue: 10000
+      name: {
+        type: Sequelize.STRING,
+        allowNull: false
       },
       createdAt: {
         type: Sequelize.DATE,
@@ -43,17 +24,17 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: false
       },
-      fk_userId: {
+      fk_subscriptionId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'Users',
+          model: 'Subscriptions',
           key: 'id'
         }
       }
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Devices');
+    return queryInterface.dropTable('SubscriptionItems');
   }
 };

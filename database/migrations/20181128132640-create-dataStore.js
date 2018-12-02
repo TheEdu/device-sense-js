@@ -19,8 +19,7 @@ module.exports = {
         unique: true
       },
       description: {
-        type: Sequelize.STRING,
-        allowNull: true
+        type: Sequelize.STRING
       },
       type: {
         type: Sequelize.STRING,
@@ -34,6 +33,10 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false
       },
+      database: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
       protocol: {
         type: Sequelize.STRING,
         allowNull: false
@@ -43,10 +46,6 @@ module.exports = {
         allowNull: false
       },
       password: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
-      database: {
         type: Sequelize.STRING,
         allowNull: false
       },

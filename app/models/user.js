@@ -11,13 +11,7 @@ module.exports = (sequelize, DataTypes) => {
 
   User.associate = function(models) {
     User.hasMany(models.Device, {foreignKey: 'fk_userId', sourceKey: 'id'})
-  }
-
-  User.associate = function(models) {
     User.hasMany(models.DataStore, {foreignKey: 'fk_userId', sourceKey: 'id'})
-  }
-
-  User.associate = function(models) {
     User.hasMany(models.Subscription, {foreignKey: 'fk_userId', sourceKey: 'id'})
   }
 
