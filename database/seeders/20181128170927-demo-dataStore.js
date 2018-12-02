@@ -3,7 +3,7 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert('DataStores', [{
-      uuid: '0000',
+      uuid: '9999',
       name: 'influxdb_test',
       description: 'Test InfluxDB seed',
       type: 'influxdb',

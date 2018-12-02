@@ -4,7 +4,7 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert('Devices', [{
         name: 'Unified Automation',
-        uuid: '0001',
+        uuid: '9998',
         description: 'Testing Device 1',
         createdAt: new Date(),
         updatedAt: new Date(),
@@ -14,7 +14,7 @@ module.exports = {
         timeOut: 10000
       }, {
         name: 'Sterfive',
-        uuid: '0002',
+        uuid: '9999',
         description: 'Testing Device 2',
         createdAt: new Date(),
         updatedAt: new Date(),
