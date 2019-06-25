@@ -8,7 +8,6 @@
     "sequelize": "sequelize --options-path=./config/sequelize_cli.js",
     "database": "sequelize --options-path=./config/sequelize_cli.js db:migrate:undo:all && sequelize --options-path=./config/sequelize_cli.js db:migrate && sequelize --options-path=./config/sequelize_cli.js db:seed:all",
     "start-prod": "cross-env NODE_ENV=production node ./bin/www"
-    // ,"heroku-postbuild": "sequelize --options-path=./config/sequelize_cli.js db:migrate:undo:all && sequelize --options-path=./config/sequelize_cli.js db:migrate && sequelize --options-path=./config/sequelize_cli.js db:seed:all"
   },
   "dependencies": {
     "async": "^2.6.1",
