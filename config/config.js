@@ -16,7 +16,7 @@ const config = {
 
   test: {
     env: 'test',
-    port: 80,
+    port: process.env.PORT || 80,
     db: database,
     root: rootPath,
     app: {
@@ -26,7 +26,7 @@ const config = {
 
   production: {
     env: 'production',
-    port: 80,
+    port: process.env.PORT || 80,
     db: database,
     root: rootPath,
     app: {

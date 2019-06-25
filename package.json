@@ -6,13 +6,15 @@
     "start": "node ./bin/www",
     "dev": "nodemon ./bin/www",
     "sequelize": "sequelize --options-path=./config/sequelize_cli.js",
-    "database": "sequelize --options-path=./config/sequelize_cli.js db:migrate:undo:all && sequelize --options-path=./config/sequelize_cli.js db:migrate && sequelize --options-path=./config/sequelize_cli.js db:seed:all"
+    "database": "sequelize --options-path=./config/sequelize_cli.js db:migrate:undo:all && sequelize --options-path=./config/sequelize_cli.js db:migrate && sequelize --options-path=./config/sequelize_cli.js db:seed:all",
+    "start-prod": "cross-env NODE_ENV=production node ./bin/www"
   },
   "dependencies": {
     "async": "^2.6.1",
     "bcrypt-nodejs": "0.0.3",
     "connect-flash": "^0.1.1",
     "cookie-parser": "~1.4.3",
+    "cross-env": "^5.2.0",
     "debug": "~2.6.9",
     "ejs": "~2.5.7",
     "express": "~4.16.0",
@@ -24,12 +26,14 @@
     "node-opcua": "^0.5.0",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
+    "pg": "^7.11.0",
+    "pg-hstore": "^2.3.3",
     "sequelize": "^4.39.0",
     "sqlite3": "^4.0.4"
   },
   "devDependencies": {
     "event-stream": "^3.3.4",
     "nodemon": "^1.18.4",
-    "sequelize-cli": "^5.1.0"
+    "sequelize-cli": "^5.5.0"
   }
 }
