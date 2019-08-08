@@ -22,12 +22,22 @@
 			'core' : {
 				'data' : [<%- JSON.stringify(addressSpace) %>]
 			},
+			'types': {
+			    // "root": {
+			    //   "icon" : "glyphicon glyphicon-plus"
+			    // },
+			    "child": {
+			      "icon" : "fab fa-envira"
+			    },
+			    "default" : {
+			    }
+			 },
 			'checkbox' : {
-			    'keep_selected_style' : false,
-			    'cascade_to_hidden': false,
-			    'cascade_to_disabled': false,
+				'keep_selected_style' : false,
+				// 'cascade_to_hidden': true,
+				'cascade_to_disabled': true,
 			},
-			'plugins' : [ "wholerow", "checkbox" ]
-		});
+			'plugins' : [ "wholerow", "checkbox", "types" ]
+		})
 	</script>
 <% } %>

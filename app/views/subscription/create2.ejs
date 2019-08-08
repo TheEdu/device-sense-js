@@ -34,12 +34,22 @@
       'core' : {
         'data' : [<%- JSON.stringify(addressSpace) %>]
       },
+      'types': {
+          // "root": {
+          //   "icon" : "glyphicon glyphicon-plus"
+          // },
+          "child": {
+            "icon" : "fab fa-envira"
+          },
+          "default" : {
+          }
+       },
       'checkbox' : {
           'keep_selected_style' : false,
-          'cascade_to_hidden': false,
-          'cascade_to_disabled': false,
+          // 'cascade_to_hidden': true,
+          'cascade_to_disabled': true,
       },
-      'plugins' : [ "wholerow", "checkbox" ]
+      'plugins' : [ "wholerow", "checkbox", "types" ]
     })
 
 
@@ -47,11 +57,11 @@
       const myStorage = window.localStorage
       //const itemsSelected = JSON.stringify($('#data').jstree(true).get_selected())
       const itemsSelected = $('#data').jstree().get_selected(true)
-      const originalItems = itemsSelected.map(function(itemSelected) {
-         return itemSelected.original;
-      });
-      $('#itemsSelected').val(JSON.stringify(originalItems))
-      myStorage.setItem('items_selected_step2', JSON.stringify(originalItems))
+      const originalItems = itemsSelected.map(itemSelected => itemSelected.original)
+      const filteredItems = originalItems.filter(itemSelected => (itemSelected.state.disabled == false && itemSelected.type == "child"))
+      
+      $('#itemsSelected').val(JSON.stringify(filteredItems))
+      myStorage.setItem('items_selected_step2', JSON.stringify(filteredItems))
       console.log(myStorage.getItem('subcription_info_step1'))
       console.log(myStorage.getItem('items_selected_step2'))
     })
