@@ -9,5 +9,6 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
+  	return queryInterface.removeConstraint('SubscriptionItems', 'unique_constraint_subscriptionItems');
   }
 };

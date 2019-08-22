@@ -9,5 +9,6 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
+    return queryInterface.removeConstraint('DataStores', 'unique_constraint_DataStores');
   }
 };

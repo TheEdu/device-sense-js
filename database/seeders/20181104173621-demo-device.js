@@ -22,6 +22,16 @@ module.exports = {
         endpointUrl: 'opc.tcp://opcuademo.sterfive.com:26543',
         rootNode: 'RootFolder',
         timeOut: 10000
+      }, {
+        name: 'Notebook-edu',
+        uuid: '10001',
+        description: 'Demo Server',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        fk_userId: 3,
+        endpointUrl: 'opc.tcp://PENTIUM-I5:48020',
+        rootNode: 'RootFolder',
+        timeOut: 10000
       }], {}
     )
   },
