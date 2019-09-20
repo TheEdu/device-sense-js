@@ -1,5 +1,9 @@
 .address-space-container {
 	overflow: auto !important;
-	height: 350px !important;
-  border: 0px !important;
+	height: 600px !important;
+ 	border: 0px !important;
+}
+
+.disabled-background-color {
+	background-color: #e4e4e4;
 }

@@ -29,6 +29,18 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: false
       },
+      collectionRate: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+      },
+      fk_collectionType: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'CollectionTypes',
+          key: 'id'
+        }
+      },
       fk_userId: {
         type: Sequelize.INTEGER,
         allowNull: false,

@@ -26,6 +26,7 @@ exports.createIndex = async (req, res) => {
   try {
     const devices = await db.Device.findAll()
     const dataStores = await db.DataStore.findAll()
+    const collectionTypes = await db.CollectionType.findAll()
 
     if (devices == '' || dataStores == '') {
       req.flash('error', 'Para realizar el Alta de una Suscripción debe Existir al menos un Dispositivo y una Base de Datos')
@@ -35,6 +36,7 @@ exports.createIndex = async (req, res) => {
     return res.render('subscription/create.ejs', {
       devices: devices,
       dataStores: dataStores,
+      collectionTypes: collectionTypes,
       error: req.flash('error')
     })
   } catch (err) {

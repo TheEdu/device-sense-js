@@ -23,7 +23,7 @@ module.exports = {
         rootNode: 'RootFolder',
         timeOut: 10000
       }, {
-        name: 'Notebook-edu',
+        name: 'DemoLocal',
         uuid: '10001',
         description: 'Demo Server',
         createdAt: new Date(),

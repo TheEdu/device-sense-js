@@ -22,13 +22,11 @@
             <input type="text" class="form-control" id="uuid" name="uuid" placeholder="XXXX" required
             value=<%if(typeof params != 'undefined'){%> "<%=params['uuid']%>" <%}%>>
           </div>
-          <div class="form-group col-md-6">
+          <!-- <div class="form-group col-md-6">
             <label for="name"><b>Nombre</b></label>
             <input type="text" class="form-control" id="name" name="name" placeholder="Nombre del Dispositivo" required
             value=<%if(typeof params != 'undefined'){%> "<%=params['name']%>" <%}%>>
-          </div>
-        </div>
-        <div class="form-row">
+          </div> -->
           <div class="form-group col-md-6">
             <label for="device"><b>Dispositivo</b></label>
             <select class="form-control" id="device" name="device" required>
@@ -40,6 +38,18 @@
               </option>
               <% }) %>
             </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="name"><b>Nombre</b></label>
+            <div class="input-group mb-2">
+              <div class="input-group-prepend">
+                <div id="pre-suscription-label" class="input-group-text disabled-background-color">__</div>
+              </div>
+              <input  type="text" class="form-control" id="name" name="name" placeholder="Identificador de la Suscripción" required
+                      value=<%if(typeof params != 'undefined'){%> "<%=params['name']%>" <%}%>>
+            </div>
           </div>
           <div class="form-group col-md-6">
             <label for="dataStore"><b>Base de Datos</b></label>
@@ -54,6 +64,32 @@
             </select>
           </div>
         </div>
+
+        <div class="form-row">
+
+          <div class="form-group col-md-6">
+            <label for="collectionType"><b>Modos de Extracción</b></label>
+            <select class="form-control" id="collectionType" name="collectionType" required>
+              <option value="">Seleccione un Modo de Extracción de Datos</option>
+              <% collectionTypes.forEach(({id, description}) => { %>
+              <option value="<%=id%>"
+                <%if(typeof params != 'undefined' && params['collectionType'] == id){%> selected <%}%>>
+                <%=description%>
+              </option>
+              <% }) %>
+            </select>
+          </div>
+
+          <div class="form-group col-md-6">
+            <label for="collectionRate"><b>Frecuencia de Extracción</b></label>
+            <div class="input-group mb-2">
+              <input  type="text" class="form-control" id="collectionRate" name="collectionRate" placeholder="Frecuencia de Extracción" required
+                      value=<%if(typeof params != 'undefined'){%> "<%=params['collectionRate']%>" <%}%>>
+            </div>
+          </div>
+
+        </div>
+
         <div class="form-row">
           <div class="form-group col-md-12">
           <label for="description"><b>Descripción</b></label>
@@ -71,6 +107,15 @@
 
 <script type="text/javascript">
 
+
+  // pre-suscription-label - Initialization
+  let selected_device = $('#device').find(":selected");
+  if (selected_device.val() >= 1) {
+    $('#pre-suscription-label').html(selected_device.text().trim() + "__")
+  } else {
+    $('#pre-suscription-label').html("__")
+  }
+
   class SubscriptionInfo {
     constructor(uuid, name, device, dataStore, description) {
       this.uuid = uuid
@@ -80,6 +125,15 @@
       this.description = description
     }
   }
+
+  $('#device').on('change', function() {
+    let selected_device = $(this).find(":selected");
+    if (selected_device.val() >= 1) {
+      $('#pre-suscription-label').html(selected_device.text().trim() + "__")
+    } else {
+      $('#pre-suscription-label').html("__")
+    }
+  });
 
   $("#create").on('submit', function () {
     const myStorage = window.localStorage
