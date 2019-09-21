@@ -230,9 +230,11 @@ exports.create1 = async (req, res) => {
   // Get Devices and DataStore for the Select (if create fails)
   let devices = null
   let dataStores = null
+  let collectionTypes = null
   try {
     devices = await db.Device.findAll()
     dataStores = await db.DataStore.findAll()
+    collectionTypes = await db.CollectionType.findAll()
     if (devices == '' || dataStores == '') {
       req.flash('error', 'Para realizar el Alta de una Suscripción debe Existir al menos un Dispositivo y una Base de Datos')
       return res.redirect('/subscription/list')
@@ -256,7 +258,8 @@ exports.create1 = async (req, res) => {
       params,
       error: 'Los Campos UUID, Nombre, Dispositivo y Base de Datos deben tener contenido',
       devices,
-      dataStores
+      dataStores,
+      collectionTypes
     })
   }
 
@@ -284,7 +287,8 @@ exports.create1 = async (req, res) => {
         error: 'Los Campos UUID y/o Nombre, deben ser unicos en la Base de Datos',
         params,
         devices,
-        dataStores
+        dataStores,
+        collectionTypes
       })
     }
     
@@ -293,7 +297,8 @@ exports.create1 = async (req, res) => {
       params,
       error: `${err}`,
       devices,
-      dataStores
+      dataStores,
+      collectionTypes
     })
   }
 }

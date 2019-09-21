@@ -68,11 +68,11 @@
         <div class="form-row">
 
           <div class="form-group col-md-6">
-            <label for="collectionType"><b>Modos de Extracción</b></label>
+            <label for="collectionType"><b>Modos de Muestreo</b></label>
             <select class="form-control" id="collectionType" name="collectionType" required>
-              <option value="">Seleccione un Modo de Extracción de Datos</option>
-              <% collectionTypes.forEach(({id, description}) => { %>
-              <option value="<%=id%>"
+              <option value="">Seleccione un Modo de Muestreo de Datos</option>
+              <% collectionTypes.forEach(({id, description, hint}) => { %>
+              <option value="<%=id%>" data-hint="<%=hint%>"
                 <%if(typeof params != 'undefined' && params['collectionType'] == id){%> selected <%}%>>
                 <%=description%>
               </option>
@@ -81,9 +81,9 @@
           </div>
 
           <div class="form-group col-md-6">
-            <label for="collectionRate"><b>Frecuencia de Extracción</b></label>
+            <label for="collectionRate"><b>Frecuencia de Muestreo</b></label>
             <div class="input-group mb-2">
-              <input  type="text" class="form-control" id="collectionRate" name="collectionRate" placeholder="Frecuencia de Extracción" required
+              <input  type="text" class="form-control" id="collectionRate" name="collectionRate" placeholder="Frecuencia de Muestreo" required
                       value=<%if(typeof params != 'undefined'){%> "<%=params['collectionRate']%>" <%}%>>
             </div>
           </div>
@@ -107,6 +107,15 @@
 
 <script type="text/javascript">
 
+  // collectionTypeRate hint setup
+  $("#collectionType").on('change', function () {
+    let selected_collectionType = $(this).find(":selected");
+    if (selected_collectionType.val() >= 1) {
+      $('#collectionRate').attr('placeholder','Frecuencia de Muestreo ' + selected_collectionType.data('hint'));
+    } else {
+      $('#collectionRate').attr('placeholder','Frecuencia de Muestreo');
+    }
+  });
 
   // pre-suscription-label - Initialization
   let selected_device = $('#device').find(":selected");
