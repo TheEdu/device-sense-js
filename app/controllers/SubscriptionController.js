@@ -45,73 +45,6 @@ exports.createIndex = async (req, res) => {
   }
 }
 
-exports.create = async (req, res) => {
-  // Get User
-  const user = req.user
-
-  // Get the form inputs from the request body
-  const uuid = req.body.uuid
-  const name = req.body.name
-  const description = req.body.description
-  const device = req.body.device
-  const dataStore = req.body.dataStore
-
-  // Get Devices and DataStore for the Select (if create fails)
-  let devices = null
-  let dataStores = null
-  try {
-    devices = await db.Device.findAll()
-    dataStores = await db.DataStore.findAll()
-    if (devices == '' || dataStores == '') {
-      req.flash('error', 'Para realizar el Alta de una Suscripción debe Existir al menos un Dispositivo y una Base de Datos')
-      return res.redirect('/subscription/list')
-    }
-  } catch (err) {
-    req.flash('error', err.toString())
-    return res.redirect('/subscription/list')
-  }
-
-  const params = {
-    uuid: uuid,
-    name: name,
-    description: description,
-    device: device,
-    dataStore: dataStore
-  }
-
-  // Check for restrictions
-  if (!uuid || !name || !device || !dataStore) {
-    return res.render('subscription/create.ejs', {
-      params,
-      error: 'Los Campos UUID, Nombre, Dispositivo y Base de Datos deben tener contenido',
-      devices,
-      dataStores
-    })
-  }
-
-  try {
-    // Insert new subscription to the Database
-    await db.Subscription.create({
-      uuid: uuid,
-      name: name,
-      description: description,
-      fk_userId: user.id,
-      fk_deviceId: device,
-      fk_dataStoreId: dataStore,
-    })
-
-    req.flash('success', 'Suscripción Creada Exitosamente.')
-    return res.redirect('/subscription/list')
-  } catch (err) {
-    return res.render('subscription/create.ejs', {
-      params,
-      error: `${err}`,
-      devices,
-      dataStores
-    })
-  }
-}
-
 exports.show = async (req, res) => {
   // Get URL params
   const subscription_uuid = req.params.uuid
@@ -216,7 +149,7 @@ exports.delete = async (req, res) => {
   }
 }
 
-exports.create1 = async (req, res) => {
+exports.create = async (req, res) => {
   // Get User
   const user = req.user
 
@@ -226,6 +159,8 @@ exports.create1 = async (req, res) => {
   const description = req.body.description
   const device = req.body.device
   const dataStore = req.body.dataStore
+  const collectionType = req.body.collectionType
+  const collectionRate = req.body.collectionRate
 
   // Get Devices and DataStore for the Select (if create fails)
   let devices = null
@@ -249,7 +184,9 @@ exports.create1 = async (req, res) => {
     name: name,
     description: description,
     device: device,
-    dataStore: dataStore
+    dataStore: dataStore,
+    collectionType: collectionType,
+    collectionRate: collectionRate
   }
 
   // Check for restrictions
@@ -277,12 +214,39 @@ exports.create1 = async (req, res) => {
     if (subscriptions == null || (subscriptions != null && subscriptions.length == 0)) {
       // No existe ningun registro con el uuid y el nombre de la nueva suscripcion.
       // Entonces puedo proceder con el Alta de la Misma
+
       const dev = await db.Device.findById(device)
       const tree = await ds_opcua.addressSpace(dev.endpointUrl, dev.rootNode, dev.timeOut)
-      return res.render('subscription/create2.ejs', {
-        addressSpace: tree
+
+      // Insert new Suscription to the Database
+      await db.Subscription.create({
+        uuid: uuid,
+        name: name,
+        description: description,
+        collectionRate: collectionRate,
+        fk_userId: user.id,
+        fk_deviceId: device,
+        fk_dataStoreId: dataStore,
+        fk_collectionType: collectionType
       })
+
+      // Traigo la suscripcion recien creada con las referencias a los modelos
+      let subscription = await db.Subscription.findOne({
+                          where: {uuid: uuid},
+                          include: [{ model: db.Device },
+                                    { model: db.DataStore },
+                                    { model: db.User }]
+                        })
+
+      // Get subscription to Show
+      return res.render('subscription/items/add.ejs', {
+        subscription: subscription,
+        addressSpace: tree,
+        success: 'Suscripcion Creada Exitosamente.'
+      })
+
     } else {
+
       return res.render('subscription/create.ejs', {
         error: 'Los Campos UUID y/o Nombre, deben ser unicos en la Base de Datos',
         params,
@@ -290,9 +254,11 @@ exports.create1 = async (req, res) => {
         dataStores,
         collectionTypes
       })
+
     }
     
   } catch (err) {
+
     return res.render('subscription/create.ejs', {
       params,
       error: `${err}`,
@@ -300,17 +266,37 @@ exports.create1 = async (req, res) => {
       dataStores,
       collectionTypes
     })
+
   }
 }
 
-exports.create2 = async (req, res) => {
+exports.itemsAdd = async (req, res) => {
+  // const itemsSelected = req.body.itemsSelected
+  // console.log(JSON.parse(itemsSelected))
+  // return res.render('subscription/create3.ejs', {
+  //   itemsSelected: JSON.parse(itemsSelected)
+  // })
+  const uuid = req.params.uuid
+  let subscription = await db.Subscription.findOne({
+                    where: {uuid: uuid},
+                    include: [{ model: db.Device },
+                              { model: db.DataStore },
+                              { model: db.User }]
+                  })
+
+  let dev = subscription.Device
+  const tree = await ds_opcua.addressSpace(dev.endpointUrl, dev.rootNode, dev.timeOut)
+
+  return res.render('subscription/items/add.ejs', {
+        subscription: subscription,
+        addressSpace: tree
+      })
+}
+
+exports.itemsSave= async (req, res) => {
   const itemsSelected = req.body.itemsSelected
   console.log(JSON.parse(itemsSelected))
   return res.render('subscription/create3.ejs', {
     itemsSelected: JSON.parse(itemsSelected)
   })
-}
-
-exports.create3 = async (req, res) => {
-  res.send('create3')
 }

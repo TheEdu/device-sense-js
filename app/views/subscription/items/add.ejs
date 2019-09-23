@@ -1,0 +1,127 @@
+<% include ../../partials/header %>
+
+  <!-- Breadcrumbs-->
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <a  href="/subscription/list">Suscripciones</a>
+    </li>
+    <li class="breadcrumb-item active">Agregar Items</li>
+  </ol>
+
+  <%if(typeof subscription != 'undefined'){%>
+    <div class="card mb-3">
+      <div class="card-header">
+
+        <div class="row">
+          <div class="col-4">
+             <span class="text-primary"> UUID: </span> <span> <%=subscription.uuid%> </span>
+          </div>
+          <div class="col-4">
+              <span class="text-primary"> Suscripción: </span> 
+              <span>
+                <%if(typeof subscription.Device != 'undefined'){%> 
+                  <%= subscription.Device.name + "__" + subscription.name%>
+                <%}else{%>
+                  <%=subscription.name%>
+                <%}%>
+              </span>
+          </div>
+          <div class="col-4">
+             <span class="text-primary"> Administrador: </span>  
+             <span> 
+                <%if(typeof subscription.User != 'undefined'){%> 
+                    <%= subscription.User.firstName %> <%= subscription.User.lastName %>
+                <%}%>
+              </span>
+          </div>
+        </div>
+
+<!--         <div class="row">
+          <div class="col-4">
+              <span class="text-primary"> Creado En: </span> 
+              <span> 
+                <%=`${subscription.createdAt.getDate()}/${subscription.createdAt.getMonth()+1}/${subscription.createdAt.getFullYear()}`%>
+              </span>
+          </div>
+          <div class="col-4">
+              <span class="text-primary"> Actualizado En: </span> 
+              <span> 
+                <%=`${subscription.updatedAt.getDate()}/${subscription.updatedAt.getMonth()+1}/${subscription.updatedAt.getFullYear()}`%>
+              </span>
+          </div>
+        </div> -->
+
+        <div class="row">
+          <div class="col-4">
+             <span class="text-primary"> Dispositivo: </span> 
+             <span> 
+              <%if(typeof subscription.Device != 'undefined'){%> 
+                <%= subscription.Device.name %>
+              <%}%>
+             </span>
+          </div>
+          <div class="col-4">
+             <span class="text-primary"> Base de Datos: </span>
+             <span>
+                <%if(typeof subscription.DataStore != 'undefined'){%> 
+                  <%= subscription.DataStore.name %>
+                <%}%>
+             </span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="container p-2">
+        <form id="add" action="<%= `/subscription/${subscription.uuid}/items/save` %>" method="POST">
+          <input id="itemsSelected" type="text" name="itemsSelected" hidden>
+          <div class="form-row address-space-container">
+            <div id="data" class="mt-1 demo"></div>
+          </div>
+          <button type="submit" class="btn btn-primary mt-2">Guardar</button>
+        </form>
+      </div>
+
+    </div>
+   <%}%>
+
+<% include ../../partials/footer %>
+
+  
+
+<% if ((typeof addressSpace != 'undefined')) { %>
+  <script>
+    // inline data demo
+    $('#data').jstree({
+      'core' : {
+        'data' : [<%- JSON.stringify(addressSpace) %>]
+      },
+      'types': {
+          // "root": {
+          //   "icon" : "glyphicon glyphicon-plus"
+          // },
+          "child": {
+            "icon" : "fab fa-envira"
+          },
+          "default" : {
+          }
+       },
+      'checkbox' : {
+          'keep_selected_style' : false,
+          // 'cascade_to_hidden': true,
+          'cascade_to_disabled': true,
+      },
+      'plugins' : [ "wholerow", "checkbox", "types" ]
+    })
+
+
+    $("#add").on('submit', function () {
+      //const itemsSelected = JSON.stringify($('#data').jstree(true).get_selected())
+      const itemsSelected = $('#data').jstree().get_selected(true)
+      const originalItems = itemsSelected.map(itemSelected => itemSelected.original)
+      const filteredItems = originalItems.filter(itemSelected => (itemSelected.state.disabled == false && itemSelected.type == "child"))
+      $('#itemsSelected').val(JSON.stringify(filteredItems))
+    })
+
+  </script>
+<% } %>

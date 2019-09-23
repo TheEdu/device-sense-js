@@ -57,6 +57,12 @@
                     <i class="far fa-edit"></i>
                   </a>
                 </div>
+
+                <div class="d-inline ml-1">
+                  <a href="<%= `/subscription/${uuid}/items/add` %>">
+                    <i class="far fa-plus-square"></i>
+                  </a>
+                </div>
                 
                 <div class="d-inline ml-1">
                   <a class="delete-device" data-id="<%= id %>" data-name="<%= name %>" data-toggle="modal" data-target="#deleteDevice" href="#">
