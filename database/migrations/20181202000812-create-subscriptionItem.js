@@ -16,6 +16,30 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
+      identifier: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      tags: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        defaultValue: "{}"
+      },
+      dataType: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        defaultValue: "GENERIC"
+      },
+      deadbandAbsolute: {
+        type: Sequelize.FLOAT,
+        allowNull: false,
+        defaultValue: 0
+      },
+      deadbandRelative: {
+        type: Sequelize.FLOAT,
+        allowNull: false,
+        defaultValue: 0
+      },
       createdAt: {
         type: Sequelize.DATE,
         allowNull: false

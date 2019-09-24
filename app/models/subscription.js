@@ -4,9 +4,9 @@ module.exports = (sequelize, DataTypes) => {
     uuid: DataTypes.STRING,
     name: DataTypes.STRING,
     description: DataTypes.STRING,
+    collectionRate: DataTypes.INTEGER,
     createdAt: DataTypes.DATE,
     updatedAt: DataTypes.DATE,
-    collectionRate: DataTypes.INTEGER,
   }, {});
 
   Subscription.associate = function(models) {

@@ -294,9 +294,27 @@ exports.itemsAdd = async (req, res) => {
 }
 
 exports.itemsSave= async (req, res) => {
-  const itemsSelected = req.body.itemsSelected
-  console.log(JSON.parse(itemsSelected))
+  const itemsSelected = JSON.parse(req.body.itemsSelected)
+
+  const uuid = JSON.parse(req.body.uuid)
+  let subscription = await db.Subscription.findOne({ where: {uuid: uuid} })
+
+  
+  try {
+    itemsSelected.forEach(async (item) => {
+      await db.SubscriptionItem.create({
+        nodeId: item.id,
+        name: item.text,
+        identifier: item.identifier,
+        fk_subscriptionId: subscription.id
+      })
+
+    })
+  } catch (err) {
+
+  }
+
   return res.render('subscription/create3.ejs', {
-    itemsSelected: JSON.parse(itemsSelected)
+    itemsSelected: itemsSelected
   })
 }

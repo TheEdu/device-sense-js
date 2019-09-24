@@ -74,6 +74,7 @@
 
       <div class="container p-2">
         <form id="add" action="<%= `/subscription/${subscription.uuid}/items/save` %>" method="POST">
+          <input id="uuid" type="text" name="uuid" value="<%=subscription.uuid%>" hidden>
           <input id="itemsSelected" type="text" name="itemsSelected" hidden>
           <div class="form-row address-space-container">
             <div id="data" class="mt-1 demo"></div>
