@@ -14,15 +14,15 @@
     <b>Configuración de los Items</b>
   </div>
   <div class="card-body">
-    <form id="create" action="/subscription/create3" method="POST">
+    <form id="create" action="/subscription/list" method="POST">
       <div class="table-responsive">
         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
           <thead>
             <tr>
               <th class="">Node</th>
-              <th class="">Parent</th>
+              <!-- <th class="">Parent Name</th> -->
               <th class="">Node Id</th>
-              <th class="">Node Class</th>
+              <th class="">Estado</th>
             </tr>
           </thead>
           <tbody>
@@ -30,9 +30,9 @@
             <% for (i = 0; i < itemsSelected.length; i++) {  %>
             <tr>
               <td class=""><%= itemsSelected[i].text %></td>
-              <td class=""><%= itemsSelected[i].parentName %></td>
+              <!-- <td class=""><%= itemsSelected[i].parentName %></td> -->
               <td class=""><%= itemsSelected[i].id %></td>
-              <td class=""><%= itemsSelected[i].nodeClass %></td>
+              <td class=""><%= itemsSelected[i].message %></td>
             </tr>
             <% } %>
           <% } %>

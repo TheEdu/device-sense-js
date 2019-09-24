@@ -11,7 +11,7 @@ module.exports = {
         fk_userId: 2,
         endpointUrl: 'opc.tcp://opcuaserver.com:48010',
         rootNode: 'RootFolder',
-        timeOut: 10000
+        timeOut: 20000
       }, {
         name: 'Sterfive',
         uuid: '9999',
@@ -21,7 +21,7 @@ module.exports = {
         fk_userId: 3,
         endpointUrl: 'opc.tcp://opcuademo.sterfive.com:26543',
         rootNode: 'RootFolder',
-        timeOut: 10000
+        timeOut: 20000
       }, {
         name: 'DemoLocal',
         uuid: '10001',
@@ -30,8 +30,8 @@ module.exports = {
         updatedAt: new Date(),
         fk_userId: 3,
         endpointUrl: 'opc.tcp://PENTIUM-I5:48020',
-        rootNode: 'RootFolder',
-        timeOut: 10000
+        rootNode: 'ns=4;s=Demo',
+        timeOut: 20000
       }], {}
     )
   },

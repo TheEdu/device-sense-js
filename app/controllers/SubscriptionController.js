@@ -212,12 +212,6 @@ exports.create = async (req, res) => {
     })
 
     if (subscriptions == null || (subscriptions != null && subscriptions.length == 0)) {
-      // No existe ningun registro con el uuid y el nombre de la nueva suscripcion.
-      // Entonces puedo proceder con el Alta de la Misma
-
-      const dev = await db.Device.findById(device)
-      const tree = await ds_opcua.addressSpace(dev.endpointUrl, dev.rootNode, dev.timeOut)
-
       // Insert new Suscription to the Database
       await db.Subscription.create({
         uuid: uuid,
@@ -238,12 +232,23 @@ exports.create = async (req, res) => {
                                     { model: db.User }]
                         })
 
-      // Get subscription to Show
-      return res.render('subscription/items/add.ejs', {
-        subscription: subscription,
-        addressSpace: tree,
-        success: 'Suscripcion Creada Exitosamente.'
-      })
+      try {
+        // Trato de Obtener el AddressSpace del Dispositivo
+        const dev = await db.Device.findById(device)
+        const tree = await ds_opcua.addressSpace(dev.endpointUrl, dev.rootNode, dev.timeOut)
+
+        // Si lo obtengo procedo con la carga de items para la misma
+        return res.render('subscription/items/add.ejs', {
+          subscription: subscription,
+          addressSpace: tree,
+          success: 'Suscripcion Creada Exitosamente.'
+        })
+      } catch (err) {
+        // Si no puedo obtener el AddressSpace, Informo de la situación
+        req.flash('success','Suscripcion Creada Exitosamente.')
+        req.flash('error', 'La carga de items no es posible de realizar en estos momentos. Error: ' + err.toString())
+        return res.redirect('/subscription/list')
+      }
 
     } else {
 
@@ -271,48 +276,64 @@ exports.create = async (req, res) => {
 }
 
 exports.itemsAdd = async (req, res) => {
-  // const itemsSelected = req.body.itemsSelected
-  // console.log(JSON.parse(itemsSelected))
-  // return res.render('subscription/create3.ejs', {
-  //   itemsSelected: JSON.parse(itemsSelected)
-  // })
   const uuid = req.params.uuid
-  let subscription = await db.Subscription.findOne({
-                    where: {uuid: uuid},
-                    include: [{ model: db.Device },
-                              { model: db.DataStore },
-                              { model: db.User }]
-                  })
 
-  let dev = subscription.Device
-  const tree = await ds_opcua.addressSpace(dev.endpointUrl, dev.rootNode, dev.timeOut)
+  try {
 
-  return res.render('subscription/items/add.ejs', {
-        subscription: subscription,
-        addressSpace: tree
-      })
+    let subscription = await db.Subscription.findOne({
+                      where: {uuid: uuid},
+                      include: [{ model: db.Device },
+                                { model: db.DataStore },
+                                { model: db.User }]
+                    })
+
+    let dev = subscription.Device
+    const tree = await ds_opcua.addressSpace(dev.endpointUrl, dev.rootNode, dev.timeOut)
+
+    return res.render('subscription/items/add.ejs', {
+          subscription: subscription,
+          addressSpace: tree
+        })
+
+  } catch (err) {
+
+    req.flash('error', err.toString())
+    return res.redirect('/subscription/list')
+
+  }
 }
 
 exports.itemsSave= async (req, res) => {
+  const uuid = req.body.uuid
   const itemsSelected = JSON.parse(req.body.itemsSelected)
 
-  const uuid = JSON.parse(req.body.uuid)
-  let subscription = await db.Subscription.findOne({ where: {uuid: uuid} })
+  await itemsSelected.forEach(async (item) => {
+    try {
+      let subscription = await db.Subscription.findOne({
+        where: {uuid: uuid}
+      })
 
-  
-  try {
-    itemsSelected.forEach(async (item) => {
       await db.SubscriptionItem.create({
         nodeId: item.id,
         name: item.text,
         identifier: item.identifier,
-        fk_subscriptionId: subscription.id
+        fk_subscriptionId: subscription.id,
+        tags: "{ suscripcion = \"" + subscription.name + "\"}"
       })
 
-    })
-  } catch (err) {
+      // Si se guardo correctamente el punto
+      item.result = 0
+      item.message = "OK"
+    } catch (err) {
+      // Si ocurrio algun error al guardar el punto
+      item.result = 1
+      item.message = err.toString()
+    }
 
-  }
+    console.log(item)
+  })
+
+  console.log(itemsSelected)
 
   return res.render('subscription/create3.ejs', {
     itemsSelected: itemsSelected
