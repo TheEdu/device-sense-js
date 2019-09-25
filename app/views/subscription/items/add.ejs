@@ -36,21 +36,6 @@
           </div>
         </div>
 
-<!--         <div class="row">
-          <div class="col-4">
-              <span class="text-primary"> Creado En: </span> 
-              <span> 
-                <%=`${subscription.createdAt.getDate()}/${subscription.createdAt.getMonth()+1}/${subscription.createdAt.getFullYear()}`%>
-              </span>
-          </div>
-          <div class="col-4">
-              <span class="text-primary"> Actualizado En: </span> 
-              <span> 
-                <%=`${subscription.updatedAt.getDate()}/${subscription.updatedAt.getMonth()+1}/${subscription.updatedAt.getFullYear()}`%>
-              </span>
-          </div>
-        </div> -->
-
         <div class="row">
           <div class="col-4">
              <span class="text-primary"> Dispositivo: </span> 
@@ -72,16 +57,70 @@
 
       </div>
 
-      <div class="container p-2">
-        <form id="add" action="<%= `/subscription/${subscription.uuid}/items/save` %>" method="POST">
-          <input id="uuid" type="text" name="uuid" value="<%=subscription.uuid%>" hidden>
-          <input id="itemsSelected" type="text" name="itemsSelected" hidden>
-          <div class="form-row address-space-container">
-            <div id="data" class="mt-1 demo"></div>
+      <div class="row m-2">
+
+        <div class="col-4">
+          <form id="add" action="<%= `/subscription/${subscription.uuid}/items/save` %>" method="POST">
+            <input id="uuid" type="text" name="uuid" value="<%=subscription.uuid%>" hidden>
+            <input id="itemsSelected" type="text" name="itemsSelected" hidden>
+            <div class="form-row address-space-container">
+              <div id="data" class="mt-1 demo"></div>
+            </div>
+          </form>
+        </div>
+
+        <div class="col-8">
+          <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable-suscription" width="100%" cellspacing="0">
+              <thead>
+                <tr>
+                  <th class="">Nombre</th>
+                  <th class="">Identificador</th>
+                  <th class="">Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+              <% if ( (typeof subscription != 'undefined') && (typeof subscription.SubscriptionItems != 'undefined') ) { %>
+                <%  subscription.SubscriptionItems.forEach(function({ name, identifier }){ %>
+                <tr>
+                  <td class=""><%= name %></td>
+                  <td class=""><%= identifier %></td>
+                  <td class="">
+                    <div class="text-center">
+
+                      <div class="d-inline ml-1">
+                        <a href="<%= `/subscription/show/${name}` %>">
+                          <i class="far fa-eye"></i>
+                        </a>
+                      </div>
+
+                      <div class="d-inline ml-1">
+                        <a href="<%= `/subscription/update/${name}` %>">
+                          <i class="far fa-edit"></i>
+                        </a>
+                      </div>
+                      
+                      <div class="d-inline ml-1">
+                        <a class="delete-device" data-id="<%= name %>" data-name="<%= name %>" data-toggle="modal" data-target="#deleteDevice" href="#">
+                          <i class="far fa-trash-alt"></i>
+                        </a>
+                      </div>
+
+                    </div>
+                  </td>
+                </tr>
+                <% }) %>
+              <% } %>
+              </tbody>
+            </table>
           </div>
-          <button type="submit" class="btn btn-primary mt-2">Guardar</button>
-          <a href="/subscription/list" class="btn btn-danger mt-2 px-4" role="button">Salir</a>
-        </form>
+        </div>
+
+      </div>
+
+      <div class="row m-2">
+        <button class="btn btn-primary mt-2 mr-2" form="add">Guardar</button>
+        <a href="/subscription/list" class="btn btn-danger mt-2 px-4" role="button">Salir</a>
       </div>
 
     </div>

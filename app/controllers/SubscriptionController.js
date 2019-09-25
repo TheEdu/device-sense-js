@@ -284,11 +284,14 @@ exports.itemsAdd = async (req, res) => {
                       where: {uuid: uuid},
                       include: [{ model: db.Device },
                                 { model: db.DataStore },
-                                { model: db.User }]
+                                { model: db.User },
+                                { model: db.SubscriptionItem }]
                     })
 
     let dev = subscription.Device
     const tree = await ds_opcua.addressSpace(dev.endpointUrl, dev.rootNode, dev.timeOut)
+
+    console.log(subscription)
 
     return res.render('subscription/items/add.ejs', {
           subscription: subscription,
@@ -307,31 +310,37 @@ exports.itemsSave= async (req, res) => {
   const uuid = req.body.uuid
   const itemsSelected = JSON.parse(req.body.itemsSelected)
 
-  await itemsSelected.forEach(async (item) => {
-    try {
-      let subscription = await db.Subscription.findOne({
-        where: {uuid: uuid}
-      })
-
-      await db.SubscriptionItem.create({
-        nodeId: item.id,
-        name: item.text,
-        identifier: item.identifier,
-        fk_subscriptionId: subscription.id,
-        tags: "{ suscripcion = \"" + subscription.name + "\"}"
-      })
-
-      // Si se guardo correctamente el punto
-      item.result = 0
-      item.message = "OK"
-    } catch (err) {
-      // Si ocurrio algun error al guardar el punto
-      item.result = 1
-      item.message = err.toString()
-    }
-
-    console.log(item)
+  let subscription = await db.Subscription.findOne({
+    where: {uuid: uuid}
   })
+
+  await Promise.all(
+    itemsSelected.map(async (item) => {
+      try {
+
+        let identifier_str = String(item.identifier)
+
+        await db.SubscriptionItem.create({
+          nodeId: item.id,
+          name: item.text,
+          identifier: identifier_str.replace(/\./g, "_"),
+          fk_subscriptionId: subscription.id,
+          tags: "{ suscripcion = \"" + subscription.name + "\"}"
+        })
+
+        // Si la carga salio bien:
+        item.result = 0
+        item.message = "OK"
+
+      } catch (err) {
+        // Si ocurrio algun error al guardar el punto:
+        item.result = 1
+        item.message = err.toString()
+      }
+
+      return item
+    })
+  )
 
   console.log(itemsSelected)
 
