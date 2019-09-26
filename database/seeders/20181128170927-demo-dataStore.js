@@ -7,7 +7,7 @@ module.exports = {
       name: 'influxdb_test',
       description: 'Test InfluxDB seed',
       type: 'influxdb',
-      host: '127.0.0.1',
+      host: '192.168.56.202',
       port: 8086,
       protocol: 'http',
       username: '',

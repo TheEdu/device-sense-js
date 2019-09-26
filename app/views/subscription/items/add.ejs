@@ -81,7 +81,7 @@
               </thead>
               <tbody>
               <% if ( (typeof subscription != 'undefined') && (typeof subscription.SubscriptionItems != 'undefined') ) { %>
-                <%  subscription.SubscriptionItems.forEach(function({ name, identifier }){ %>
+                <%  subscription.SubscriptionItems.forEach(function({ id, name, identifier }){ %>
                 <tr>
                   <td class=""><%= name %></td>
                   <td class=""><%= identifier %></td>
@@ -89,19 +89,19 @@
                     <div class="text-center">
 
                       <div class="d-inline ml-1">
-                        <a href="<%= `/subscription/show/${name}` %>">
+                        <a href="<%=  %>">
                           <i class="far fa-eye"></i>
                         </a>
                       </div>
 
                       <div class="d-inline ml-1">
-                        <a href="<%= `/subscription/update/${name}` %>">
+                        <a href="<%=  %>">
                           <i class="far fa-edit"></i>
                         </a>
                       </div>
                       
                       <div class="d-inline ml-1">
-                        <a class="delete-device" data-id="<%= name %>" data-name="<%= name %>" data-toggle="modal" data-target="#deleteDevice" href="#">
+                        <a class="delete-item" data-id="<%= id %>" data-name="<%= name %>" data-toggle="modal" data-target="#deleteItem" href="#">
                           <i class="far fa-trash-alt"></i>
                         </a>
                       </div>
@@ -125,6 +125,32 @@
 
     </div>
    <%}%>
+
+<!-- Delete Item Modal-->
+<div class="modal fade" id="deleteItem" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <form id="deleteForm" action="/subscription/item/delete" method="POST">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Desea Eliminar el Item seleccionado?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>
+            Si continua eliminara "<b><span id="suscripcionItemBorrarNombre"></span></b>" de su lista de Suscripciones
+          </p>
+          <input type="text" name="deleteId" id="deleteId" value="" hidden/>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+          <a class="btn btn-danger text-white" onclick="deleteItem()">Eliminar</a>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
 
 <% include ../../partials/footer %>
 
@@ -163,6 +189,17 @@
       const filteredItems = originalItems.filter(itemSelected => (itemSelected.state.disabled == false && itemSelected.type == "child"))
       $('#itemsSelected').val(JSON.stringify(filteredItems))
     })
+
+    $(document).on('click', '.delete-item', function () {
+      const name = $(this).data('name')
+      const id = $(this).data('id')
+      $('.modal-body #suscripcionItemBorrarNombre').html(name)
+      $('.modal-body #deleteId').val(id)
+    })
+
+    function deleteItem() {
+      $('#deleteForm').submit()
+    }
 
   </script>
 <% } %>

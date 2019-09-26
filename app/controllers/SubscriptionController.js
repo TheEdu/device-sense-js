@@ -55,7 +55,8 @@ exports.show = async (req, res) => {
                           where: {uuid: subscription_uuid},
                           include: [{ model: db.Device },
                                     { model: db.DataStore },
-                                    { model: db.User }]
+                                    { model: db.User },
+                                    { model: db.SubscriptionItem }]
                         })
     return res.render('subscription/show.ejs', {subscription})
   } catch (err) {
@@ -325,7 +326,7 @@ exports.itemsSave= async (req, res) => {
           name: item.text,
           identifier: identifier_str.replace(/\./g, "_"),
           fk_subscriptionId: subscription.id,
-          tags: "{ suscripcion = \"" + subscription.name + "\"}"
+          tags: "{ \"suscripcion\": \"" + subscription.name + "\"}"
         })
 
         // Si la carga salio bien:

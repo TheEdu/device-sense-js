@@ -23,9 +23,9 @@ module.exports = {
         rootNode: 'RootFolder',
         timeOut: 20000
       }, {
-        name: 'DemoLocal',
+        name: 'DemoServer2',
         uuid: '10001',
-        description: 'Demo Server',
+        description: 'Demo Server 2',
         createdAt: new Date(),
         updatedAt: new Date(),
         fk_userId: 3,
