@@ -233,10 +233,17 @@ exports.create = async (req, res) => {
                                     { model: db.User }]
                         })
 
+      let availableDataTypes = await db.DataType.findAll({
+                          where: {supported: 1}
+                        })
+
+      let dataIdentifiers = availableDataTypes.map(dataType => dataType.identifier)
+      console.log(dataIdentifiers)
+
       try {
         // Trato de Obtener el AddressSpace del Dispositivo
         const dev = await db.Device.findById(device)
-        const tree = await ds_opcua.addressSpace(dev.endpointUrl, dev.rootNode, dev.timeOut)
+        const tree = await ds_opcua.addressSpace(dev.endpointUrl, dev.rootNode, dev.timeOut, dataIdentifiers)
 
         // Si lo obtengo procedo con la carga de items para la misma
         return res.render('subscription/items/add.ejs', {
@@ -289,8 +296,15 @@ exports.itemsAdd = async (req, res) => {
                                 { model: db.SubscriptionItem }]
                     })
 
+    let availableDataTypes = await db.DataType.findAll({
+                          where: {supported: 1}
+                        })
+
+    let dataIdentifiers = availableDataTypes.map(dataType => dataType.identifier)
+    console.log(dataIdentifiers)
+
     let dev = subscription.Device
-    const tree = await ds_opcua.addressSpace(dev.endpointUrl, dev.rootNode, dev.timeOut)
+    const tree = await ds_opcua.addressSpace(dev.endpointUrl, dev.rootNode, dev.timeOut, dataIdentifiers)
 
     console.log(subscription)
 

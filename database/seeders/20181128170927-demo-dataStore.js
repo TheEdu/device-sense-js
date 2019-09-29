@@ -14,9 +14,9 @@ module.exports = {
       password: '',
       database: 'test',
       failoverTimeout: 10000,
-      bufferMaxSize: 64,
-      writeInterval: 3000,
-      writeMaxPoints: 1000,
+      bufferMaxSize: 512,
+      writeInterval: 10000,
+      writeMaxPoints: 100000,
       createdAt: new Date(),
       updatedAt: new Date(),
       fk_userId: 2
