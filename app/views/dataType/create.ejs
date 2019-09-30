@@ -1,0 +1,42 @@
+<% include ../partials/header %>
+
+<!-- Breadcrumbs-->
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">
+    <a  href="/datatype/list">Tipos de Datos</a>
+  </li>
+  <li class="breadcrumb-item active">Nuevo</li>
+</ol>
+
+<div class="card mb-3">
+  <div class="container p-2">
+    <form action="/datatype/create" method="POST">
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="name"><b>Nombre</b></label>
+          <input type="text" class="form-control" id="name" name="name" placeholder="Nombre del Tipo de Dato" 
+          value=<%if(typeof params != 'undefined'){%> "<%=params['name']%>" <%}%>>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-3">
+          <label for="type"><b>Identificador</b></label>
+          <input type="text" class="form-control" id="identifier" name="identifier" placeholder="Identificador"
+          value=<%if(typeof params != 'undefined'){%> "<%=params['identifier']%>" <%}%>>
+        </div>
+
+        <div class="form-group col-md-3">
+          <label for="supported"><b>Soportado</b></label>
+          <select class="form-control" id="supported" name="supported" required="">
+            <option value=""> </option>
+            <option value="1"> Si </option>
+            <option value="0"> No </option>
+          </select>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Crear</button>
+    </form>
+  </div>
+</div>
+
+<% include ../partials/footer %>

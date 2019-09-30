@@ -1,0 +1,114 @@
+<% include ../partials/header %>
+
+<!-- Breadcrumbs-->
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">
+    <a  href="/datatype/list">Tipos de Datos</a>
+  </li>
+  <li class="breadcrumb-item active">Mis Tipos de Datos</li>
+</ol>
+
+<!-- DataTables Example -->
+<div class="card mb-3">
+  <div class="card-header">
+    <div class="d-inline text-primary">
+      <i class="fas fa-table"></i>
+      <span><b>Mis Tipos de Datos</b></span>
+    </div>
+  	<div class="d-inline" style="position: relative; float: right;">
+  		<a href="/datatype/create">
+  			<i class="fas fa-plus fa-lg"></i>
+  		</a>
+  	</div>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <thead>
+          <tr>
+            <th class="">Nombre</th>
+            <th class="">Identificador</th>
+            <th class="">Soportado</th>
+            <th class="">Fecha Alta</th>
+            <th class=" text-center">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+        <% if (typeof dataTypes != 'undefined') { %>
+        	<% dataTypes.forEach(function({id, name, identifier, supported, createdAt}){ %>
+  				<tr>
+            <td class=""><%= name %></td>
+            <td class=""><%= identifier %></td>
+            <td class=""><%if (supported == 1) {%> Si <%} else {%> No <%}%></td>
+            <td class=""><%=  `${createdAt.getDate()}/${createdAt.getMonth()+1}/${createdAt.getFullYear()}` %></td>
+            <td class="">
+              <div class="text-center">
+
+                <div class="d-inline ml-1">
+                  <a href="<%= `/datatype/show/${id}` %>">
+                    <i class="far fa-eye"></i>
+                  </a>
+                </div>
+
+                <div class="d-inline ml-1">
+                  <a href="<%= `/datatype/update/${id}` %>">
+                    <i class="far fa-edit"></i>
+                  </a>
+                </div>
+                
+                <div class="d-inline ml-1">
+                  <a class="delete-device" data-id="<%= id %>" data-name="<%= name %>" data-toggle="modal" data-target="#deleteDevice" href="#">
+                    <i class="far fa-trash-alt"></i>
+                  </a>
+                </div>
+  						</div>
+  					</td>
+  				</tr>
+        	<% }) %>
+        <% } %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Device Modal-->
+<div class="modal fade" id="deleteDevice" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <form id="deleteForm" action="/datatype/delete" method="POST">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Desea Eliminar el Tipo de Datos seleccionado?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>
+            Si continua eliminara "<b><span id="baseDatosBorrarNombre"></span></b>" de su lista de Tipo de Datos
+          </p>
+          <input type="text" name="deleteId" id="deleteId" value="" hidden/>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+          <a class="btn btn-danger text-white" onclick="deleteDataBase()">Eliminar</a>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<% include ../partials/footer %>
+
+<script type='text/javascript'>
+  $(document).on('click', '.delete-device', function () {
+    const name = $(this).data('name')
+    const id = $(this).data('id')
+    $('.modal-body #baseDatosBorrarNombre').html(name)
+    $('.modal-body #deleteId').val(id)
+  })
+
+  function deleteDataBase() {
+    $('#deleteForm').submit()
+  }
+</script>

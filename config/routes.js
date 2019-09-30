@@ -3,6 +3,7 @@ const home = require('../app/controllers/HomeController')
 const user = require('../app/controllers/UserController')
 const device = require('../app/controllers/DeviceController')
 const dataStore = require('../app/controllers/DataStoreController')
+const dataType = require('../app/controllers/DataTypeController')
 const subscription = require('../app/controllers/SubscriptionController')
 
 module.exports = (app, passport) => {
@@ -55,5 +56,14 @@ module.exports = (app, passport) => {
 
   app.get('/subscription/:uuid/items/add', home.loggedIn, subscription.itemsAdd)
   app.post('/subscription/:uuid/items/save', home.loggedIn, subscription.itemsSave)
+
+  /* DataType Routes */
+  app.get('/datatype/list', home.loggedIn, dataType.list)
+  app.get('/datatype/create', home.loggedIn, dataType.createIndex)
+  app.post('/datatype/create', home.loggedIn, dataType.create)
+  app.get('/datatype/show/:id', home.loggedIn, dataType.show)
+  app.get('/datatype/update/:id', home.loggedIn, dataType.updateIndex)
+  app.post('/datatype/update', home.loggedIn, dataType.update)
+  app.post('/datatype/delete', home.loggedIn, dataType.delete)
   
 }
