@@ -5,6 +5,7 @@ const device = require('../app/controllers/DeviceController')
 const dataStore = require('../app/controllers/DataStoreController')
 const dataType = require('../app/controllers/DataTypeController')
 const subscription = require('../app/controllers/SubscriptionController')
+const subscriptionProcess = require('../app/controllers/SubscriptionProcessController')
 
 module.exports = (app, passport) => {
 
@@ -65,5 +66,12 @@ module.exports = (app, passport) => {
   app.get('/datatype/update/:id', home.loggedIn, dataType.updateIndex)
   app.post('/datatype/update', home.loggedIn, dataType.update)
   app.post('/datatype/delete', home.loggedIn, dataType.delete)
+
+  /* SubscriptionpProcess Routes */
+  app.get('/subscriptionprocess/list', home.loggedIn, subscriptionProcess.list)
+  app.get('/subscriptionprocess/:uuid/history', home.loggedIn, subscriptionProcess.history)
+  app.get('/subscriptionprocess/:uuid/start', home.loggedIn, subscriptionProcess.start)
+  app.get('/subscriptionprocess/:uuid/stop', home.loggedIn, subscriptionProcess.stop)
+  app.get('/subscriptionprocess/:uuid/restart', home.loggedIn, subscriptionProcess.restart)
   
 }

@@ -15,6 +15,7 @@ module.exports = (sequelize, DataTypes) => {
     Subscription.belongsTo(models.DataStore, {foreignKey: 'fk_dataStoreId', targetKey: 'id'});
     Subscription.belongsTo(models.CollectionType, {foreignKey: 'fk_collectionType', targetKey: 'id'});
     Subscription.hasMany(models.SubscriptionItem, {foreignKey: 'fk_subscriptionId', sourceKey: 'id'});
+    Subscription.hasMany(models.SubscriptionProcess, {foreignKey: 'fk_subscriptionId', sourceKey: 'id'});
   };
 
   return Subscription;

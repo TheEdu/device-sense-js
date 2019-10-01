@@ -3,146 +3,140 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert('DataTypes', [{
-        name: '1',
+        name: 'Boolean',
         identifier: 1,
         supported: 1,
         createdAt: new Date(),
         updatedAt: new Date()
       }, {
-        name: '2',
+        name: 'SByte',
         identifier: 2,
         supported: 1,
         createdAt: new Date(),
         updatedAt: new Date()
       }, {
-        name: '3',
+        name: 'Byte',
         identifier: 3,
         supported: 1,
         createdAt: new Date(),
         updatedAt: new Date()
       }, {
-        name: '4',
+        name: 'Int16',
         identifier: 4,
         supported: 1,
         createdAt: new Date(),
         updatedAt: new Date()
       }, {
-        name: '5',
+        name: 'UInt16',
         identifier: 5,
         supported: 1,
         createdAt: new Date(),
         updatedAt: new Date()
       }, {
-        name: '6',
+        name: 'Int32',
         identifier: 6,
         supported: 1,
         createdAt: new Date(),
         updatedAt: new Date()
       }, {
-        name: '7',
+        name: 'UInt32',
         identifier: 7,
         supported: 1,
         createdAt: new Date(),
         updatedAt: new Date()
       }, {
-        name: '8',
+        name: 'Int64',
         identifier: 8,
         supported: 0,
         createdAt: new Date(),
         updatedAt: new Date()
       }, {
-        name: '9',
+        name: 'UInt64',
         identifier: 9,
         supported: 0,
         createdAt: new Date(),
         updatedAt: new Date()
       }, {
-        name: '10',
+        name: 'Float',
         identifier: 10,
         supported: 1,
         createdAt: new Date(),
         updatedAt: new Date()
       }, {
-        name: '11',
+        name: 'Double',
         identifier: 11,
         supported: 1,
         createdAt: new Date(),
         updatedAt: new Date()
       }, {
-        name: '12',
+        name: 'String',
         identifier: 12,
         supported: 1,
         createdAt: new Date(),
         updatedAt: new Date()
       }, {
-        name: '13',
+        name: 'DateTime',
         identifier: 13,
         supported: 0,
         createdAt: new Date(),
         updatedAt: new Date()
       }, {
-        name: '14',
+        name: 'Guid',
         identifier: 14,
         supported: 1,
         createdAt: new Date(),
         updatedAt: new Date()
       }, {
-        name: '15',
+        name: 'ByteString',
         identifier: 15,
         supported: 0,
         createdAt: new Date(),
         updatedAt: new Date()
       }, {
-        name: '16',
+        name: 'XmlElement',
         identifier: 16,
         supported: 1,
         createdAt: new Date(),
         updatedAt: new Date()
       }, {
-        name: '17',
+        name: 'NodeId',
         identifier: 17,
         supported: 0,
         createdAt: new Date(),
         updatedAt: new Date()
       }, {
-        name: '18',
+        name: 'ExpandedNodeId',
         identifier: 18,
         supported: 0,
         createdAt: new Date(),
         updatedAt: new Date()
       }, {
-        name: '19',
+        name: 'StatusCode',
         identifier: 19,
         supported: 0,
         createdAt: new Date(),
         updatedAt: new Date()
       }, {
-        name: '20',
+        name: 'QualifiedName',
         identifier: 20,
         supported: 0,
         createdAt: new Date(),
         updatedAt: new Date()
       }, {
-        name: '21',
+        name: 'LocalizedText',
         identifier: 21,
         supported: 0,
         createdAt: new Date(),
         updatedAt: new Date()
       }, {
-        name: '22',
+        name: 'Structure',
         identifier: 22,
         supported: 0,
         createdAt: new Date(),
         updatedAt: new Date()
       }, {
-        name: '23',
+        name: 'DataValue',
         identifier: 23,
-        supported: 1,
-        createdAt: new Date(),
-        updatedAt: new Date()
-      }, {
-        name: '24',
-        identifier: 24,
         supported: 1,
         createdAt: new Date(),
         updatedAt: new Date()

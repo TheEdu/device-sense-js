@@ -214,7 +214,7 @@ exports.create = async (req, res) => {
 
     if (subscriptions == null || (subscriptions != null && subscriptions.length == 0)) {
       // Insert new Suscription to the Database
-      await db.Subscription.create({
+      let subscription = await db.Subscription.create({
         uuid: uuid,
         name: name,
         description: description,
@@ -225,8 +225,16 @@ exports.create = async (req, res) => {
         fk_collectionType: collectionType
       })
 
+      // Insert new Suscription Process to the Database
+      await db.SubscriptionProcess.create({
+        pid: 0,
+        status: "new",
+        current: 1,
+        fk_subscriptionId: subscription.id
+      })
+
       // Traigo la suscripcion recien creada con las referencias a los modelos
-      let subscription = await db.Subscription.findOne({
+      subscription = await db.Subscription.findOne({
                           where: {uuid: uuid},
                           include: [{ model: db.Device },
                                     { model: db.DataStore },

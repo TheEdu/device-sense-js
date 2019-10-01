@@ -23,7 +23,7 @@ module.exports = {
         rootNode: 'RootFolder',
         timeOut: 20000
       }, {
-        name: 'Prueba_3009',
+        name: 'Robot_yu',
         uuid: '10001',
         description: 'Demo Server 2',
         createdAt: new Date(),
