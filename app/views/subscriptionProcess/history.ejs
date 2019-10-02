@@ -1,0 +1,56 @@
+<% include ../partials/header %>
+
+<!-- Breadcrumbs-->
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">
+    <a  href="/subscriptionprocess/list">Procesos</a>
+  </li>
+  <li class="breadcrumb-item active">Historial</li>
+</ol>
+
+<!-- DataTables Example -->
+<div class="card mb-3">
+  <div class="card-header">
+    <div class="d-inline text-primary">
+      <i class="fas fa-table"></i>
+      <span><b>Historial</b></span>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <thead>
+          <tr>
+            <th class="">Suscripcion - UUID</th>
+            <th class="">Suscripcion</th>
+            <th class="">PID</th>
+            <th class="">Estado</th>
+            <th class="">Actual</th>
+            <th class="">Fecha</th>
+            <th class="">Administrador</th>
+          </tr>
+        </thead>
+        <tbody>
+        <% if (typeof subscription != 'undefined') { %>
+          <% subscription.SubscriptionProcesses.forEach(function({ pid, status, current, createdAt }){ %>
+          <tr>
+            <td class=""><%= subscription.uuid %></td>
+            <td class=""><%= subscription.name %></td>
+            <td class=""><%= pid %></td>
+            <td class=""><%= status %></td>
+            <td class=""><%= current %></td>
+            <td class=""><%=  `${createdAt.getDate()}/${createdAt.getMonth()+1}/${createdAt.getFullYear()}` %></td>
+            <td class=""><%= subscription.User.firstName %> <%= subscription.User.lastName %></td>
+          </tr>
+          <% }) %>
+        <% } %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<% include ../partials/footer %>
+
+<script type='text/javascript'>
+</script>
