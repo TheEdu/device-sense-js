@@ -47,6 +47,7 @@ exports.start = async (req, res) => {
             && subscriptionProcess.status != "running"
             && subscription.SubscriptionItems != null 
             && subscription.SubscriptionItems.length > 0) {
+            
             subprocess = spawn('/usr/bin/nodejs', [dataLoggerPath, '-s', subscription_uuid], {
                 detached: true,
                 stdio: 'ignore'

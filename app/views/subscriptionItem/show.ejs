@@ -1,0 +1,82 @@
+<% include ../partials/header %>
+
+  <!-- Breadcrumbs-->
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <a  href="/subscriptionitem/list">Items</a>
+    </li>
+    <li class="breadcrumb-item active">Ver</li>
+  </ol>
+
+  <%if(typeof subscriptionItem != 'undefined'){%>
+    <div class="card mb-3">
+      <div class="mx-3 pt-2">
+        <form>
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <label for="id"><b>ID</b></label>
+              <input type="text" class="form-control" disabled
+              value="<%=subscriptionItem.id%>">
+            </div>
+            <div class="form-group col-md-4">
+              <label for="name"><b>Nombre</b></label>
+              <input type="text" class="form-control" disabled
+              value="<%=subscriptionItem.name%>">
+            </div>
+            <div class="form-group col-md-4">
+              <label for="dataStore"><b>Identificador</b></label>
+              <input type="text" class="form-control" disabled
+              value="<%=subscriptionItem.identifier%>">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="device"><b>Suscripcion</b></label>
+              <input type="text" class="form-control" disabled
+              value=<%if(typeof subscriptionItem.Subscription != 'undefined'){%> 
+                      "<%= subscriptionItem.Subscription.name %>"
+                    <%}%>>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="ipAdrress"><b>Administrador</b></label>
+              <input type="text" class="form-control" disabled
+              value=<%if(typeof subscriptionItem.Subscription.User != 'undefined'){%> 
+                      "<%= subscriptionItem.Subscription.User.firstName %> <%= subscriptionItem.Subscription.User.lastName %>" 
+                    <%}%>>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-4">
+            <label for="description"><b>Tipo de Dato</b></label>
+              <input type="text" class="form-control" disabled
+              value="<%=subscriptionItem.dataType%>">
+            </div>
+            <div class="form-group col-md-4">
+            <label for="description"><b>DeadbandAbsolute</b></label>
+              <input type="text" class="form-control" disabled
+              value="<%=subscriptionItem.deadbandAbsolute%>">
+            </div>
+            <div class="form-group col-md-4">
+            <label for="description"><b>DeadbandRelative</b></label>
+              <input type="text" class="form-control" disabled
+              value="<%=subscriptionItem.deadbandRelative%>">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-3">
+              <label for="rootNode"><b>Creado En</b></label>
+              <input type="text" class="form-control" disabled
+              value="<%=`${subscriptionItem.createdAt.getDate()}/${subscriptionItem.createdAt.getMonth()+1}/${subscriptionItem.createdAt.getFullYear()}`%>">
+            </div>
+            <div class="form-group col-md-3">
+              <label for="timeOut"><b>Actualizado En</b></label>
+              <input type="text" class="form-control" disabled
+              value="<%=`${subscriptionItem.updatedAt.getDate()}/${subscriptionItem.updatedAt.getMonth()+1}/${subscriptionItem.updatedAt.getFullYear()}`%>">
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+   <%}%>
+
+<% include ../partials/footer %>

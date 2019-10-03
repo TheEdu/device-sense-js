@@ -3,9 +3,9 @@
 <!-- Breadcrumbs-->
 <ol class="breadcrumb">
   <li class="breadcrumb-item">
-    <a  href="/subscription/list">Suscripciones</a>
+    <a  href="/subscriptionitem/list">Items</a>
   </li>
-  <li class="breadcrumb-item active">Mis Suscripciones</li>
+  <li class="breadcrumb-item active">Mis Items</li>
 </ol>
 
 <!-- DataTables Example -->
@@ -13,66 +13,54 @@
   <div class="card-header">
     <div class="d-inline text-primary">
       <i class="fas fa-table"></i>
-      <span><b>Mis Suscripciones</b></span>
+      <span><b>Mis Items</b></span>
     </div>
-    <div class="d-inline" style="position: relative; float: right;">
-      <a href="/subscription/create">
-        <i class="fas fa-plus fa-lg"></i>
-      </a>
-    </div>
+  	<div class="d-inline" style="position: relative; float: right;">
+  		<a href="/subscriptionitem/create">
+  			<i class="fas fa-plus fa-lg"></i>
+  		</a>
+  	</div>
   </div>
   <div class="card-body">
     <div class="table-responsive">
       <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
         <thead>
           <tr>
-            <th class="">UUID</th>
+            <th class="">Suscripcion UUID</th>
+            <th class="">Suscripcion</th>
             <th class="">Nombre</th>
-            <th class="">Dispositivo</th>
-            <th class="">Base de Datos</th>
-            <th class="">Administrador</th>
+            <th class="">Identificador</th>
+            <th class="">Node ID</th>
             <th class=" text-center">Acciones</th>
           </tr>
         </thead>
         <tbody>
-        <% if (typeof subscriptions != 'undefined') { %>
-          <% subscriptions.forEach(function({id, uuid, name, createdAt, Device, DataStore, User:{firstName, lastName}}){ %>
-          <tr>
-            <td class=""><%= uuid %></td>
-            <td class=""><%= name %></td>
-            <td class=""><%= Device.name %></td>
-            <td class=""><%= DataStore.name %></td>
-            <td class=""><%= firstName %> <%= lastName %></td>
+        <% if (typeof subscriptionItems != 'undefined') { %>
+        	<% subscriptionItems.forEach(function(item){ %>
+  				<tr>
+            <td class=""><%= item.Subscription.uuid %></td>
+            <td class=""><%= item.Subscription.name %></td>
+            <td class=""><%= item.name %></td>
+            <td class=""><%= item.identifier %></td>
+            <td class=""><%= item.nodeId %></td>
             <td class="">
               <div class="text-center">
 
                 <div class="d-inline ml-1">
-                  <a href="<%= `/subscription/show/${uuid}` %>">
+                  <a href="<%= `/subscriptionitem/show/${item.id}` %>">
                     <i class="far fa-eye"></i>
-                  </a>
-                </div>
-
-                <div class="d-inline ml-1">
-                  <a href="<%= `/subscription/update/${uuid}` %>">
-                    <i class="far fa-edit"></i>
-                  </a>
-                </div>
-
-                <div class="d-inline ml-1">
-                  <a href="<%= `/subscription/${uuid}/items/add` %>">
-                    <i class="fas fa-list-ul"></i>
                   </a>
                 </div>
                 
                 <div class="d-inline ml-1">
-                  <a class="delete-device" data-id="<%= id %>" data-name="<%= name %>" data-toggle="modal" data-target="#deleteDevice" href="#">
+                  <a class="delete-device" data-id="<%= item.id %>" data-name="<%= item.name %>" data-toggle="modal" data-target="#deleteDevice" href="#">
                     <i class="far fa-trash-alt"></i>
                   </a>
                 </div>
-              </div>
-            </td>
-          </tr>
-          <% }) %>
+  						</div>
+  					</td>
+  				</tr>
+        	<% }) %>
         <% } %>
         </tbody>
       </table>
@@ -83,17 +71,17 @@
 <!-- Delete Device Modal-->
 <div class="modal fade" id="deleteDevice" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
-    <form id="deleteForm" action="/subscription/delete" method="POST">
+    <form id="deleteForm" action="/subscriptionitem/delete" method="POST">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Desea Eliminar la Suscripción seleccionada?</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Desea Eliminar el Item seleccionado?</h5>
           <button class="close" type="button" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
           </button>
         </div>
         <div class="modal-body">
           <p>
-            Si continua eliminara "<b><span id="suscripcionBorrarNombre"></span></b>" de su lista de Suscripciones
+            Si continua eliminara "<b><span id="baseDatosBorrarNombre"></span></b>" de su lista de Items
           </p>
           <input type="text" name="deleteId" id="deleteId" value="" hidden/>
         </div>
@@ -112,7 +100,7 @@
   $(document).on('click', '.delete-device', function () {
     const name = $(this).data('name')
     const id = $(this).data('id')
-    $('.modal-body #suscripcionBorrarNombre').html(name)
+    $('.modal-body #baseDatosBorrarNombre').html(name)
     $('.modal-body #deleteId').val(id)
   })
 

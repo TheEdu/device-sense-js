@@ -6,6 +6,7 @@ const dataStore = require('../app/controllers/DataStoreController')
 const dataType = require('../app/controllers/DataTypeController')
 const subscription = require('../app/controllers/SubscriptionController')
 const subscriptionProcess = require('../app/controllers/SubscriptionProcessController')
+const subscriptionItem = require('../app/controllers/SubscriptionItemController')
 
 module.exports = (app, passport) => {
 
@@ -55,9 +56,6 @@ module.exports = (app, passport) => {
   app.post('/subscription/update', home.loggedIn, subscription.update)
   app.post('/subscription/delete', home.loggedIn, subscription.delete)
 
-  app.get('/subscription/:uuid/items/add', home.loggedIn, subscription.itemsAdd)
-  app.post('/subscription/:uuid/items/save', home.loggedIn, subscription.itemsSave)
-
   /* DataType Routes */
   app.get('/datatype/list', home.loggedIn, dataType.list)
   app.get('/datatype/create', home.loggedIn, dataType.createIndex)
@@ -73,5 +71,18 @@ module.exports = (app, passport) => {
   app.get('/subscriptionprocess/:uuid/start', home.loggedIn, subscriptionProcess.start)
   app.get('/subscriptionprocess/:uuid/stop', home.loggedIn, subscriptionProcess.stop)
   app.get('/subscriptionprocess/:uuid/restart', home.loggedIn, subscriptionProcess.restart)
+ 
+  /* SubscriptionpItem Routes */
+  app.get('/subscriptionitem/list', home.loggedIn, subscriptionItem.list)
+  app.get('/subscriptionitem/show/:id', home.loggedIn, subscriptionItem.show)
+  app.post('/subscriptionitem/delete', home.loggedIn, subscriptionItem.delete)
+
+
+
+  app.get('/subscription/:uuid/items/add', home.loggedIn, subscription.itemsAdd)
+  app.post('/subscription/:uuid/items/save', home.loggedIn, subscription.itemsSave)
   
+  // app.get('/subscription/:uuid/subscriptionitem/create', home.loggedIn, subscriptionItem.createIndex)
+  // app.post('/subscription/:uuid/subscriptionitem/create', home.loggedIn, subscriptionItem.create)
+
 }
