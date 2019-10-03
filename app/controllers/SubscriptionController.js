@@ -254,7 +254,7 @@ exports.create = async (req, res) => {
         const tree = await ds_opcua.addressSpace(dev.endpointUrl, dev.rootNode, dev.timeOut, dataIdentifiers)
 
         // Si lo obtengo procedo con la carga de items para la misma
-        return res.render('subscription/items/add.ejs', {
+        return res.render('subscriptionItem/create.ejs', {
           subscription: subscription,
           addressSpace: tree,
           success: 'Suscripcion Creada Exitosamente.'
@@ -289,85 +289,4 @@ exports.create = async (req, res) => {
     })
 
   }
-}
-
-exports.itemsAdd = async (req, res) => {
-  const uuid = req.params.uuid
-
-  try {
-
-    let subscription = await db.Subscription.findOne({
-                      where: {uuid: uuid},
-                      include: [{ model: db.Device },
-                                { model: db.DataStore },
-                                { model: db.User },
-                                { model: db.SubscriptionItem }]
-                    })
-
-    let availableDataTypes = await db.DataType.findAll({
-                          where: {supported: 1}
-                        })
-
-    let dataIdentifiers = availableDataTypes.map(dataType => dataType.identifier)
-    console.log(dataIdentifiers)
-
-    let dev = subscription.Device
-    const tree = await ds_opcua.addressSpace(dev.endpointUrl, dev.rootNode, dev.timeOut, dataIdentifiers)
-
-    console.log(subscription)
-
-    return res.render('subscription/items/add.ejs', {
-          subscription: subscription,
-          addressSpace: tree
-        })
-
-  } catch (err) {
-
-    req.flash('error', err.toString())
-    return res.redirect('/subscription/list')
-
-  }
-}
-
-exports.itemsSave= async (req, res) => {
-  const uuid = req.body.uuid
-  const itemsSelected = JSON.parse(req.body.itemsSelected)
-
-  let subscription = await db.Subscription.findOne({
-    where: {uuid: uuid}
-  })
-
-  await Promise.all(
-    itemsSelected.map(async (item) => {
-      try {
-
-        let identifier_str = String(item.identifier)
-
-        await db.SubscriptionItem.create({
-          nodeId: item.id,
-          name: item.text,
-          identifier: identifier_str.replace(/\./g, "_"),
-          fk_subscriptionId: subscription.id,
-          tags: "{ \"suscripcion\": \"" + subscription.name + "\"}"
-        })
-
-        // Si la carga salio bien:
-        item.result = 0
-        item.message = "OK"
-
-      } catch (err) {
-        // Si ocurrio algun error al guardar el punto:
-        item.result = 1
-        item.message = err.toString()
-      }
-
-      return item
-    })
-  )
-
-  console.log(itemsSelected)
-
-  return res.render('subscription/create3.ejs', {
-    itemsSelected: itemsSelected
-  })
 }

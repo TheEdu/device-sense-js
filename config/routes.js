@@ -76,13 +76,7 @@ module.exports = (app, passport) => {
   app.get('/subscriptionitem/list', home.loggedIn, subscriptionItem.list)
   app.get('/subscriptionitem/show/:id', home.loggedIn, subscriptionItem.show)
   app.post('/subscriptionitem/delete', home.loggedIn, subscriptionItem.delete)
-
-
-
-  app.get('/subscription/:uuid/items/add', home.loggedIn, subscription.itemsAdd)
-  app.post('/subscription/:uuid/items/save', home.loggedIn, subscription.itemsSave)
-  
-  // app.get('/subscription/:uuid/subscriptionitem/create', home.loggedIn, subscriptionItem.createIndex)
-  // app.post('/subscription/:uuid/subscriptionitem/create', home.loggedIn, subscriptionItem.create)
+  app.get('/subscription/:uuid/subscriptionitem/create', home.loggedIn, subscriptionItem.createIndex)
+  app.post('/subscription/:uuid/subscriptionitem/create', home.loggedIn, subscriptionItem.create)
 
 }
