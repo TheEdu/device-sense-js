@@ -34,7 +34,7 @@
            <span class="text-primary"> Base de Datos: </span>  <span> <%=dataStore.database%> </span>
         </div>
       </div>
-      <div class="container py-2">
+      <div class="card-body">
         <form action="/datastore/update" method="POST">
           <input type="number" name="id" value="<%=dataStore.id%>" hidden>
           <div class="form-row">

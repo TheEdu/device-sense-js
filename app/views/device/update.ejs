@@ -17,11 +17,8 @@
         <div class="d-inline ml-3">
            <span class="text-primary"> Nombre: </span>  <span> <%=device.name%> </span>
         </div>
-        <div class="d-inline ml-3">
-           <span class="text-primary"> URL de Conexión: </span>  <span> <%=device.endpointUrl%> </span>
-        </div>
       </div>
-      <div class="container py-2">
+      <div class="card-body">
         <form action="/device/update" method="POST">
           <input type="number" name="id" value="<%=device.id%>" hidden>
           <div class="form-row">
@@ -41,6 +38,17 @@
                         "<%=params['timeOut']%>"
                       <%} else {%>
                         "<%=device.timeOut%>"
+                      <%}%> >
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-12">
+            <label for="endpointUrl"><b>URL</b></label>
+              <input type="text" class="form-control"  id="endpointUrl" name="endpointUrl"
+              value=  <%if(typeof params != 'undefined'){%> 
+                        "<%=params['endpointUrl']%>"
+                      <%} else {%>
+                        "<%=device.endpointUrl%>"
                       <%}%> >
             </div>
           </div>

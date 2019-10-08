@@ -122,11 +122,13 @@ exports.update = async (req, res) => {
   const description = req.body.description
   const rootNode = req.body.rootNode
   const timeOut = req.body.timeOut
+  const endpointUrl = req.body.endpointUrl
   const default_timeOut = 10000
 
   const params = {
     description: description,
     rootNode: rootNode,
+    endpointUrl,
     timeOut: timeOut
   }
 
@@ -153,12 +155,22 @@ exports.update = async (req, res) => {
     })
   }
 
+  // Check for restrictions
+  if (!endpointUrl) {
+    return res.render('device/update.ejs', {
+      device: device,
+      params: params,
+      error: 'El Campo URL debe tener contenido'
+    })
+  }
+
   // Update Device
   try {
     await device.update({
       rootNode: rootNode,
       timeOut: timeOut || default_timeOut,
       description: description,
+      endpointUrl: endpointUrl
     })
 
     req.flash('success', 'Dispositivo Actualizado Correctamente.')
