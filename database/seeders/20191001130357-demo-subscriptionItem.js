@@ -7,7 +7,7 @@ module.exports = {
         nodeId: 'ns=4;i=21999',
         name: 'Variable999',
         identifier: '21999',
-        tags: "{ \"suscripcion\": \"" + "seeder" + "\"}",
+        tags: "{ \"suscripcion\": \"" + "test_1_item" + "\"}",
         dataType: 'GENERIC',
         deadbandAbsolute: 0,
         deadbandRelative: 0,

@@ -3118,7 +3118,7 @@ input[type="button"].btn-block {
 .dropdown-item {
   display: block;
   width: 100%;
-  padding: 0.25rem 1.5rem;
+  padding: 0.08rem 1.5rem;
   clear: both;
   font-weight: 400;
   color: #212529;
@@ -3126,6 +3126,7 @@ input[type="button"].btn-block {
   white-space: nowrap;
   background-color: transparent;
   border: 0;
+  padding-top: 1px !important;
 }
 
 .dropdown-item:hover, .dropdown-item:focus {
