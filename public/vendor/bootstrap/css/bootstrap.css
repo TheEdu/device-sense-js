@@ -3118,15 +3118,16 @@ input[type="button"].btn-block {
 .dropdown-item {
   display: block;
   width: 100%;
+  /*padding: 0.08rem 1.5rem;*/
   padding: 0.08rem 1.5rem;
-  clear: both;
-  font-weight: 400;
-  color: #212529;
   text-align: inherit;
-  white-space: nowrap;
   background-color: transparent;
   border: 0;
   padding-top: 1px !important;
+  font-weight: 500;
+  font-size: 0.875rem;
+  color: #6c757d;
+  white-space: nowrap;
 }
 
 .dropdown-item:hover, .dropdown-item:focus {

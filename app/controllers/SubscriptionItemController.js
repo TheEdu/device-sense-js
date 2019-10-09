@@ -67,14 +67,15 @@ exports.createIndex = async (req, res) => {
                                 { model: db.SubscriptionItem }]
                     })
 
+
+    let dev = subscription.Device
     let availableDataTypes = await db.DataType.findAll({
-                          where: {supported: 1}
+                          where: {supported: 1, fk_deviceId: dev.id}
                         })
 
     let dataIdentifiers = availableDataTypes.map(dataType => dataType.identifier)
     console.log(dataIdentifiers)
 
-    let dev = subscription.Device
     const tree = await ds_opcua.addressSpace(dev.endpointUrl, dev.rootNode, dev.timeOut, dataIdentifiers)
 
     console.log(subscription)

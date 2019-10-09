@@ -31,7 +31,6 @@ exports.create = async (req, res) => {
   const uuid = req.body.uuid
   const name = req.body.name
   const description = req.body.description
-  const type = req.body.type
   const host = req.body.host
   const port = req.body.port
   const protocol = req.body.protocol
@@ -46,6 +45,7 @@ exports.create = async (req, res) => {
   const default_bufferMaxSize = 64
   const default_writeInterval = 3000
   const default_writeMaxPoints = 1000
+  const type = "influxdb"
 
   const params = {
     uuid: uuid,
@@ -65,10 +65,10 @@ exports.create = async (req, res) => {
   }
 
   // Check for restrictions
-  if (!uuid || !name || !type || !host || !protocol || !database) {
+  if (!uuid || !name || !host || !protocol || !database) {
     return res.render('dataStore/create.ejs', {
       params,
-      error: 'Los Campos UUID, Nombre, Tipo, Host, Protocolo, y Base de Datos deben tener contenido'
+      error: 'Los Campos UUID, Identificador, Host, Protocolo, y Base de Datos deben tener contenido'
     })
   }
 

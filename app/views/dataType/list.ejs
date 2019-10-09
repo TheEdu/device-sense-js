@@ -28,6 +28,7 @@
           <tr>
             <th class="">Nombre</th>
             <th class="">Identificador</th>
+            <th class="">Dispositivo</th>
             <th class="">Soportado</th>
             <th class="">Fecha Alta</th>
             <th class=" text-center">Acciones</th>
@@ -35,10 +36,11 @@
         </thead>
         <tbody>
         <% if (typeof dataTypes != 'undefined') { %>
-        	<% dataTypes.forEach(function({id, name, identifier, supported, createdAt}){ %>
+        	<% dataTypes.forEach(function({id, name, identifier, supported, createdAt, Device}){ %>
   				<tr>
             <td class=""><%= name %></td>
             <td class=""><%= identifier %></td>
+            <td class=""><%= Device.name %></td>
             <td class=""><%if (supported == 1) {%> Si <%} else {%> No <%}%></td>
             <td class=""><%=  `${createdAt.getDate()}/${createdAt.getMonth()+1}/${createdAt.getFullYear()}` %></td>
             <td class="">

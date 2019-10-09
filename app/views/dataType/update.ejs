@@ -23,10 +23,22 @@
           <input type="number" name="id" value="<%=dataType.id%>" hidden>
 
           <div class="form-row">
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-3">
             <label for="name"><b>Nombre</b></label>
               <input type="text" class="form-control"  id="name" name="name"
               value="<%=dataType.name%>">
+            </div>
+            <div class="form-group col-md-3">
+              <label for="device"><b>Dispositivo</b></label>
+              <select class="form-control" id="device" name="device" required>
+                <option value="">Seleccione un Dispositivo</option>
+                <% devices.forEach(({id, name}) => { %>
+                <option value="<%=id%>"
+                  <%if(dataType.Device.id == id){%> selected <%}%>>
+                  <%=name%>
+                </option>
+                <% }) %>
+              </select>
             </div>
           </div>
 

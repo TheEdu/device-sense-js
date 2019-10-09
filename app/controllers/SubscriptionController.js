@@ -242,7 +242,7 @@ exports.create = async (req, res) => {
                         })
 
       let availableDataTypes = await db.DataType.findAll({
-                          where: {supported: 1}
+                          where: {supported: 1, fk_deviceId: dev.id}
                         })
 
       let dataIdentifiers = availableDataTypes.map(dataType => dataType.identifier)

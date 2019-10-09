@@ -18,47 +18,47 @@
           value=<%if(typeof params != 'undefined'){%> "<%=params['uuid']%>" <%}%>>
         </div>
         <div class="form-group col-md-6">
-          <label for="name"><b>Nombre</b></label>
-          <input type="text" class="form-control" id="name" name="name" placeholder="Nombre del Dispositivo" 
+          <label for="name"><b>Identificador</b></label>
+          <input type="text" class="form-control" id="name" name="name" placeholder="Identificador de la Base de Datos" 
           value=<%if(typeof params != 'undefined'){%> "<%=params['name']%>" <%}%>>
         </div>
       </div>
       <div class="form-row">
-        <div class="form-group col-md-3">
+        <!-- <div class="form-group col-md-3">
           <label for="type"><b>Tipo</b></label>
           <input type="text" class="form-control" id="type" name="type" placeholder="type"
           value=<%if(typeof params != 'undefined'){%> "<%=params['type']%>" <%}%>>
-        </div>
+        </div> -->
         <div class="form-group col-md-3">
           <label for="host"><b>Host</b></label>
-          <input type="text" class="form-control" id="host" name="host" placeholder="host"
+          <input type="text" class="form-control" id="host" name="host" placeholder="Host"
           value=<%if(typeof params != 'undefined'){%> "<%=params['host']%>" <%}%>>
         </div>
         <div class="form-group col-md-3">
           <label for="port"><b>Puerto</b></label>
-          <input type="number" class="form-control" id="port" name="port" placeholder="port"
+          <input type="number" class="form-control" id="port" name="port" placeholder="Puerto"
           value=<%if(typeof params != 'undefined'){%> "<%=params['port']%>" <%}%>>
         </div>
         <div class="form-group col-md-3">
           <label for="protocol"><b>Protocolo</b></label>
-          <input type="text" class="form-control" id="protocol" name="protocol" placeholder="protocol"
+          <input type="text" class="form-control" id="protocol" name="protocol" placeholder="Protocolo"
           value=<%if(typeof params != 'undefined'){%> "<%=params['protocol']%>" <%}%>>
         </div>
       </div>
       <div class="form-row">
         <div class="form-group col-md-6">
           <label for="database"><b>Base de Datos</b></label>
-          <input type="text" class="form-control" id="database" name="database" placeholder="database"
+          <input type="text" class="form-control" id="database" name="database" placeholder="Nombre de la Base de Datos"
           value=<%if(typeof params != 'undefined'){%> "<%=params['database']%>" <%}%>>
         </div>
         <div class="form-group col-md-3">
           <label for="username"><b>Usuario</b></label>
-          <input type="text" class="form-control" id="username" name="username" placeholder="username"
+          <input type="text" class="form-control" id="username" name="username" placeholder="Usuario"
           value=<%if(typeof params != 'undefined'){%> "<%=params['username']%>" <%}%>>
         </div>
         <div class="form-group col-md-3">
           <label for="password"><b>Contraseña</b></label>
-          <input type="text" class="form-control" id="password" name="password" placeholder="password"
+          <input type="text" class="form-control" id="password" name="password" placeholder="Contraseña"
           value=<%if(typeof params != 'undefined'){%> "<%=params['password']%>" <%}%>>
         </div>
       </div>
@@ -87,7 +87,7 @@
       <div class="form-row">
         <div class="form-group col-md-12">
         <label for="description"><b>Descripción</b></label>
-          <input type="text" class="form-control"  id="description" name="description" placeholder="Drescripción del Dispositivo"
+          <input type="text" class="form-control"  id="description" name="description" placeholder="Drescripción de la Base de Datos"
           value=<%if(typeof params != 'undefined'){%> "<%=params['description']%>" <%}%>>
         </div>
       </div>

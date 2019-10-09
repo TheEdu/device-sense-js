@@ -28,6 +28,14 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: false
       },
+      fk_deviceId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'Devices',
+          key: 'id'
+        }
+      },
     });
   },
   down: (queryInterface, Sequelize) => {

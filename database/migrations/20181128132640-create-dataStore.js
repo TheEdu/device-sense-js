@@ -23,7 +23,8 @@ module.exports = {
       },
       type: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
+        defaultValue: "influxdb"
       },
       host: {
         type: Sequelize.STRING,
