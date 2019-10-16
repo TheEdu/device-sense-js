@@ -241,6 +241,8 @@ exports.create = async (req, res) => {
                                     { model: db.User }]
                         })
 
+      
+      let dev = await db.Device.findById(device)
       let availableDataTypes = await db.DataType.findAll({
                           where: {supported: 1, fk_deviceId: dev.id}
                         })
@@ -250,7 +252,6 @@ exports.create = async (req, res) => {
 
       try {
         // Trato de Obtener el AddressSpace del Dispositivo
-        const dev = await db.Device.findById(device)
         const tree = await ds_opcua.addressSpace(dev.endpointUrl, dev.rootNode, dev.timeOut, dataIdentifiers)
 
         // Si lo obtengo procedo con la carga de items para la misma
