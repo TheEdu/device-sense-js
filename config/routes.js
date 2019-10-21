@@ -16,6 +16,13 @@ module.exports = (app, passport) => {
 
   /* User Routes */
   app.get('/user/list', home.loggedIn, user.list)
+  app.get('/user/create', home.loggedIn, user.createIndex)
+  app.post('/user/create', home.loggedIn, user.create)
+  app.get('/user/update/:id', home.loggedIn, user.updateIndex)
+  app.post('/user/update', home.loggedIn, user.update)
+  app.post('/user/delete', home.loggedIn, user.delete)
+  app.get('/user/changepassword', home.loggedIn, user.changePasswordIndex)
+  app.post('/user/changepassword', home.loggedIn, user.changePassword)
 
   /* Login Routes */
   app.get('/login',   home.login)

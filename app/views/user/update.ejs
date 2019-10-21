@@ -1,0 +1,68 @@
+<% include ../partials/header %>
+
+  <!-- Breadcrumbs-->
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <a href="/user/list">Usuarios</a>
+    </li>
+    <li class="breadcrumb-item active">Actualizar</li>
+  </ol>
+
+  <%if(typeof user != 'undefined'){%>
+    <div class="card mb-3">
+      <div class="card-body">
+        <form action="/user/update" method="POST">
+          <input type="number" name="id" value="<%=user.id%>" hidden>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="firstName"><b>Nombres</b></label>
+              <input type="text" class="form-control" id="firstName" name="firstName"
+              value=  <%if(typeof params != 'undefined'){%> 
+                        "<%=params['firstName']%>"
+                      <%} else {%>
+                        "<%=user.firstName%>"
+                      <%}%> >
+            </div>
+            <div class="form-group col-md-6">
+              <label for="lastName"><b>Apellidos</b></label>
+              <input type="text" class="form-control" id="lastName" name="lastName"
+              value=  <%if(typeof params != 'undefined'){%> 
+                        "<%=params['lastName']%>"
+                      <%} else {%>
+                        "<%=user.lastName%>"
+                      <%}%> >
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-12">
+              <label for="email"><b>Email</b></label>
+              <input type="text" class="form-control" id="email" name="email" placeholder="10000ms (Default)"
+              value=  <%if(typeof params != 'undefined'){%> 
+                        "<%=params['email']%>"
+                      <%} else {%>
+                        "<%=user.email%>"
+                      <%}%> >
+
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <label for="password"><b>Contraseña Actual</b></label>
+              <input type="password" class="form-control"  id="password" name="password">
+            </div>
+            <div class="form-group col-md-4">
+              <label for="passwordNew"><b>Nueva Contraseña</b></label>
+              <input type="password" class="form-control"  id="passwordNew" name="passwordNew">
+            </div>
+            <div class="form-group col-md-4">
+              <label for="passwordNew2"><b>Repetir Nueva Contraseña</b></label>
+              <input type="password" class="form-control"  id="passwordNew2" name="passwordNew2">
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">Guardar</button>
+        </form>
+      </div>
+    </div>
+   <%}%>
+
+<% include ../partials/footer %>
