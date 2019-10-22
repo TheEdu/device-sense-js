@@ -56,7 +56,8 @@ exports.show = async (req, res) => {
                           include: [{ model: db.Device },
                                     { model: db.DataStore },
                                     { model: db.User },
-                                    { model: db.SubscriptionItem }]
+                                    { model: db.SubscriptionItem },
+                                    { model: db.CollectionType }]
                         })
     return res.render('subscription/show.ejs', {subscription})
   } catch (err) {
@@ -70,11 +71,19 @@ exports.updateIndex = async (req, res) => {
   const subscription_uuid = req.params.uuid
   
   try {
-    // Get subscription to Update
+    let collectionTypes = await db.CollectionType.findAll()
     let subscription = await db.Subscription.findOne({
-                          where: {uuid: subscription_uuid}
+                          where: {uuid: subscription_uuid},
+                          include: [{ model: db.Device },
+                                    { model: db.DataStore },
+                                    { model: db.User },
+                                    { model: db.SubscriptionItem },
+                                    { model: db.CollectionType }]
                         })
-    return res.render('subscription/update.ejs', {subscription})
+    return res.render('subscription/update.ejs', {
+                        subscription: subscription,
+                        collectionTypes: collectionTypes,
+                      })
   } catch (err) {
     // Redirect to subscription List with the Error
     req.flash('error', err.toString())
@@ -88,9 +97,13 @@ exports.update = async (req, res) => {
   let subscription = null
   const id = req.body.id
   const description = req.body.description
+  const collectionType = req.body.collectionType
+  const collectionRate = req.body.collectionRate
 
   const params = {
-    description: description
+    description: description,
+    collectionType: collectionType,
+    collectionRate: collectionRate
   }
 
   // Get the subscription by the hidden form Id
@@ -108,18 +121,20 @@ exports.update = async (req, res) => {
   }
 
   // Check for restrictions
-  if (!description) {
+  if (!description || !collectionRate || !collectionType) {
     return res.render('subscription/update.ejs', {
       subscription: subscription,
       params: params,
-      error: 'El Campo description debe tener contenido'
+      error: 'Los Campos Descripción, Modos de Muestreo y Frecuencia de Muestreo deben tener contenido'
     })
   }
 
   // Update subscription
   try {
     await subscription.update({
-      description: description
+      description: description,
+      collectionRate: collectionRate,
+      fk_collectionType: collectionType
     })
 
     req.flash('success', 'Suscripción Actualizada Correctamente.')

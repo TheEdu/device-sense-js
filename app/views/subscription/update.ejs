@@ -21,17 +21,38 @@
       <div class="card-body">
         <form action="/subscription/update" method="POST">
           <input type="number" name="id" value="<%=subscription.id%>" hidden>
+          
           <div class="form-row">
             <div class="form-group col-md-12">
             <label for="description"><b>Descripción</b></label>
               <input type="text" class="form-control"  id="description" name="description"
-              value=  <%if(typeof params != 'undefined'){%> 
-                        "<%=params['description']%>"
-                      <%} else {%>
-                        "<%=subscription.description%>"
-                      <%}%> >
+              value="<%=subscription.description%>">
             </div>
           </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="collectionType"><b>Modos de Muestreo</b></label>
+              <select class="form-control" id="collectionType" name="collectionType" required>
+                <option value="">Seleccione un Modo de Muestreo de Datos</option>
+                <% collectionTypes.forEach(({id, description, hint}) => { %>
+                <option value="<%=id%>" data-hint="<%=hint%>"
+                  <%if(typeof subscription.CollectionType != 'undefined' && subscription.CollectionType.id == id){%> selected <%}%>>
+                  <%=description%>
+                </option>
+                <% }) %>
+              </select>
+            </div>
+
+            <div class="form-group col-md-6">
+              <label for="collectionRate"><b>Frecuencia de Muestreo</b></label>
+              <div class="input-group mb-2">
+                <input  type="text" class="form-control" id="collectionRate" name="collectionRate" placeholder="Frecuencia de Muestreo" required
+                value="<%=subscription.collectionRate%>">
+              </div>
+            </div>
+          </div>
+
           <button type="submit" class="btn btn-primary">Guardar</button>
         </form>
       </div>
@@ -39,3 +60,23 @@
    <%}%>
 
 <% include ../partials/footer %>
+
+<script type="text/javascript">
+
+  const setHint = () => {
+    let selected_collectionType = $("#collectionType").find(":selected");
+    if (selected_collectionType.val() >= 1) {
+      $('#collectionRate').attr('placeholder','Frecuencia de Muestreo ' + selected_collectionType.data('hint'));
+    } else {
+      $('#collectionRate').attr('placeholder','Frecuencia de Muestreo');
+    }
+  }
+  
+  // collectionTypeRate hint setup
+  $("#collectionType").on('change', function () {
+    setHint()
+  });
+
+  setHint()
+
+</script>

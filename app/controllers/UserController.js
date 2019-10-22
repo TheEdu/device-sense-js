@@ -206,8 +206,6 @@ exports.changePassword = async (req, res) => {
   const passwordNew2 = req.body.passwordNew2
   const user_id = req.user.id
   let user = null
-
-  console.log("******************", user_id)
   
   try {
     // Get User to Update

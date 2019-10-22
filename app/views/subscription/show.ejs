@@ -42,6 +42,20 @@
           </div>
           <div class="form-row">
             <div class="form-group col-md-6">
+              <label for="device"><b>Modo de Muestreo</b></label>
+              <input type="text" class="form-control" id="device" disabled
+              value=<%if(typeof subscription.CollectionType != 'undefined'){%> 
+                      "<%= subscription.CollectionType.description %>"
+                    <%}%>>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="dataStore"><b>Frecuencia de Muestreo</b></label>
+              <input type="text" class="form-control" id="dataStore" disabled
+              value="<%= subscription.collectionRate %>">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
               <label for="ipAdrress"><b>Administrador</b></label>
               <input type="text" class="form-control" id="endpointUrl" disabled
               value=<%if(typeof subscription.User != 'undefined'){%> 
