@@ -59,7 +59,7 @@
 
       <div class="row m-2">
 
-        <div class="col-4">
+        <div class="col-12">
           <form id="add" action="<%= `/subscription/${subscription.uuid}/subscriptionitem/create` %>" method="POST">
             <input id="uuid" type="text" name="uuid" value="<%=subscription.uuid%>" hidden>
             <input id="itemsSelected" type="text" name="itemsSelected" hidden>
@@ -68,53 +68,6 @@
             </div>
           </form>
         </div>
-
-<!--         <div class="col-8">
-          <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable-suscription" width="100%" cellspacing="0">
-              <thead>
-                <tr>
-                  <th class="">Nombre</th>
-                  <th class="">Identificador</th>
-                  <th class="">Acciones</th>
-                </tr>
-              </thead>
-              <tbody>
-              <% if ( (typeof subscription != 'undefined') && (typeof subscription.SubscriptionItems != 'undefined') ) { %>
-                <%  subscription.SubscriptionItems.forEach(function({ id, name, identifier }){ %>
-                <tr>
-                  <td class=""><%= name %></td>
-                  <td class=""><%= identifier %></td>
-                  <td class="">
-                    <div class="text-center">
-
-                      <div class="d-inline ml-1">
-                        <a href="<%=  %>">
-                          <i class="far fa-eye"></i>
-                        </a>
-                      </div>
-
-                      <div class="d-inline ml-1">
-                        <a href="<%=  %>">
-                          <i class="far fa-edit"></i>
-                        </a>
-                      </div>
-                      
-                      <div class="d-inline ml-1">
-                        <a class="delete-item" data-id="<%= id %>" data-name="<%= name %>" data-toggle="modal" data-target="#deleteItem" href="#">
-                          <i class="far fa-trash-alt"></i>
-                        </a>
-                      </div>
-
-                    </div>
-                  </td>
-                </tr>
-                <% }) %>
-              <% } %>
-              </tbody>
-            </table>
-          </div>
-        </div> -->
 
       </div>
 
