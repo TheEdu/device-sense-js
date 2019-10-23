@@ -20,11 +20,12 @@
     <!-- Custom styles for this template-->
     <link href="css/sb-admin.css" rel="stylesheet">
 
+    <!-- Loading styles-->
+    <link href="/css/loading.css" rel="stylesheet">
+
   </head>
 
   <body class="bg-dark">
-
-
 
     <div class="container">
       <div class="card card-login mx-auto mt-5">
@@ -33,7 +34,9 @@
           <div class="alert alert-danger m-0"><%- error %></div>
         <% } %>
 
-        <div class="card-header">Login</div>
+        <div class="card-header">
+          Login
+        </div>
         <div class="card-body">
           <form action="/login" method="post">
             <div class="form-group">
@@ -61,6 +64,24 @@
     <!-- Core plugin JavaScript-->
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
+    <!-- Loading -->
+    <script src="/js/loading.js"></script>
+
   </body>
 
 </html>
+
+<script type="text/javascript">
+  
+  $("form").submit(event => {
+    $(".container").hide();
+
+    let element = lv.create(null, "lv-squares lg lv-mid lvt-5 lvb-3 loading-center");
+    $("body").append(element.getElement());
+
+    let loader = new lv();
+    loader.initLoaderAll();
+    loader.startObserving();
+  });
+
+</script>
