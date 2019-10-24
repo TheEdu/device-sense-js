@@ -78,10 +78,16 @@ exports.createIndex = async (req, res) => {
 
     const tree = await ds_opcua.addressSpace(dev.endpointUrl, dev.rootNode, dev.timeOut, dataIdentifiers)
 
+    let subscriptionItems = await db.SubscriptionItem.findAll({
+                      where: {fk_subscriptionId: subscription.id}
+                    })
+
     console.log(subscription)
+    console.log(subscriptionItems)
 
     return res.render('subscriptionItem/create.ejs', {
           subscription: subscription,
+          subscriptionItems: subscriptionItems,
           addressSpace: tree
         })
 
@@ -96,10 +102,33 @@ exports.createIndex = async (req, res) => {
 exports.create= async (req, res) => {
   const uuid = req.body.uuid
   const itemsSelected = JSON.parse(req.body.itemsSelected)
+  const itemsToDelete = JSON.parse(req.body.itemsToDelete)
+  const itemsResult = []
 
   let subscription = await db.Subscription.findOne({
     where: {uuid: uuid}
   })
+
+  await Promise.all(
+    itemsToDelete.map(async (item) => {
+      item.id = item.nodeId
+      item.text = item.name
+      try {
+        await db.SubscriptionItem.destroy({
+          where: {
+            nodeId: item.nodeId,
+            fk_subscriptionId: subscription.id
+          }
+        })
+        item.result = 0
+        item.message = "Borrado"
+      } catch (err) {
+        item.result = 1
+        item.message = err.toString()
+      }
+      itemsResult.push(item)
+    })
+  )
 
   await Promise.all(
     itemsSelected.map(async (item) => {
@@ -117,21 +146,20 @@ exports.create= async (req, res) => {
 
         // Si la carga salio bien:
         item.result = 0
-        item.message = "OK"
+        item.message = "Creado"
 
       } catch (err) {
         // Si ocurrio algun error al guardar el punto:
         item.result = 1
         item.message = err.toString()
       }
-
-      return item
+      itemsResult.push(item)
     })
   )
 
-  console.log(itemsSelected)
+  console.log(itemsResult)
 
   return res.render('subscriptionItem/result.ejs', {
-    itemsSelected: itemsSelected
+    itemsSelected: itemsResult
   })
 }

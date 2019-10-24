@@ -63,6 +63,7 @@
           <form id="add" action="<%= `/subscription/${subscription.uuid}/subscriptionitem/create` %>" method="POST">
             <input id="uuid" type="text" name="uuid" value="<%=subscription.uuid%>" hidden>
             <input id="itemsSelected" type="text" name="itemsSelected" hidden>
+            <input id="itemsToDelete" type="text" name="itemsToDelete" hidden>
             <div class="form-row address-space-container">
               <div id="data" class="mt-1 demo"></div>
             </div>
@@ -111,36 +112,54 @@
 
 <% if ((typeof addressSpace != 'undefined')) { %>
   <script>
-    // inline data demo
-    $('#data').jstree({
-      'core' : {
-        'data' : [<%- JSON.stringify(addressSpace) %>]
-      },
-      'types': {
-          // "root": {
-          //   "icon" : "glyphicon glyphicon-plus"
-          // },
-          "child": {
-            "icon" : "fab fa-envira"
-          },
-          "default" : {
-          }
-       },
-      'checkbox' : {
-          'keep_selected_style' : false,
-          // 'cascade_to_hidden': true,
-          'cascade_to_disabled': true,
-      },
-      'plugins' : [ "wholerow", "checkbox", "types" ]
-    })
 
+    let subscriptionItems = <%- JSON.stringify(subscriptionItems) %>
+    subscriptionItemsIds = subscriptionItems.map(item => item.nodeId)
+    // inline data demo
+    $('#data')
+      .bind('ready.jstree', function(e, data) {
+          // invoked after jstree has loaded
+          console.log(subscriptionItemsIds)
+          subscriptionItemsIds.forEach(nodeId => { $('#data').jstree('select_node', nodeId) })
+       })
+      .jstree({
+        'core' : {
+          'data' : [<%- JSON.stringify(addressSpace) %>]
+        },
+        'types': {
+            // "root": {
+            //   "icon" : "glyphicon glyphicon-plus"
+            // },
+            "child": {
+              "icon" : "fab fa-envira"
+            },
+            "default" : {
+            }
+         },
+        'checkbox' : {
+            'keep_selected_style' : false,
+            // 'cascade_to_hidden': true,
+            'cascade_to_disabled': true,
+        },
+        'plugins' : [ "wholerow", "checkbox", "types" ]
+      })
 
     $("#add").on('submit', function () {
       //const itemsSelected = JSON.stringify($('#data').jstree(true).get_selected())
       const itemsSelected = $('#data').jstree().get_selected(true)
-      const originalItems = itemsSelected.map(itemSelected => itemSelected.original)
-      const filteredItems = originalItems.filter(itemSelected => (itemSelected.state.disabled == false && itemSelected.type == "child"))
-      $('#itemsSelected').val(JSON.stringify(filteredItems))
+      const itemsSelectedFull = itemsSelected.map( itemSelected => itemSelected.original )
+      const itemsSelectedFullIds = itemsSelectedFull.map( itemSelected => itemSelected.id )
+      const itemsToAdd = itemsSelectedFull.filter( itemSelected => ( 
+          itemSelected.state.disabled == false && 
+          itemSelected.type == "child" && 
+          !subscriptionItemsIds.includes(itemSelected.id)
+      ))
+      const itemsToDelete = subscriptionItems.filter( item => (
+        !itemsSelectedFullIds.includes(item.nodeId)
+      ))
+
+      $('#itemsSelected').val(JSON.stringify(itemsToAdd))
+      $('#itemsToDelete').val(JSON.stringify(itemsToDelete))
     })
 
     $(document).on('click', '.delete-item', function () {
