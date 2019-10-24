@@ -271,6 +271,7 @@ exports.create = async (req, res) => {
 
         // Si lo obtengo procedo con la carga de items para la misma
         return res.render('subscriptionItem/create.ejs', {
+          subscriptionItems: [],
           subscription: subscription,
           addressSpace: tree,
           success: 'Suscripcion Creada Exitosamente.'

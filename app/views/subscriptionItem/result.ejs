@@ -38,7 +38,12 @@
           </tbody>
         </table>
       </div>
-      <a href="/subscription/list" class="btn btn-danger mt-2 px-4" role="button">Finalizar</a>
+      <a 
+        href="<%= `/subscriptionprocess/${uuid}/restart` %>"
+        class="btn btn-success mt-2 px-4"
+        role="button">
+        Iniciar Proceso
+      </a>
     </form>
   </div>
 </div>

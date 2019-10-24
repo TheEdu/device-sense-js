@@ -115,7 +115,8 @@ exports.restart = async (req, res) => {
 
     try {
         let subscription = await db.Subscription.findOne({
-            where: {uuid: subscription_uuid}
+            where: {uuid: subscription_uuid},
+            include: [{ model: db.SubscriptionItem }]
         })
 
         let subscriptionProcess = await db.SubscriptionProcess.findOne({
@@ -127,28 +128,38 @@ exports.restart = async (req, res) => {
             }
         })
 
-        if (subscriptionProcess != null && subscriptionProcess.pid > 0) {
+        if (subscriptionProcess != null) {
 
             // Try to kill the Process
-            try {
-                await exec(`kill -2 ${subscriptionProcess.pid}`)
-            } catch (err) {
-                console.log(err.toString())
+            if (subscriptionProcess.pid > 0) {
+                try {
+                    await exec(`kill -2 ${subscriptionProcess.pid}`)
+                } catch (err) {
+                    console.log(err.toString())
+                }
             }
 
-            // Run new process
-            subprocess = spawn('/usr/bin/nodejs', [dataLoggerPath, '-s', subscription_uuid], {
-                detached: true,
-                stdio: 'ignore'
-            });
-            subprocess.unref();
+            if (subscription.SubscriptionItems != null && subscription.SubscriptionItems.length > 0) {
+                // Run new process
+                subprocess = spawn('/usr/bin/nodejs', [dataLoggerPath, '-s', subscription_uuid], {
+                    detached: true,
+                    stdio: 'ignore'
+                });
+                subprocess.unref();
+                await subscriptionProcess.update({ current: 0 })
+                await db.SubscriptionProcess.create({ pid: subprocess.pid, status: "running", current: 1, fk_subscriptionId: subscription.id})
 
-            await subscriptionProcess.update({ current: 0 })
-            await db.SubscriptionProcess.create({ pid: subprocess.pid, status: "running", current: 1, fk_subscriptionId: subscription.id})
+                req.flash('success', 'Proceso Reiniciado con Exito!')
+                return res.redirect('/subscriptionprocess/list')
+            } else {
+                await subscriptionProcess.update({ current: 0 })
+                await db.SubscriptionProcess.create({ pid: 0, status: "stopped", current: 1, fk_subscriptionId: subscription.id})
 
-            
-            req.flash('success', 'Proceso Reiniciado con Exito!')
-            return res.redirect('/subscriptionprocess/list')
+                req.flash('error', 'Para Iniciar el Proceso la Suscription debe tener al menos un Item.')
+                return res.redirect('/subscriptionprocess/list')
+            }
+
+
         } else {
             req.flash('error', 'La Suscription debe tener un PID asociado.')
             return res.redirect('/subscriptionprocess/list')

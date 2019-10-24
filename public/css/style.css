@@ -7,3 +7,15 @@
 .disabled-background-color {
 	background-color: #e4e4e4;
 }
+
+.row-color-new {
+	background-color: #fff878d4;
+}
+
+.row-color-running {
+	background-color: #d4edda;
+}
+
+.row-color-stopped {
+	background-color: #f7d7da;
+}

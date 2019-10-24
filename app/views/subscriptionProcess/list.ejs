@@ -36,12 +36,32 @@
                                               pid, status, createdAt,
                                               Subscription: { uuid, name , User: { firstName, lastName }}
                                             }){ %>
-  				<tr>
+  				<tr
+            <% if (status == 'new') { %>
+                  class="row-color-new"
+            <% } %>
+            <% if (status == 'running') { %>
+                  class="row-color-running"
+            <% } %>
+            <% if (status == 'stopped') { %>
+                  class="row-color-stopped"
+            <% } %>
+          >
             <td class=""><%= uuid %></td>
             <td class=""><%= name %></td>
             <td class=""><%= pid %></td>
-            <td class=""><%= status %></td>
-            <td class=""><%=  `${createdAt.getDate()}/${createdAt.getMonth()+1}/${createdAt.getFullYear()}` %></td>
+            <td class=""> 
+              <% if (status == 'new') { %>
+                    Sin Items
+              <% } %>
+              <% if (status == 'running') { %>
+                    En Ejecución
+              <% } %>
+              <% if (status == 'stopped') { %>
+                    Parado
+              <% } %>
+            </td>
+            <td class=""><%=  `${createdAt.getDate()}/${createdAt.getMonth()+1}/${createdAt.getFullYear()} ${createdAt.getHours()}:${createdAt.getMinutes()}:${createdAt.getSeconds()}` %></td>
             <td class=""><%= firstName %> <%= lastName %></td>
             <td class="">
               <div class="text-center">

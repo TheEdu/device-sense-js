@@ -160,6 +160,7 @@ exports.create= async (req, res) => {
   console.log(itemsResult)
 
   return res.render('subscriptionItem/result.ejs', {
+    uuid: uuid,
     itemsSelected: itemsResult
   })
 }
