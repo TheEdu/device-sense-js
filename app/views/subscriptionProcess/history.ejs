@@ -37,7 +37,17 @@
             <td class=""><%= subscription.uuid %></td>
             <td class=""><%= subscription.name %></td>
             <td class=""><%= pid %></td>
-            <td class=""><%= status %></td>
+            <td class=""> 
+              <% if (status == 'new') { %>
+                    Sin Items
+              <% } %>
+              <% if (status == 'running') { %>
+                    En Ejecución
+              <% } %>
+              <% if (status == 'stopped') { %>
+                    Parado
+              <% } %>
+            </td>
             <td class=""><%= current %></td>
             <td class=""><%=  `${createdAt.getDate()}/${createdAt.getMonth()+1}/${createdAt.getFullYear()}` %></td>
             <td class=""><%= subscription.User.firstName %> <%= subscription.User.lastName %></td>
