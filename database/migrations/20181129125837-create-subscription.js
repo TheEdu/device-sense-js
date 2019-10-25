@@ -33,6 +33,10 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false
       },
+      available: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
       fk_collectionType: {
         type: Sequelize.INTEGER,
         allowNull: false,

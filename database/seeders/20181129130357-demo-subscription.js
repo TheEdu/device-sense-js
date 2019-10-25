@@ -13,6 +13,7 @@ module.exports = {
         fk_deviceId: 3,
         fk_userId: 1,
         fk_collectionType: 1,
+        available: 1
       }, 
       // {
       //   uuid: '10',
@@ -25,6 +26,7 @@ module.exports = {
       //   fk_deviceId: 3,
       //   fk_userId: 1,
       //   fk_collectionType: 1,
+      //   available: 1
       // }, {
       //   uuid: '50',
       //   name: 'test_50_item',
@@ -36,6 +38,7 @@ module.exports = {
       //   fk_deviceId: 3,
       //   fk_userId: 1,
       //   fk_collectionType: 1,
+      //   available: 1
       // }, {
       //   uuid: '100',
       //   name: 'test_100_item',
@@ -47,6 +50,7 @@ module.exports = {
       //   fk_deviceId: 3,
       //   fk_userId: 1,
       //   fk_collectionType: 1,
+      //   available: 1
       // }, {
       //   uuid: '200',
       //   name: 'test_200_item',
@@ -58,6 +62,7 @@ module.exports = {
       //   fk_deviceId: 3,
       //   fk_userId: 1,
       //   fk_collectionType: 1,
+      //   available: 1
       // }, {
       //   uuid: '300',
       //   name: 'test_300_item',
@@ -69,6 +74,7 @@ module.exports = {
       //   fk_deviceId: 3,
       //   fk_userId: 1,
       //   fk_collectionType: 1,
+      //   available: 1
       // }, {
       //   uuid: '500',
       //   name: 'test_500_item',
@@ -80,6 +86,7 @@ module.exports = {
       //   fk_deviceId: 3,
       //   fk_userId: 1,
       //   fk_collectionType: 1,
+      //   available: 1
       // }, {
       //   uuid: '999',
       //   name: 'test_999_item',
@@ -91,6 +98,7 @@ module.exports = {
       //   fk_deviceId: 3,
       //   fk_userId: 1,
       //   fk_collectionType: 1,
+      //   available: 1
       // }
       ], {}
     )

@@ -61,7 +61,7 @@
 
         <div class="form-row">
 
-          <div class="form-group col-md-6">
+          <div class="form-group col-md-4">
             <label for="collectionType"><b>Modos de Muestreo</b></label>
             <select class="form-control" id="collectionType" name="collectionType" required>
               <option value="">Seleccione un Modo de Muestreo de Datos</option>
@@ -74,12 +74,20 @@
             </select>
           </div>
 
-          <div class="form-group col-md-6">
+          <div class="form-group col-md-4">
             <label for="collectionRate"><b>Frecuencia de Muestreo</b></label>
             <div class="input-group mb-2">
               <input  type="text" class="form-control" id="collectionRate" name="collectionRate" placeholder="Frecuencia de Muestreo" required
                       value=<%if(typeof params != 'undefined'){%> "<%=params['collectionRate']%>" <%}%>>
             </div>
+          </div>
+
+          <div class="form-group col-md-4">
+            <label for="available"><b>Habilitada</b></label>
+            <select class="form-control" id="available" name="available" required>
+              <option value="1" <%if(typeof params != 'undefined' && params['available'] == "1"){%> selected <%}%>>Si</option>
+              <option value="0" <%if(typeof params != 'undefined' && params['available'] == "0"){%> selected <%}%>>No</option>
+            </select>
           </div>
 
         </div>

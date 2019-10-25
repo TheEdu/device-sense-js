@@ -99,11 +99,13 @@ exports.update = async (req, res) => {
   const description = req.body.description
   const collectionType = req.body.collectionType
   const collectionRate = req.body.collectionRate
+  const available = req.body.available
 
   const params = {
     description: description,
     collectionType: collectionType,
-    collectionRate: collectionRate
+    collectionRate: collectionRate,
+    available: available
   }
 
   // Get the subscription by the hidden form Id
@@ -134,7 +136,8 @@ exports.update = async (req, res) => {
     await subscription.update({
       description: description,
       collectionRate: collectionRate,
-      fk_collectionType: collectionType
+      fk_collectionType: collectionType,
+      available: available
     })
 
     req.flash('success', 'Suscripción Actualizada Correctamente.')
@@ -177,6 +180,7 @@ exports.create = async (req, res) => {
   const dataStore = req.body.dataStore
   const collectionType = req.body.collectionType
   const collectionRate = req.body.collectionRate
+  const available = req.body.available
 
   // Get Devices and DataStore for the Select (if create fails)
   let devices = null
@@ -202,7 +206,8 @@ exports.create = async (req, res) => {
     device: device,
     dataStore: dataStore,
     collectionType: collectionType,
-    collectionRate: collectionRate
+    collectionRate: collectionRate,
+    available: available
   }
 
   // Check for restrictions
@@ -237,7 +242,8 @@ exports.create = async (req, res) => {
         fk_userId: user.id,
         fk_deviceId: device,
         fk_dataStoreId: dataStore,
-        fk_collectionType: collectionType
+        fk_collectionType: collectionType,
+        available: available
       })
 
       // Insert new Suscription Process to the Database

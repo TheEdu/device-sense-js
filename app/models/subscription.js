@@ -7,6 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     collectionRate: DataTypes.INTEGER,
     createdAt: DataTypes.DATE,
     updatedAt: DataTypes.DATE,
+    available: DataTypes.INTEGER,
   }, {});
 
   Subscription.associate = function(models) {
