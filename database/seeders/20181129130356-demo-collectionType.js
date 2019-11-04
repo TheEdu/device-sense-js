@@ -5,14 +5,16 @@ module.exports = {
     return queryInterface.bulkInsert('CollectionTypes', [{
         id: 1,
         description: 'monitored',
-        hint: '# milliseconds',
+        alias: 'Monitoreado',
+        hint: ' (milisegundos)',
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
         id: 2,
         description: 'polled',
-        hint: '# samples / minute.',
+        alias: 'Consultado',
+        hint: ' (muestras / minuto)',
         createdAt: new Date(),
         updatedAt: new Date(),
       }], {}

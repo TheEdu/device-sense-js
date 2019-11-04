@@ -11,6 +11,9 @@ module.exports = {
       description: {
         type: Sequelize.STRING
       },
+      alias: {
+        type: Sequelize.STRING
+      },
       hint: {
         type: Sequelize.STRING
       },

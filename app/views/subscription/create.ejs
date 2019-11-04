@@ -65,10 +65,10 @@
             <label for="collectionType"><b>Modos de Muestreo</b></label>
             <select class="form-control" id="collectionType" name="collectionType" required>
               <option value="">Seleccione un Modo de Muestreo de Datos</option>
-              <% collectionTypes.forEach(({id, description, hint}) => { %>
+              <% collectionTypes.forEach(({id, alias, hint}) => { %>
               <option value="<%=id%>" data-hint="<%=hint%>"
                 <%if(typeof params != 'undefined' && params['collectionType'] == id){%> selected <%}%>>
-                <%=description%>
+                <%=alias%>
               </option>
               <% }) %>
             </select>

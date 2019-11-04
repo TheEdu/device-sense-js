@@ -45,7 +45,7 @@
               <label for="device"><b>Modo de Muestreo</b></label>
               <input type="text" class="form-control" id="device" disabled
               value=<%if(typeof subscription.CollectionType != 'undefined'){%> 
-                      "<%= subscription.CollectionType.description %>"
+                      "<%= subscription.CollectionType.alias %>"
                     <%}%>>
             </div>
             <div class="form-group col-md-6">

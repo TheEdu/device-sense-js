@@ -2,6 +2,7 @@
 module.exports = (sequelize, DataTypes) => {
   const CollectionType = sequelize.define('CollectionType', {
     description: DataTypes.STRING,
+    alias: DataTypes.STRING,
     hint: DataTypes.STRING,
     createdAt: DataTypes.DATE,
     updatedAt: DataTypes.DATE,
