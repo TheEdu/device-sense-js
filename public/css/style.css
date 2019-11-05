@@ -19,3 +19,5 @@
 .row-color-stopped {
 	background-color: #f7d7da;
 }
+
+.dataTables_filter, .dataTables_info, .dataTables_length { display: none; }
