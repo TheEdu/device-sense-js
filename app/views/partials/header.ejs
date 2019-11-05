@@ -111,16 +111,26 @@
             <a class="dropdown-item" href="/subscriptionprocess/list">Historico</a>
           </div>
         </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link" href="/dash">
+            <i class="fas fa-tachometer-alt"></i>
+            <span>Grafana</span>
+          </a>
+        </li>
       </ul>
 
-      <div id="content-wrapper">
+      <% if ((typeof showDash != 'undefined') && showDash == 1) { %>
 
-        <div class="container-fluid">
+      <% } else {%>
+        <div id="content-wrapper">
 
-          <% if ((typeof error != 'undefined') && error.length > 0) { %>
-            <div class="alert alert-danger"><%- error %></div>
-          <% } %>
+          <div class="container-fluid">
 
-          <% if ((typeof success != 'undefined') && success.length > 0) { %>
-            <div class="alert alert-success"><%- success %></div>
-          <% } %>
+            <% if ((typeof error != 'undefined') && error.length > 0) { %>
+              <div class="alert alert-danger"><%- error %></div>
+            <% } %>
+
+            <% if ((typeof success != 'undefined') && success.length > 0) { %>
+              <div class="alert alert-success"><%- success %></div>
+            <% } %>
+      <% } %>

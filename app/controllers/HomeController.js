@@ -8,6 +8,15 @@ exports.home = (req, res) => {
   })
 }
 
+/* Dash. */
+exports.dash = (req, res) => {
+  res.render('dash.ejs', {
+    error :  req.flash("error"),
+    success: req.flash("success"),
+    showDash: 1
+  })
+}
+
 /* Login. */
 exports.login = (req, res) => {
   if (!req.isAuthenticated()) {

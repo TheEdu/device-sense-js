@@ -1,17 +1,21 @@
-        </div>
-        <!-- /.container-fluid -->
+        <% if ((typeof showDash != 'undefined') && showDash == 1) { %>
 
-        <!-- Sticky Footer -->
-        <footer class="sticky-footer">
-          <div class="container my-auto">
-            <div class="copyright text-center my-auto">
-              <span>Copyright © Device Sense 2018</span>
+        <% } else {%>
             </div>
-          </div>
-        </footer>
+            <!-- /.container-fluid -->
 
-      </div>
-      <!-- /.content-wrapper -->
+            <!-- Sticky Footer -->
+            <footer class="sticky-footer">
+              <div class="container my-auto">
+                <div class="copyright text-center my-auto">
+                  <span>Copyright © Device Sense 2018</span>
+                </div>
+              </div>
+            </footer>
+
+          </div>
+          <!-- /.content-wrapper -->
+        <% } %>
 
     </div>
     <!-- /#wrapper -->

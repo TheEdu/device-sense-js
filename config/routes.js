@@ -13,6 +13,7 @@ module.exports = (app, passport) => {
   /* Home Routes */
   app.get('/',      home.loggedIn, home.home)
   app.get('/home',  home.loggedIn, home.home)
+  app.get('/dash', home.loggedIn, home.dash)
 
   /* User Routes */
   app.get('/user/list', home.loggedIn, user.list)
