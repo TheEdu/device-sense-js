@@ -18,7 +18,7 @@
   </div>
   <div class="card-body">
     <div class="table-responsive">
-      <table class="table" id="dataTable" width="100%" cellspacing="0">
+      <table class="table table-border" id="dataTable" width="100%" cellspacing="0">
         <thead>
           <tr>
             <!-- <th class="">Suscripcion - UUID</th> -->
@@ -52,13 +52,13 @@
             <td class=""><%= pid %></td>
             <td class=""> 
               <% if (status == 'new') { %>
-                    Nuevo
+                    <b>Nuevo</b>
               <% } %>
               <% if (status == 'running') { %>
-                    En Ejecución
+                    <b>En Ejecución</b>
               <% } %>
               <% if (status == 'stopped') { %>
-                    Parado
+                    <b>Parado</b>
               <% } %>
             </td>
             <td class=""><%=  `${createdAt.getDate()}/${createdAt.getMonth()+1}/${createdAt.getFullYear()} ${createdAt.getHours()}:${createdAt.getMinutes()}:${createdAt.getSeconds()}` %></td>

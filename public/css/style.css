@@ -81,11 +81,11 @@ table.dataTable {
 }
 
 .a-process-action {
-	color: #0b5345 !important;
+	color: #191719 !important;
 }
 
 .a-process-action:hover {
-    color: #0b5345 !important;
+    color: #000000 !important;
     text-decoration: underline;
 }
 
@@ -98,7 +98,7 @@ table.dataTable {
 }
 
 .row-color-stopped {
-	background-color: red;
+	background-color: #c70707;
 }
 
 .page-link {
@@ -111,6 +111,30 @@ table.dataTable {
 
 .text-secondary {
 	color: #ced4da !important;
+}
+
+.btn-primary {
+    background-color: #3e8181;
+    border-color: #3e8181;
+}
+
+.btn-primary:hover {
+    background-color: #4e9090;
+    border-color: #4e9090;
+}
+
+.btn-primary:active {
+    background-color: #4e9090;
+    border-color: #4e9090;
+}
+
+.dropdown-item:active {
+	background-color: #4e9090;
+    border-color: #4e9090;
+}
+
+.table-border {
+	border: 1px solid;
 }
 
 .form-control {
