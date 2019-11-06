@@ -18,7 +18,7 @@
   </div>
   <div class="card-body">
     <div class="table-responsive">
-      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+      <table class="table" id="dataTable" width="100%" cellspacing="0">
         <thead>
           <tr>
             <!-- <th class="">Suscripcion - UUID</th> -->
@@ -67,25 +67,25 @@
               <div class="text-center">
 
                 <div class="d-inline ml-1">
-                  <a href="<%= `/subscriptionprocess/${uuid}/start` %>">
+                  <a class="a-process-action" href="<%= `/subscriptionprocess/${uuid}/start` %>">
                     <i class="fas fa-play"></i>
                   </a>
                 </div>
 
                 <div class="d-inline ml-1">
-                  <a href="<%= `/subscriptionprocess/${uuid}/stop` %>">
+                  <a class="a-process-action" href="<%= `/subscriptionprocess/${uuid}/stop` %>">
                     <i class="fas fa-stop-circle"></i>
                   </a>
                 </div>
 
                 <div class="d-inline ml-1">
-                  <a href="<%= `/subscriptionprocess/${uuid}/restart` %>">
+                  <a class="a-process-action" href="<%= `/subscriptionprocess/${uuid}/restart` %>">
                     <i class="fas fa-redo-alt"></i>
                   </a>
                 </div>
 
                 <div class="d-inline ml-1">
-                  <a href="<%= `/subscriptionprocess/${uuid}/history` %>">
+                  <a class="a-process-action" href="<%= `/subscriptionprocess/${uuid}/history` %>">
                     <i class="fas fa-notes-medical"></i>
                   </a>
                 </div>

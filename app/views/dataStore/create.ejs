@@ -64,22 +64,22 @@
       </div>
       <div class="form-row">
         <div class="form-group col-md-3">
-          <label for="failoverTimeout"><b>failoverTimeout</b></label>
+          <label for="failoverTimeout"><b>Tiempo de Espera por Fallo</b></label>
           <input type="number" class="form-control" id="failoverTimeout" name="failoverTimeout" placeholder="10000ms (Default)"
           value=<%if(typeof params != 'undefined'){%> "<%=params['failoverTimeout']%>" <%}%>>
         </div>
         <div class="form-group col-md-3">
-          <label for="bufferMaxSize"><b>bufferMaxSize</b></label>
+          <label for="bufferMaxSize"><b>Máximo tamaño de Buffer</b></label>
           <input type="number" class="form-control" id="bufferMaxSize" name="bufferMaxSize" placeholder="64MB (Default)"
           value=<%if(typeof params != 'undefined'){%> "<%=params['bufferMaxSize']%>" <%}%>>
         </div>
         <div class="form-group col-md-3">
-          <label for="writeInterval"><b>writeInterval</b></label>
+          <label for="writeInterval"><b>Intervalo de Escritura</b></label>
           <input type="number" class="form-control" id="writeInterval" name="writeInterval" placeholder="3000ms (Default)"
           value=<%if(typeof params != 'undefined'){%> "<%=params['writeInterval']%>" <%}%>>
         </div>
         <div class="form-group col-md-3">
-          <label for="writeMaxPoints"><b>writeMaxPoints</b></label>
+          <label for="writeMaxPoints"><b>Puntos por Intervalo</b></label>
           <input type="number" class="form-control" id="writeMaxPoints" name="writeMaxPoints" placeholder="1000 (Default)"
           value=<%if(typeof params != 'undefined'){%> "<%=params['writeMaxPoints']%>" <%}%>>
         </div>

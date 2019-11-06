@@ -14,11 +14,11 @@
 
         <div class="row">
           <div class="col-4">
-             <span class="text-primary"> UUID: </span> <span> <%=subscription.uuid%> </span>
+             <span class="text-primary"> UUID: </span> <span class="text-secondary"> <%=subscription.uuid%> </span>
           </div>
           <div class="col-4">
               <span class="text-primary"> Suscripción: </span> 
-              <span>
+              <span class="text-secondary">
                 <%if(typeof subscription.Device != 'undefined'){%> 
                   <%= subscription.Device.name + "__" + subscription.name%>
                 <%}else{%>
@@ -28,7 +28,7 @@
           </div>
           <div class="col-4">
              <span class="text-primary"> Administrador: </span>  
-             <span> 
+             <span class="text-secondary"> 
                 <%if(typeof subscription.User != 'undefined'){%> 
                     <%= subscription.User.firstName %> <%= subscription.User.lastName %>
                 <%}%>
@@ -39,7 +39,7 @@
         <div class="row">
           <div class="col-4">
              <span class="text-primary"> Dispositivo: </span> 
-             <span> 
+             <span class="text-secondary"> 
               <%if(typeof subscription.Device != 'undefined'){%> 
                 <%= subscription.Device.name %>
               <%}%>
@@ -47,7 +47,7 @@
           </div>
           <div class="col-4">
              <span class="text-primary"> Base de Datos: </span>
-             <span>
+             <span class="text-secondary">
                 <%if(typeof subscription.DataStore != 'undefined'){%> 
                   <%= subscription.DataStore.name %>
                 <%}%>
@@ -64,7 +64,7 @@
             <input id="uuid" type="text" name="uuid" value="<%=subscription.uuid%>" hidden>
             <input id="itemsSelected" type="text" name="itemsSelected" hidden>
             <input id="itemsToDelete" type="text" name="itemsToDelete" hidden>
-            <div class="form-row address-space-container">
+            <div class="form-row address-space-container" style="background-color:#898e92 !important; color: black;">
               <div id="data" class="mt-1 demo"></div>
             </div>
           </form>

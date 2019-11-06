@@ -12,23 +12,15 @@
     <div class="card mb-3">
       <div class="card-header">
         <div class="d-inline">
-           <span class="text-primary"> UUID: </span> <span> <%=subscription.uuid%> </span>
+           <span class="text-primary"> UUID: </span> <span class="text-secondary"> <%=subscription.uuid%> </span>
         </div>
         <div class="d-inline ml-2">
-           <span class="text-primary"> Nombre: </span>  <span> <%=subscription.name%> </span>
+           <span class="text-primary"> Nombre: </span>  <span class="text-secondary"> <%=subscription.name%> </span>
         </div>
       </div>
       <div class="card-body">
         <form action="/subscription/update" method="POST">
           <input type="number" name="id" value="<%=subscription.id%>" hidden>
-          
-          <div class="form-row">
-            <div class="form-group col-md-12">
-            <label for="description"><b>Descripción</b></label>
-              <input type="text" class="form-control"  id="description" name="description"
-              value="<%=subscription.description%>">
-            </div>
-          </div>
 
           <div class="form-row">
             <div class="form-group col-md-4">
@@ -60,6 +52,14 @@
               </select>
             </div> -->
             
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group col-md-12">
+            <label for="description"><b>Descripción</b></label>
+              <input type="text" class="form-control"  id="description" name="description"
+              value="<%=subscription.description%>">
+            </div>
           </div>
 
           <button type="submit" class="btn btn-primary">Guardar</button>
