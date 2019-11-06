@@ -99,7 +99,8 @@ exports.update = async (req, res) => {
   const description = req.body.description
   const collectionType = req.body.collectionType
   const collectionRate = req.body.collectionRate
-  const available = req.body.available
+  // const available = req.body.available
+  const available = 1
 
   const params = {
     description: description,
@@ -180,7 +181,8 @@ exports.create = async (req, res) => {
   const dataStore = req.body.dataStore
   const collectionType = req.body.collectionType
   const collectionRate = req.body.collectionRate
-  const available = req.body.available
+  // const available = req.body.available
+  const available = 1
 
   // Get Devices and DataStore for the Select (if create fails)
   let devices = null
