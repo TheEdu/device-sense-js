@@ -1,11 +1,5 @@
 <% include partials/header %>
 
- 	<iframe src="http://192.168.56.204:3000?kiosk=tv" frameborder="0" scrolling="no" onload="resizeIframe(this)" style="width:100%;"></iframe>
-
-	<script>
-		function resizeIframe(obj) {
-			obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
-		}
-	</script>
+ 	<iframe src="http://grafana.device.sense:3000?kiosk=tv" frameborder="0" scrolling="no" style="width:100%;"></iframe>
 
 <% include partials/footer %>

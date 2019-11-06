@@ -11,6 +11,8 @@
 
     <title>Device Sense</title>
 
+    <link rel="icon" type="image/png" href="img/favicon-16x16.png">
+
     <!-- Bootstrap core CSS-->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -23,20 +25,21 @@
     <!-- Loading styles-->
     <link href="/css/loading.css" rel="stylesheet">
 
+    <link href="/css/style.css" rel="stylesheet">
+
   </head>
 
   <body class="bg-dark">
 
     <div class="container">
-      <div class="card card-login mx-auto mt-5">
+      <div class="card card-login mx-auto" style="background-color: #212529; margin-top: 150px; border-color: #65d0a7;">
 
         <% if ((typeof error != 'undefined') && error.length > 0) { %>
           <div class="alert alert-danger m-0"><%- error %></div>
         <% } %>
 
-        <div class="card-header">
-          Login
-        </div>
+        <img src="img/logo0_color.png" class="center" style="width: 200px; height: 230px;">
+        
         <div class="card-body">
           <form action="/login" method="post">
             <div class="form-group">
@@ -51,7 +54,7 @@
                 <label for="inputPassword">Password</label>
               </div>
             </div>
-            <input class="btn btn-primary btn-block" type="submit" value="Login">
+            <input class="btn btn-primary btn-block" type="submit" value="Login" style="background-color: #2d6061; border-color: #34d0a6;">
           </form>
         </div>
       </div>
