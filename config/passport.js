@@ -15,7 +15,7 @@ module.exports = (passport) => {
             return done(null, false, { message: 'Usuario Incorrecto.' })
           if (!bCrypt.compareSync(password, user.password)) 
             return done(null, false, { message: 'Contraseña Incorrecta.' })
-          return done(null, user, { message: `Bienvenid@ ${user.firstName}.`})
+          return done(null, user, { message: `Bienvenido ${user.firstName}.`})
         }).catch( err => {
           return done(err)
         })
